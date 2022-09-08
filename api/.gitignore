@@ -5,4 +5,5 @@ Homestead.yaml
 .phpunit.result.cache
 /public
 .env
+.env.backup
 /tests
