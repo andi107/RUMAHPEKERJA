@@ -152,9 +152,9 @@
     <div class="bg11">
         <div class="container size-h-4 flex-c-c p-tb-15">
             <span class="f1-s-1 cl0 txt-center">
-                Copyright © 2018 
+                Copyright © 2022 
 
-                <a href="#" class="f1-s-1 cl10 hov-link1">Colorlib.</a>
+                <a href="#" class="f1-s-1 cl10 hov-link1">Rumah Pekerja Hebat.</a>
 
                 All rights reserved.
             </span>
