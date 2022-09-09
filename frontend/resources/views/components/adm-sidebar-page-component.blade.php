@@ -16,13 +16,18 @@
             </a>
         </li>
         <li class="nav-title">
-            Post
+            Content
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="colors.html">
+            <a class="nav-link" href="{{ route('adm.category') }}">
                 <svg class="nav-icon">
-                    <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-drop')}}"></use>
-                </svg> Colors
+                    <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-fork')}}"></use>
+                </svg> Tambah Kategori
+            </a>
+            <a class="nav-link" href="#">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-newspaper')}}"></use>
+                </svg> Tambah Postingan
             </a>
         </li>
     </ul>

@@ -6,7 +6,7 @@ use App\Http\Controllers\Content\PostDetailController;
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
-
+use App\Http\Controllers\Admin\CategoryController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -23,5 +23,8 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('adm.dashboard');
+    });
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category', 'index')->name('adm.category');
     });
 });
