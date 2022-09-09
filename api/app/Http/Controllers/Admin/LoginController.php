@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller {
 
@@ -16,12 +17,37 @@ class LoginController extends Controller {
             'username' => 'required|max:100',
             'password' => 'required|max:100',
         ]);
-        DB::beginTransaction();
         try {
             $credentials = request(['username', 'password']);
-            dd('OK');
+
+            if (!$token = auth()->attempt($credentials)) {
+                return response()->json(['error' => "Wrong credential!"], 200);
+            }else{
+                $check = DB::table('users')
+                    ->select('id','username', 'fbstatus')
+                    ->where('username', '=', $request->input('username'))
+                    ->where('fbstatus', '=', 1)
+                    ->first();
+                if (!$check) {
+                    return response()->json(['error' => "Wrong credential!"], 200);
+                }
+                $token_time = 8640;
+                // if ($request->input('remember') == 1) {
+                //     $token_time = 8640;
+                // }else{
+                //     $token_time = 1440;
+                // }
+                $token = auth()->setTTL($token_time)->attempt($credentials);
+                
+                return response()->json([
+                    'access_token' => $token,
+                    'expires_in_minute' => auth()->factory()->getTTL(),
+                    'username' => $check->username,
+                    'uid' => $check->id
+                ])->header('Authorization', sprintf('Bearer %s', $token));
+            }
+
         } catch (\Throwable $th) {
-            DB::rollback();
             return response()->json([
                 'error' => 'Internal Server Error.',
             ], 500)

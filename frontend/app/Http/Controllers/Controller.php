@@ -15,4 +15,6 @@ class Controller extends BaseController
         $res = $this->attributes['published_at'] = strtotime($date);
         return $res.$id;
     }
+
+    
 }

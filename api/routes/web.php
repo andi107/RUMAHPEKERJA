@@ -8,7 +8,7 @@ $router->get('/', function () use ($router) {
 
 $router->group([
     'prefix' => 'api',
-    'middleware' => ['nocache','hideserver', 'security','csp','gzip'],
+    // 'middleware' => ['nocache','hideserver', 'security','csp','gzip'],
 ], function() use($router) {
     $router->group([
         'prefix' => 'a',
