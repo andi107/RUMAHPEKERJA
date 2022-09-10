@@ -21,12 +21,12 @@
     <x-adm-sidebar-page-component />
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
       <x-adm-header-component />
-      
       <div class="body flex-grow-1 px-3">
         <div class="container-lg">
           {{ $slot }}
         </div>
       </div>
+      <br/>
       <footer class="footer">
         <div>Rumah Pekerja Hebat © 2022.</div>
         <div class="ms-auto">Powered by&nbsp;RPH Labs</div>

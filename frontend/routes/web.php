@@ -7,6 +7,7 @@ use App\Http\Controllers\Content\PostDetailController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -28,5 +29,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/category', 'index')->name('adm.category');
         Route::post('/category/create', 'create')->name('adm.category-create');
         Route::put('/category/update/{id}', 'update')->name('adm.category-update');
+    });
+    Route::controller(PostController::class)->group(function () {
+        Route::get('/post/create', 'index')->name('adm.post-create-index');
     });
 });

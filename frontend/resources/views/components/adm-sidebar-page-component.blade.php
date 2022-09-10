@@ -32,7 +32,7 @@
             </svg> Post</a>
             <ul class="nav-group-items">
                 <li class="nav-item"><a class="nav-link" href="#"><span class="nav-icon"></span> Daftar Posting</a></li>
-                <li class="nav-item"><a class="nav-link" href="buttons/button-group.html"><span class="nav-icon"></span> Tambah</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('adm.post-create-index')}}"><span class="nav-icon"></span> Tambah</a></li>
             </ul>
         </li>
     </ul>
