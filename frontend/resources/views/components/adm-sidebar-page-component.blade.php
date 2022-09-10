@@ -24,7 +24,6 @@
             </svg> Kategori</a>
             <ul class="nav-group-items">
                 <li class="nav-item"><a class="nav-link" href="{{ route('adm.category') }}"><span class="nav-icon"></span> Daftar Kategori</a></li>
-                <li class="nav-item"><a class="nav-link" href="buttons/button-group.html"><span class="nav-icon"></span> Tambah</a></li>
             </ul>
         </li>
         <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">

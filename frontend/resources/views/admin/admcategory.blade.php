@@ -2,10 +2,8 @@
     <x-slot name="titleSlot">
         <title>RPH Admin - Kategori</title>
     </x-slot>
-    <x-slot name="breadSlot">
-        {{-- <x-adm-breadcrumb-component /> --}}
-        asdasdasd
-    </x-slot>
+    
+        
     {{-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> --}}
 
     {{-- <table id="myTable">
@@ -40,42 +38,42 @@
     </div>
     <div class="row gutters pt-4">
         <div class="col col-lg">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>NAMA</th>
-                    <th class="text-center">STATUS</th>
-                    <th class="text-center">AKSI</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($res->data as $key => $r)
-                <tr>
-                    <td>{{ $firstrow++ }}</td>
-                    <td>
-                        <div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>NAMA</th>
+                        <th class="text-center">STATUS</th>
+                        <th class="text-center">AKSI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($res->data as $key => $r)
+                    <tr>
+                        <td>{{ $firstrow++ }}</td>
+                        <td>
                             <div>
-                                <p>{{ $r->ftname }}</p>
+                                <div>
+                                    <p>{{ $r->ftname }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <span class="badge bg-{{ApiH::statusForm($r->fnstatus) }} text-white rounded-2">{{ \ApiH::statusForm2($r->fnstatus) }}</span>
-                    </td>
-                    <td class="text-center">
-                        <div class="actions action-btn-table">
-                            <a href="javascript:edit('{{ $key + 1 }}')" class="btn btn-ghost-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                Edit
-                            </a>
-                        </div>
-                    </td>
-                    <input type="hidden" value="{{ $r->id }}">
-                    <input type="hidden" value="{{ $r->ftdescription }}">
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-{{ApiH::statusForm($r->fnstatus) }} text-white rounded-2">{{ \ApiH::statusForm2($r->fnstatus) }}</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="actions action-btn-table">
+                                <a href="javascript:edit('{{ $key + 1 }}')" class="btn btn-ghost-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                    Edit
+                                </a>
+                            </div>
+                        </td>
+                        <input type="hidden" value="{{ $r->id }}">
+                        <input type="hidden" value="{{ $r->ftdescription }}">
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="row gutters pt-2">
@@ -126,12 +124,12 @@
                             <textarea class="form-control" name="txtDescription" placeholder="Deskripsi" id="ftxtDescription" style="height: 150px"></textarea>
                             <label for="ftxtDescription">Deskripsi</label>
                         </div>
-                        <br/>
+                        <br />
                         <select class="form-select" name="selStatus" aria-label="Status">
                             <option value="1">Active</option>
                             <option selected value="2">Draft</option>
                         </select>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
@@ -143,7 +141,7 @@
     </div>
     @else
     {{ dd($error) }}
-@endif
+    @endif
     <script>
         function onlyAlphaNumS(key, e) {
             var letters = /^[a-zA-Z0-9\s-]/g;
@@ -154,6 +152,7 @@
             var letters = /^[0-9]/g;
             if (!(key).match(letters)) e.preventDefault();
         }
+
         function add(clear = true) {
             // $('.saveBtn').text('Save');
             $('.modal-title').text('Kategori Baru');

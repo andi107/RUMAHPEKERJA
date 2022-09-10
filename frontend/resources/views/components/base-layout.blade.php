@@ -10,7 +10,6 @@
     {{ $titleSlot }}
 
     @if (config('app.env') === 'production')
-    <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -28,8 +27,6 @@
         })(window, document, 'script', 'dataLayer', 'GTM-T4SJPW7');
 
     </script>
-    <!-- End Google Tag Manager -->
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB7PG0P5TG"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
