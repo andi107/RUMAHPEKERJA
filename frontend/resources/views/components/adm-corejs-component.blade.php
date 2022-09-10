@@ -1,3 +1,6 @@
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 @if (config('app.env') === 'production')
     <script src="{{ secure_asset('adm/vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
     <script src="{{ secure_asset('adm/vendors/simplebar/js/simplebar.min.js') }}"></script>

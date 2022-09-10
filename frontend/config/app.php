@@ -209,8 +209,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
-        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class
+        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
+        'ApiH' => App\Helpers\ApiH::class,
     ])->toArray(),
-
+    
 ];

@@ -58,6 +58,14 @@ class ApiH
         return $response;
     }
 
+    public static function apiPutVar($url, $body)
+    {
+        $response = Http::withToken(Cookie::get('API_TOKEN'))
+        ->acceptJson()->put(env('APP_API') . $url, $body);
+
+        return $response;
+    }
+
     public static function apiPostVarFile($url, $body, $fparam = null, $tfile = null, $fname = null, $multiple = null)
     {
         if ($multiple) {

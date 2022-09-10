@@ -8,7 +8,7 @@ $router->get('/', function () use ($router) {
 
 $router->group([
     'prefix' => 'api',
-    // 'middleware' => ['nocache','hideserver', 'security','csp','gzip'],
+    'middleware' => ['nocache','hideserver', 'security','csp','gzip'],
 ], function() use($router) {
     $router->group([
         'prefix' => 'a',
@@ -16,6 +16,13 @@ $router->group([
         $router->group(['middleware' => ['throttle:5,1']], function () use ($router) {
             $router->post('auth', 'Admin\LoginController@index');
             $router->post('logout', 'Admin\ProfileController@logout');
+        });
+        $router->group([
+            'prefix' => 'category',
+        ], function() use($router) {
+            $router->get('/', 'Admin\CategoryController@index');
+            $router->post('create', 'Admin\CategoryController@create');
+            $router->put('update', 'Admin\CategoryController@update');
         });
     });
 });

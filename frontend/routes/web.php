@@ -26,5 +26,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index')->name('adm.category');
+        Route::post('/category/create', 'create')->name('adm.category-create');
+        Route::put('/category/update/{id}', 'update')->name('adm.category-update');
     });
 });

@@ -18,17 +18,23 @@
         <li class="nav-title">
             Content
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('adm.category') }}">
-                <svg class="nav-icon">
-                    <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-fork')}}"></use>
-                </svg> Tambah Kategori
-            </a>
-            <a class="nav-link" href="#">
-                <svg class="nav-icon">
-                    <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-newspaper')}}"></use>
-                </svg> Tambah Postingan
-            </a>
+        <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-fork')}}"></use>
+            </svg> Kategori</a>
+            <ul class="nav-group-items">
+                <li class="nav-item"><a class="nav-link" href="{{ route('adm.category') }}"><span class="nav-icon"></span> Daftar Kategori</a></li>
+                <li class="nav-item"><a class="nav-link" href="buttons/button-group.html"><span class="nav-icon"></span> Tambah</a></li>
+            </ul>
+        </li>
+        <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-newspaper')}}"></use>
+            </svg> Post</a>
+            <ul class="nav-group-items">
+                <li class="nav-item"><a class="nav-link" href="#"><span class="nav-icon"></span> Daftar Posting</a></li>
+                <li class="nav-item"><a class="nav-link" href="buttons/button-group.html"><span class="nav-icon"></span> Tambah</a></li>
+            </ul>
         </li>
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
