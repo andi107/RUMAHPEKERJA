@@ -16,6 +16,8 @@
     <meta name="theme-color" content="#ffffff"> --}}
     {{ $cssPage ?? '' }}
     {{ $titleSlot }}
+    <x-adm-corejs-component/>
+    {{ $jsPage ?? '' }}
   </head>
   <body>
     <x-adm-sidebar-page-component />
@@ -33,7 +35,6 @@
       </footer>
     </div>
     
-    <x-adm-corejs-component/>
-    {{ $jsPage ?? '' }}
+    
   </body>
 </html>

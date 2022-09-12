@@ -24,5 +24,14 @@ $router->group([
             $router->post('create', 'Admin\CategoryController@create');
             $router->put('update', 'Admin\CategoryController@update');
         });
+        $router->group([
+            'prefix' => 'posts',
+        ], function() use($router) {
+            $router->get('/', 'Admin\CategoryController@index');
+            
+            $router->post('create/save', 'Admin\PostsController@create');
+            $router->put('update', 'Admin\PostsController@update');
+            $router->post('update_body', 'Admin\PostsController@update_body');
+        });
     });
 });
