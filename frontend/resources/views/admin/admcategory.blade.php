@@ -139,8 +139,6 @@
             </div>
         </div>
     </div>
-    @else
-    {{ dd($error) }}
     @endif
     <script>
         function onlyAlphaNumS(key, e) {

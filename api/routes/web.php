@@ -10,6 +10,7 @@ $router->group([
     'prefix' => 'api',
     'middleware' => ['nocache','hideserver', 'security','csp','gzip'],
 ], function() use($router) {
+    $router->get('chk', 'Admin\CheckController@index');
     $router->group([
         'prefix' => 'a',
     ], function() use($router) {

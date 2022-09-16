@@ -8,7 +8,34 @@ use App\Helpers\ApiH;
 use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
+
+    public function indexList(Request $req) {
+        //=== Check ===
+        $res = ApiH::apiGetVar('/chk');
+        if ($res == null) {
+            return redirect()->route('adm.login');
+        }
+        if (isset($res->error)) {
+            if ($res->error == "Unauthorized") {
+                return redirect()->route('adm.login');
+            }
+        }
+        //=== End Check ===
+        return view('admin.admpostcreate');
+    }
+
     public function index(Request $req) {
+        //=== Check ===
+        $res = ApiH::apiGetVar('/chk');
+        if ($res == null) {
+            return redirect()->route('adm.login');
+        }
+        if (isset($res->error)) {
+            if ($res->error == "Unauthorized") {
+                return redirect()->route('adm.login');
+            }
+        }
+        //=== End Check ===
         return view('admin.admpostcreate');
     }
 

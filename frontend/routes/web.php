@@ -19,6 +19,9 @@ Route::controller(PostDetailController::class)->group(function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', function() {
+        return redirect()->route('adm.dashboard');
+    });
     Route::controller(LoginController::class)->group(function () {
         Route::get('/login', 'index')->name('adm.login');
         Route::post('/login/process', 'go')->name('adm.login-submit');

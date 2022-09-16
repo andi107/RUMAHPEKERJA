@@ -1,6 +1,7 @@
 <x-base-layout>
     <x-slot name="titleSlot">
         <title>RPH - Detail</title>
+		<meta name="asdasd" content="width=device-width, initial-scale=1">
     </x-slot>
 
     <!-- Breadcrumb -->
