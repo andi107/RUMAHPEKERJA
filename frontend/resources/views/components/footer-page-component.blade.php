@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-lg-4 p-b-20">
                     <div class="size-h-3 flex-s-c">
-                        <a href="index.html">
-                            <img class="max-s-full" src="{{ asset('src/images/icons/logo-02.png')}}" alt="LOGO">
+                        <a href="{{ route('home')}}">
+                            <img class="max-s-full" width="150" height="60" src="{{ asset('src/images/icons/logo-02.png')}}" alt="LOGO">
                         </a>
                     </div>
 
