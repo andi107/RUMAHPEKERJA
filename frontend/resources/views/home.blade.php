@@ -1,6 +1,6 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-        <title>RPH - Home</title>
+        <title>Beranda | Rumah Pekerja Hebat</title>
     </x-slot>
     
 	<!-- Headline -->
@@ -2051,7 +2051,7 @@
 						<div>
 							<div class="how2 how2-cl4 flex-s-c">
 								<h3 class="f1-m-2 cl3 tab01-title">
-									Most Popular
+									Berita Populer
 								</h3>
 							</div>
 
@@ -2116,7 +2116,7 @@
 						</div>
 						
 						<!--  -->
-						<div class="p-t-50">
+						{{-- <div class="p-t-50">
 							<div class="how2 how2-cl4 flex-s-c">
 								<h3 class="f1-m-2 cl3 tab01-title">
 									Stay Connected
@@ -2172,7 +2172,7 @@
 									</div>
 								</li>
 							</ul>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 			</div>
@@ -2432,7 +2432,7 @@
 						</div>
 							
 						<!-- Subscribe -->
-						<div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
+						{{-- <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
 							<h5 class="f1-m-5 cl0 p-b-10">
 								Subscribe
 							</h5>
@@ -2448,7 +2448,7 @@
 									<i class="fa fa-arrow-right"></i>
 								</button>
 							</form>
-						</div>
+						</div> --}}
 						
 						<!-- Tag -->
 						<div class="p-b-55">

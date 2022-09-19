@@ -132,7 +132,7 @@
 
             <ul class="main-menu-m">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{route('home')}}">Beranda</a>
                     <ul class="sub-menu-m">
                         <li><a href="index.html">Homepage v1</a></li>
                         <li><a href="home-02.html">Homepage v2</a></li>
@@ -213,7 +213,7 @@
 
                     <ul class="main-menu">
                         <li class="main-menu-active">
-                            <a href="index.html">Home</a>
+                            <a href="{{route('home')}}">Beranda</a>
                             <ul class="sub-menu">
                                 <li><a href="index.html">Homepage v1</a></li>
                                 <li><a href="home-02.html">Homepage v2</a></li>

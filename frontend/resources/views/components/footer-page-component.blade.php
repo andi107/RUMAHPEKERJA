@@ -11,11 +11,11 @@
 
                     <div>
                         <p class="f1-s-1 cl11 p-b-16">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna eget elit efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec molestie at, facilisis ut turpis. Vestibulum dolor metus, tincidunt eget odio
+                            Jl. Benteng Betawi, Gg. Blok Kepu Rt 05/01 No. 258 Poris Gaga Baru, Kota Tangerang-Banten
                         </p>
 
                         <p class="f1-s-1 cl11 p-b-16">
-                            Any questions? Call us on (+1) 96 716 6879
+                            Hubungi kami di (+62) 812-9715-0027
                         </p>
 
                         <div class="p-t-15">
@@ -27,15 +27,7 @@
                                 <span class="fab fa-twitter"></span>
                             </a>
 
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                <span class="fab fa-pinterest-p"></span>
-                            </a>
-
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                <span class="fab fa-vimeo-v"></span>
-                            </a>
-
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a href="https://www.youtube.com/channel/UCTRr0G0wlFlIRHPRwHGGWfQ" target="_blank" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-youtube"></span>
                             </a>
                         </div>
