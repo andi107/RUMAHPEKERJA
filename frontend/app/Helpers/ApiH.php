@@ -151,9 +151,9 @@ class ApiH
     public static function statusForm2($stat)
     {
         if ($stat == 1) {
-            $badge = "Active";
+            $badge = "Publik";
         } else if ($stat == 3) {
-            $badge = "Deactive";
+            $badge = "Tidak Publik";
         } else if ($stat == 2) {
             $badge = "Draft";
         } else {

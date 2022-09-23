@@ -30,7 +30,7 @@ $router->group([
             'prefix' => 'posts',
         ], function() use($router) {
             $router->get('/', 'Admin\PostsController@index');
-            
+            $router->get('/detail/{uniq}', 'Admin\PostsController@detail');
             $router->post('create/save', 'Admin\PostsController@create');
             $router->put('update', 'Admin\PostsController@update');
             $router->post('update_body', 'Admin\PostsController@update_body');

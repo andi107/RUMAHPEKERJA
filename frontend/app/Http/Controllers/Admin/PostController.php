@@ -63,11 +63,21 @@ class PostController extends Controller
             }
         }
         //=== End Check ===
-        return view('admin.admpostcreate');
+        $id = $req->input('edit');
+        if ($id) {
+            $res_edit = ApiH::apiGetVar('/a/posts/detail/'. urlencode($id));
+            // dd($res_edit);
+            return view('admin.admpostedit', [
+                'res_edit' => $res_edit
+            ]);
+        }else{
+            return view('admin.admpostcreate');
+        }
+        
     }
 
     public function create_update(Request $req) {
-        // try {
+        try {
         
             $id = $req->input('type');
 
@@ -95,7 +105,7 @@ class PostController extends Controller
             $resBody = 'Data berhasil tersimpan.';
             if ($id == 'new') {
                 $res = $this->post_new($req);
-            }else{
+            } else {
                 $c = ApiH::csrf();
                 $res = $this->post_update($req,$id,$c);
                 $this->post_update_body($req,$id,$c);
@@ -106,12 +116,12 @@ class PostController extends Controller
                 'msg' => $resBody,
                 'data' => $res
             ]);
-        // } catch (\Throwable $th) {
-        //     return response()->json([
-        //         'code' => 404,
-        //         'msg' => 'Gagal menyimpan data.',
-        //     ]);
-        // }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 404,
+                'msg' => 'Gagal menyimpan data.',
+            ]);
+        }
     }
 
     function post_new($req) {

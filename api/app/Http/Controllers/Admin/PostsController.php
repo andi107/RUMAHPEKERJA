@@ -34,6 +34,18 @@ class PostsController extends Controller {
         ], 200);
     }
 
+    public function detail($uniq) {
+        $uniq = urldecode($uniq);
+
+        $data = DB::table('posts')
+        ->where('ftuniq','=',$uniq)
+        ->first();
+
+        return response()->json([
+            'data' => $data
+        ], 200);
+    }
+
     public function create(Request $request) {
         $this->validate($request, [
             'title' => 'required|max:255',
@@ -98,7 +110,7 @@ class PostsController extends Controller {
 
     public function update(Request $request) {
         $this->validate($request, [
-            'id' => 'required|numeric',
+            'id' => 'required',
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'category' => 'required|numeric',
@@ -114,10 +126,10 @@ class PostsController extends Controller {
             $dtnow = Carbon::now();
 
             $ckData = DB::table('posts')
-            ->where('id','=',$id)
+            ->where('ftuniq','=',$id)
             ->first();
             $ckName = DB::table('posts')
-            ->where('id','<>',$id)
+            ->where('ftuniq','<>',$id)
             ->where('fttitle','=', $title)
             ->first();
             if (!$ckData) {
@@ -133,7 +145,7 @@ class PostsController extends Controller {
             }
 
             DB::table('posts')
-            ->where('id','=',$id)
+            ->where('ftuniq','=',$id)
             ->update([
                 'fttitle' => $title,
                 'ftdescription' => $description,
@@ -144,7 +156,7 @@ class PostsController extends Controller {
             ]);
             $data = DB::table('posts')
             ->selectRaw('id,fttitle, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
-            ->where('id','=', $id)
+            ->where('ftuniq','=', $id)
             ->first();
 
             DB::commit();
@@ -165,17 +177,17 @@ class PostsController extends Controller {
 
     public function update_body(Request $request) {
         $this->validate($request, [
-            'id' => 'required|numeric',
+            'ftuniq' => 'required',
             'body' => 'required',
         ]);
-        $id = $request->input('id');
+        $id = $request->input('ftuniq');
         $body = $request->input('body');
 
         try {
             $dtnow = Carbon::now();
 
             $ckData = DB::table('posts')
-            ->where('id','=',$id)
+            ->where('ftuniq','=',$id)
             ->first();
             if (!$ckData) {
                 DB::rollback();
@@ -184,9 +196,8 @@ class PostsController extends Controller {
                 ], 404);
             }
 
-            $getUniq = $this->getRandString();
             DB::table('posts')
-            ->where('id','=',$id)
+            ->where('ftuniq','=',$id)
             ->update([
                 'ftbody' => $body,
             ]);

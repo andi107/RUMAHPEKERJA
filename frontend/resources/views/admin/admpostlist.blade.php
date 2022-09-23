@@ -46,7 +46,7 @@
                         </td>
                         <td class="text-center">
                             <div class="actions action-btn-table">
-                                <a href="javascript:edit('{{ $key + 1 }}')" class="btn btn-ghost-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                <a href="{{ route('adm.post-edit-index',['edit' => $r->ftuniq])}}" class="btn btn-ghost-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
                                     Edit
                                 </a>
                             </div>

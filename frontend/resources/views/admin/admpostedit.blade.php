@@ -24,22 +24,22 @@
       </div>
     <form action="" method="POST" id="formPosts" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="_id" value="new">
+        <input type="hidden" name="_id" value="{{ $res_edit->data->ftuniq }}">
         <div class="row gutters pt-4">
             <div class="col col-lg">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Judul...">
+                    <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Judul..." value="{{ $res_edit->data->fttitle }}">
                     <label for="txtTitle">Judul</label>
                 </div>
                 <div class="form-floating">
-                    <textarea class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px"></textarea>
+                    <textarea class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px">{{ $res_edit->data->ftdescription }}</textarea>
                     <label for="txtDescription">Deskripsi</label>
                 </div>
             </div>
         </div>
         <div class="row gutters pt-4">
             <div class="col-sm-6 col-md-8">
-                <textarea name="txtbody" id="txtbody" rows="10" cols="80" placeholder="Tuliskan apa yang terjadi?"></textarea>
+                <textarea name="txtbody" id="txtbody" rows="10" cols="80" placeholder="Tuliskan apa yang terjadi?">{{ $res_edit->data->ftbody }}</textarea>
             </div>
             <div class="col-6 col-md-4">
                 <div class="row">
@@ -107,8 +107,6 @@
                     let url = "{{ route('adm.post-save') }}";
                         let resBody = CKEDITOR.instances.txtbody.getData();
                         let isType = $("input[name=_id]").val();
-
-                        console.log(url, $("input[name=_token]").val());
                         $.post(url, {
                             '_token': $("input[name=_token]").val()
                             , type: isType
@@ -123,7 +121,7 @@
                         , }, function(res) {
                             let msg = '';
                             if (res.code == 200) {
-                                $("input[name=_id]").val(res.data.id);
+                                $("input[name=_id]").val(res.data.ftuniq);
                                 if (res.data.msg) {
                                     msg = res.data.msg;
                                 }else{

@@ -121,7 +121,7 @@
                         , }, function(res) {
                             let msg = '';
                             if (res.code == 200) {
-                                $("input[name=_id]").val(res.data.id);
+                                $("input[name=_id]").val(res.data.ftuniq);
                                 if (res.data.msg) {
                                     msg = res.data.msg;
                                 }else{
