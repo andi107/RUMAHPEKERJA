@@ -29,9 +29,9 @@ $app->singleton(
 $app->configure('app');
 $app->configure('auth');
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    App\Http\Middleware\RequestRecord::class
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,

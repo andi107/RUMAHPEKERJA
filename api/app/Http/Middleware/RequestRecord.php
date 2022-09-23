@@ -20,24 +20,26 @@ class RequestRecord
         }
 
         $_req_method = $request->method();
+        
         $_isurl = URL::current();
         $dtnow = Carbon::now();
         $_isAuth = false;
 
-        if (isset(Auth::user()->ftcode)) {
-            $_users_code = Auth::user()->ftcode;
+        if (isset(Auth::user()->id)) {
+            $_users_code = Auth::user()->id;
         }else{
-            $_users_code = '00000000-0000-0000-0000-000000000000';
+            $_users_code = 0;
         }
         
         if (strtoupper($_req_method) == 'POST') {
             $_req_dump = json_encode($request->all());
+            
             $_user_agent = request()->userAgent();
             $csrf = $request->input('_csrf');
             if (!$csrf) {
                 return response()->json(['csrf' => ['The csrf field is required.']], 422);
             }
-            if (str_contains($_isurl, '/api/users/auth')){
+            if (str_contains($_isurl, '/api/a/auth')){
                 $_isAuth = true;
                 $username = $request->input('username');
                 if (!$username) {
@@ -45,11 +47,13 @@ class RequestRecord
                 }
                 
                 $validate = Guard::check_point($request->input('_csrf'),$username);
+                
                 $getUsernameWithoutLogin = DB::table('users')
                     ->where('username','=', $username)
                     ->first();
+                    
                 if ($getUsernameWithoutLogin) {
-                    $_users_code = $getUsernameWithoutLogin->ftcode;
+                    $_users_code = $getUsernameWithoutLogin->id;
                 }
             }else{
                 $validate = Guard::check_point($csrf);
@@ -60,24 +64,24 @@ class RequestRecord
                 $_isurl = "External Browser.";
             }
             
-            DB::table('x_log_request')
-                ->insert([
-                    'uuid_users_code' => $_users_code,
-                    'ftmethod' => $_req_method,
-                    'ftapi_url_action' => $_isurl,
-                    'ftapi_curl_json' => $_req_dump,
-                    'ftapi_user_agent' => $_user_agent,
-                    'ftclient_host' => $validate->host,
-                    'ftclient_public_ip' => $validate->public_ip,
-                    'ftclient_browser' => $validate->browser,
-                    'ftclient_devices' => $validate->devices,
-                    'ftclient_os' => $validate->os,
-                    'ftclient_user_agent' => $validate->user_agent,
-                    'ftclient_url' => $validate->url,
-                    'created_at' => $dtnow,
-                    'ftgeo_latitude' => $validate->geo_latitude,
-                    'ftgeo_longitude' => $validate->geo_longitude
-                ]);
+            // DB::table('x_log_request')
+            //     ->insert([
+            //         'uuid_users_code' => $_users_code,
+            //         'ftmethod' => $_req_method,
+            //         'ftapi_url_action' => $_isurl,
+            //         'ftapi_curl_json' => $_req_dump,
+            //         'ftapi_user_agent' => $_user_agent,
+            //         'ftclient_host' => $validate->host,
+            //         'ftclient_public_ip' => $validate->public_ip,
+            //         'ftclient_browser' => $validate->browser,
+            //         'ftclient_devices' => $validate->devices,
+            //         'ftclient_os' => $validate->os,
+            //         'ftclient_user_agent' => $validate->user_agent,
+            //         'ftclient_url' => $validate->url,
+            //         'created_at' => $dtnow,
+            //         'ftgeo_latitude' => $validate->geo_latitude,
+            //         'ftgeo_longitude' => $validate->geo_longitude
+            //     ]);
         }
 
         if ($_isAuth) {

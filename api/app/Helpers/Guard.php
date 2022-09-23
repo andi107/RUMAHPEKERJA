@@ -14,6 +14,7 @@ class Guard {
         $public_ip = '::1';
         $dtnow = Carbon::now();
         $err = '{"error":"{{ERR}}"}';
+        
         try {
             
             $res_msg = explode('.',$value);
@@ -33,10 +34,12 @@ class Guard {
                 $dc = json_decode(substr($dc,19));
                 
                 $public_ip = $dc->public_ip;
+                
                 $checkBlockedIp = DB::table('blacklist_ip')
                     ->where('ftpublic_ip', '=', $public_ip)
                     ->where('fnattempt','>=', 10)
                     ->first();
+                    
                 if($checkBlockedIp) {
                     return json_decode(str_replace('{{ERR}}', 'You are forbidden to access.',$err));
                 }
@@ -47,15 +50,15 @@ class Guard {
                         ->where('uuid_app_id','=', $dc->app_id)
                         ->where('fnstatus','=', 1)
                         ->first();
-                
+                        
                     if($chkWhite) {
-                        if ($username){
-                            $res = (new self)->users_log($dc,$username);
-                            if (str_contains($res, '{{ERR}}')){ 
-                                DB::rollback();
-                                return json_decode(str_replace('{{ERR}}', str_replace('{{ERR}}','',$res),$err));
-                            }
-                        }
+                        // if ($username){
+                        //     $res = (new self)->users_log($dc,$username);
+                        //     if (str_contains($res, '{{ERR}}')){ 
+                        //         DB::rollback();
+                        //         return json_decode(str_replace('{{ERR}}', str_replace('{{ERR}}','',$res),$err));
+                        //     }
+                        // }
                         
                         return $dc;
                     }

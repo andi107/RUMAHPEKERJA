@@ -21,7 +21,7 @@ class DashboardController extends Controller
         }
         //=== End Check ===
 
-
+        dd(ApiH::csrf('@adminandi1'));
         return view('admin.admhome');
     }
 }
