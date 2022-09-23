@@ -60,11 +60,8 @@ class LoginController extends Controller {
 
     public function go_migrate() {
         try {
-            // $data = Artisan::call('migrate');
-            $data = Artisan::call('migrate', ["--force" => true ]);
-            return response()->json([
-                'msg' => $data
-            ], 200);
+            // Artisan::call('migrate');
+            Artisan::call('migrate', ["--force" => true ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'error' => 'Internal Server Error.',

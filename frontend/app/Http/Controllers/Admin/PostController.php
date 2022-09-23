@@ -72,14 +72,14 @@ class PostController extends Controller
             $id = $req->input('type');
 
             $validator = Validator::make($req->all(), [
-                'title' => 'required|max:100',
+                'title' => 'required|max:255',
                 'description' => 'required|max:255',
                 'body' => 'required|min:100',
                 'category' => 'required|numeric',
                 'status' => 'required|numeric',
             ],[
                 'title.required' => 'Mohon input Judul.',
-                'title.max' => 'Judul tidak lebih dari 100 karakter.',
+                'title.max' => 'Judul tidak lebih dari 255 karakter.',
                 'description.required' => 'Deskripsi harus di isi.',
                 'description.max' => 'Deskripsi tidak kurang dari 255 karakter.',
                 'body.required' => 'Bodi konten harus di isi.',
