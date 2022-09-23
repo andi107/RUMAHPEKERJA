@@ -59,7 +59,17 @@ class LoginController extends Controller {
     }
 
     public function go_migrate() {
-        Artisan::call('migrate');
+        try {
+            Artisan::call('migrate');
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => 'Internal Server Error.',
+            ], 500)
+                ->header('X-Content-Type-Options', 'nosniff')
+                ->header('X-Frame-Options', 'DENY')
+                ->header('X-XSS-Protection', '1; mode=block')
+                ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
+        }
     }
 
 }
