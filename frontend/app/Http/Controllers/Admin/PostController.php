@@ -67,7 +67,7 @@ class PostController extends Controller
     }
 
     public function create_update(Request $req) {
-        try {
+        // try {
         
             $id = $req->input('type');
 
@@ -106,12 +106,12 @@ class PostController extends Controller
                 'msg' => $resBody,
                 'data' => $res
             ]);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'code' => 404,
-                'msg' => 'Gagal menyimpan data.',
-            ]);
-        }
+        // } catch (\Throwable $th) {
+        //     return response()->json([
+        //         'code' => 404,
+        //         'msg' => 'Gagal menyimpan data.',
+        //     ]);
+        // }
     }
 
     function post_new($req) {

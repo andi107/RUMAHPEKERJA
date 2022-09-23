@@ -36,7 +36,7 @@ class PostsController extends Controller {
 
     public function create(Request $request) {
         $this->validate($request, [
-            'title' => 'required|max:100',
+            'title' => 'required|max:255',
             'description' => 'required|max:255',
             'body' => 'required',
             'category' => 'required|numeric',
@@ -99,7 +99,7 @@ class PostsController extends Controller {
     public function update(Request $request) {
         $this->validate($request, [
             'id' => 'required|numeric',
-            'title' => 'required|max:100',
+            'title' => 'required|max:255',
             'description' => 'required|max:255',
             'category' => 'required|numeric',
             'status' => 'required|numeric',

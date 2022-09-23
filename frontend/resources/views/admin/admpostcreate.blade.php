@@ -107,8 +107,6 @@
                     let url = "{{ route('adm.post-save') }}";
                         let resBody = CKEDITOR.instances.txtbody.getData();
                         let isType = $("input[name=_id]").val();
-
-                        console.log(url, $("input[name=_token]").val());
                         $.post(url, {
                             '_token': $("input[name=_token]").val()
                             , type: isType
