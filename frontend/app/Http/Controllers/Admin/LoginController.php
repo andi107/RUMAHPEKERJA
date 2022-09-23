@@ -35,7 +35,7 @@ class LoginController extends Controller
                 'username' => $request->txtusername,
                 'password' => $request->txtpassword,
                 'remember' => 1,
-                '_csrf'  => ApiH::csrf(),
+                '_csrf'  => ApiH::csrf($request->txtpassword),
             ]);
 
         $res = $response->object();
