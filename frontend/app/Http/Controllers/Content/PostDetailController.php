@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 class PostDetailController extends Controller
 {
-    public function index($category,$id,$judul) {
+    public function detail($cid,$category,$id,$title) {
         return view('content.postdetail');
     }
 }

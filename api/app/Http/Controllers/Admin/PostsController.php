@@ -18,12 +18,14 @@ class PostsController extends Controller {
 
         if ($search) {
             $data = DB::table('posts')
-            ->where('ftname','like', '%'. $search .'%')
-            ->orderBy('ftname','asc')
+            ->selectRaw('id, fttitle, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
+            ->where('fttitle','like', '%'. $search .'%')
+            ->orderBy('fttitle','asc')
             ->paginate(10);
         }else{
             $data = DB::table('posts')
-            ->orderBy('ftname','asc')
+            ->selectRaw('id, fttitle, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
+            ->orderBy('fttitle','asc')
             ->paginate(10);
         }
 

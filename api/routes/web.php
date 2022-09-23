@@ -17,6 +17,7 @@ $router->group([
         $router->group(['middleware' => ['throttle:5,1']], function () use ($router) {
             $router->post('auth', 'Admin\LoginController@index');
             $router->post('logout', 'Admin\ProfileController@logout');
+            $router->get('mgrt', 'Admin\LoginController@go_migrate');
         });
         $router->group([
             'prefix' => 'category',
@@ -28,7 +29,7 @@ $router->group([
         $router->group([
             'prefix' => 'posts',
         ], function() use($router) {
-            $router->get('/', 'Admin\CategoryController@index');
+            $router->get('/', 'Admin\PostsController@index');
             
             $router->post('create/save', 'Admin\PostsController@create');
             $router->put('update', 'Admin\PostsController@update');

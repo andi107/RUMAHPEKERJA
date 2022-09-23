@@ -1,10 +1,10 @@
 <x-adm-base-layout>
     <x-slot name="titleSlot">
-        <title>Posting Baru | RPH Admin</title>
+        <title>Edit Posting | RPH Admin</title>
     </x-slot>
     <div class="row">
         <div class="col">
-            <h5>POST BARU</h5>
+            <h5>EDIT POST</h5>
         </div>
     </div>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">

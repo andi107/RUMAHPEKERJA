@@ -1,6 +1,6 @@
 <x-adm-base-layout>
     <x-slot name="titleSlot">
-        <title>RPH Admin - Dashboard</title>
+        <title>Dashboard | RPH Admin</title>
     </x-slot>
 
     <div class="row">

@@ -1,6 +1,6 @@
 <x-adm-base-layout>
     <x-slot name="titleSlot">
-        <title>RPH Admin - Kategori</title>
+        <title>Kategori | RPH Admin</title>
     </x-slot>
     
         

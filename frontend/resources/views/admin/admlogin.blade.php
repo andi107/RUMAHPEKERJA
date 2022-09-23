@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>RPH - Login</title>
+    <title>Login | RPH</title>
     @if (config('app.env') === 'production')
         <link rel="stylesheet" href="{{ secure_asset('adm/vendors/simplebar/css/simplebar.css')}}">
         <link rel="stylesheet" href="{{ secure_asset('adm/css/vendors/simplebar.css')}}">

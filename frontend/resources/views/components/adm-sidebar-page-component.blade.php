@@ -31,7 +31,7 @@
                 <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-newspaper')}}"></use>
             </svg> Post</a>
             <ul class="nav-group-items">
-                <li class="nav-item"><a class="nav-link" href="#"><span class="nav-icon"></span> Daftar Posting</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('adm.post-list-index') }}"><span class="nav-icon"></span> Daftar Posting</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('adm.post-create-index')}}"><span class="nav-icon"></span> Tambah</a></li>
             </ul>
         </li>

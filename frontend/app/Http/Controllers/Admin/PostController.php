@@ -21,7 +21,34 @@ class PostController extends Controller
             }
         }
         //=== End Check ===
-        return view('admin.admpostcreate');
+
+        $page = 1;
+        $perPage = 10;
+        $url = '/a/posts';
+        $search = "";
+
+        if ($req->has('filter')) {
+            $search = $req->input('filter');
+            if ($search != "") {
+                $url = '/a/posts/?s=' . urlencode($search);
+            }
+        }
+
+        if ($req->has('page')) {
+            $url = $url . '?page=' . $req->input('page');
+            $page = $req->input('page');
+        }
+        $firstrow = (($page * $perPage) - $perPage) + 1;
+
+        $res = ApiH::apiGetVar($url);
+        if (isset($res->error)) {
+            if (!$res->error == "Unauthorized") {
+                return view('admin.admpostlist')->with('error', $res->error); 
+            }
+        }
+        $res = ApiH::fixPagination(route('adm.post-list-index'), $res->data);
+        $hlp = ApiH::class;
+        return view('admin.admpostlist', ['hlp' => $hlp,'res' => $res, 'firstrow' => $firstrow, 'qsearch' => $search]);
     }
 
     public function index(Request $req) {
