@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 class LoginController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['index','register']]);
+        $this->middleware('auth:api', ['except' => ['index','go_migrate']]);
     }
 
     public function index(Request $request) {
@@ -60,7 +60,11 @@ class LoginController extends Controller {
 
     public function go_migrate() {
         try {
-            Artisan::call('migrate');
+            // $data = Artisan::call('migrate');
+            $data = Artisan::call('migrate', ["--force" => true ]);
+            return response()->json([
+                'msg' => $data
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'error' => 'Internal Server Error.',

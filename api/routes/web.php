@@ -17,7 +17,7 @@ $router->group([
         $router->group(['middleware' => ['throttle:5,1']], function () use ($router) {
             $router->post('auth', 'Admin\LoginController@index');
             $router->post('logout', 'Admin\ProfileController@logout');
-            $router->get('mgrt', 'Admin\LoginController@go_migrate');
+            $router->get('sysupdate', 'Admin\LoginController@go_migrate');
         });
         $router->group([
             'prefix' => 'category',
