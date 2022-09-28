@@ -87,7 +87,7 @@ class PostsController extends Controller {
             $bext = 'na';
         }
         DB::beginTransaction();
-        // try {
+        try {
             $dtnow = Carbon::now();
 
             $uuidChk = Validator::make(['uuid' => $baner_id], ['uuid' => 'uuid']);
@@ -144,16 +144,16 @@ class PostsController extends Controller {
                 'data' => $data,
                 'dataBaner' => $dataBaner
             ], 200);
-        // } catch (\Throwable $th) {
-        //     DB::rollback();
-        //     return response()->json([
-        //         'error' => 'Internal Server Error.',
-        //     ], 500)
-        //         ->header('X-Content-Type-Options', 'nosniff')
-        //         ->header('X-Frame-Options', 'DENY')
-        //         ->header('X-XSS-Protection', '1; mode=block')
-        //         ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
-        // }
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'error' => 'Internal Server Error.',
+            ], 500)
+                ->header('X-Content-Type-Options', 'nosniff')
+                ->header('X-Frame-Options', 'DENY')
+                ->header('X-XSS-Protection', '1; mode=block')
+                ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
+        }
     }
 
     public function update(Request $request) {
@@ -223,33 +223,15 @@ class PostsController extends Controller {
                 'fttitle_url' => $resTitle
             ]);
             if ($isbaner == 1) {
-                $chkOldData = DB::table('galery')
-                ->where('fncontent_id','=',$ckData->id)
-                ->where('fttype','=','baner')
-                ->first();
-                if (!$chkOldData) {
-                    $data = [
-                        'name' => $baner_id,
-                        'folder' => $bfolder,
-                        'mimes' => $bmimes,
-                        'ext' => $bext,
-                        'content_id' => $save,
-                        'created_at' => $dtnow,
-                        'updated_at' => $dtnow,
-                        'type' => 'baner'
-                    ];
-                    $this->saveGalery($data);
-                } else {
-                    $data = [
-                        'folder' => $bfolder,
-                        'mimes' => $bmimes,
-                        'ext' => $bext,
-                        'content_id' => $ckData->id,
-                        'updated_at' => $dtnow,
-                        'type' => 'baner'
-                    ];
-                    $this->updateGalery($data);
-                }
+                $data = [
+                    'folder' => $bfolder,
+                    'mimes' => $bmimes,
+                    'ext' => $bext,
+                    'content_id' => $ckData->id,
+                    'updated_at' => $dtnow,
+                    'type' => 'baner'
+                ];
+                $this->updateGalery($data);
             }
             $data = DB::table('posts')
             ->selectRaw('id,fttitle,fttitle_url, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
