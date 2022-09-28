@@ -181,6 +181,10 @@ class PostsController extends Controller {
             $bfolder = $request->input('bfolder');
             $bmimes = $request->input('bmimes');
             $bext = $request->input('bext');
+        } else {
+            $bfolder = 'na';
+            $bmimes = 'na';
+            $bext = 'na';
         }
         DB::beginTransaction();
         try {
@@ -219,15 +223,33 @@ class PostsController extends Controller {
                 'fttitle_url' => $resTitle
             ]);
             if ($isbaner == 1) {
-                $data = [
-                    'folder' => $bfolder,
-                    'mimes' => $bmimes,
-                    'ext' => $bext,
-                    'content_id' => $ckData->id,
-                    'updated_at' => $dtnow,
-                    'type' => 'baner'
-                ];
-                $this->updateGalery($data);
+                $chkOldData = DB::table('galery')
+                ->where('fncontent_id','=',$ckData->id)
+                ->where('fttype','=','baner')
+                ->first();
+                if (!$chkOldData) {
+                    $data = [
+                        'name' => $baner_id,
+                        'folder' => $bfolder,
+                        'mimes' => $bmimes,
+                        'ext' => $bext,
+                        'content_id' => $save,
+                        'created_at' => $dtnow,
+                        'updated_at' => $dtnow,
+                        'type' => 'baner'
+                    ];
+                    $this->saveGalery($data);
+                } else {
+                    $data = [
+                        'folder' => $bfolder,
+                        'mimes' => $bmimes,
+                        'ext' => $bext,
+                        'content_id' => $ckData->id,
+                        'updated_at' => $dtnow,
+                        'type' => 'baner'
+                    ];
+                    $this->updateGalery($data);
+                }
             }
             $data = DB::table('posts')
             ->selectRaw('id,fttitle,fttitle_url, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
