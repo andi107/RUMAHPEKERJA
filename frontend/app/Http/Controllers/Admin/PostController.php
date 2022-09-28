@@ -132,14 +132,18 @@ class PostController extends Controller
             } else {
                 $c = ApiH::csrf();
                 $res = 'null';
+                $banerName = $req->input('baner_name');
+                $banerExt = $req->input('baner_ext');
                 if ($baner) {
-                    $banerName = $req->input('baner_name');
-                    $banerExt = $req->input('baner_ext');
                     $resImg = ApiH::file_create($baner,'postbaner',$banerName,$banerName .'.'. $banerExt);
                     $res = $this->post_update($req,$id, $c,$resImg);
                 } else {
                     $res = $this->post_update($req,$id, $c,null);
-                    // $res = $req->all();
+                    $resImg = [
+                        'baner_id' => $banerName,
+                        'ext' => $banerExt,
+                        'mimes' => 'none'
+                    ];
                 }
                 $this->post_update_body($req,$id,$c);
             }
@@ -147,8 +151,9 @@ class PostController extends Controller
             return response()->json([
                 'code' => 200,
                 'msg' => $resBody,
-                // 'msg' => $banerName,
-                'data' => $res
+                // 'msg' => $banerName .'.'. $banerExt,
+                'data' => $res,
+                'dataBaner' => $resImg
             ]);
         } catch (\Throwable $th) {
             return response()->json([

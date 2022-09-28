@@ -62,7 +62,7 @@
                         $('#formPosts').css("opacity", ".5");
                     }
                     , success: function(res) {
-                        // console.log(res)
+                        console.log(res.dataBaner)
                         let msg = '';
                         if (res.code == 200) {
                             $("input[name=_id]").val(res.data.ftuniq);
@@ -81,6 +81,8 @@
                         }
                         $('strong.me-auto').text('PEMBERITAHUAN');
                         $('div.toast-body').text(msg);
+                        $("input[name=baner_name]").val(res.dataBaner.baner_id);
+                        $("input[name=baner_ext]").val(res.dataBaner.ext);
                         toast.show();
 
                         $('#formPosts').css("opacity", "");

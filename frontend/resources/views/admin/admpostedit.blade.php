@@ -1,56 +1,7 @@
 <x-adm-base-layout>
     <x-slot name="titleSlot">
         <title>Posting Edit | RPH Admin</title>
-        <style>
-            .drop-zone {
-                max-width: 1000px;
-                height: 225px;
-                padding: 25px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                font-family: "Quicksand", sans-serif;
-                font-weight: 500;
-                font-size: 20px;
-                cursor: pointer;
-                color: #cccccc;
-                border: 4px dashed #009578;
-                border-radius: 10px;
-            }
-
-            .drop-zone--over {
-                border-style: solid;
-            }
-
-            .drop-zone__input {
-                display: none;
-            }
-
-            .drop-zone__thumb {
-                width: 100%;
-                height: 100%;
-                border-radius: 10px;
-                overflow: hidden;
-                background-color: #cccccc;
-                background-size: cover;
-                position: relative;
-            }
-
-            .drop-zone__thumb::after {
-                content: attr(data-label);
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                padding: 5px 0;
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.75);
-                font-size: 14px;
-                text-align: center;
-            }
-
-        </style>
+        <x-posts-css-component />
     </x-slot>
     <div class="row">
         <div class="col">
@@ -112,7 +63,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                    Thumbnail maks (5mb)
+                                    Thumbnail [1000x529 Pixel]
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
