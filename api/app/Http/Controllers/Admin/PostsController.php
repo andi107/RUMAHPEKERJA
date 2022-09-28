@@ -87,7 +87,7 @@ class PostsController extends Controller {
             $bext = 'na';
         }
         DB::beginTransaction();
-        try {
+        // try {
             $dtnow = Carbon::now();
 
             $uuidChk = Validator::make(['uuid' => $baner_id], ['uuid' => 'uuid']);
@@ -144,16 +144,16 @@ class PostsController extends Controller {
                 'data' => $data,
                 'dataBaner' => $dataBaner
             ], 200);
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return response()->json([
-                'error' => 'Internal Server Error.',
-            ], 500)
-                ->header('X-Content-Type-Options', 'nosniff')
-                ->header('X-Frame-Options', 'DENY')
-                ->header('X-XSS-Protection', '1; mode=block')
-                ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
-        }
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        //     return response()->json([
+        //         'error' => 'Internal Server Error.',
+        //     ], 500)
+        //         ->header('X-Content-Type-Options', 'nosniff')
+        //         ->header('X-Frame-Options', 'DENY')
+        //         ->header('X-XSS-Protection', '1; mode=block')
+        //         ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
+        // }
     }
 
     public function update(Request $request) {
