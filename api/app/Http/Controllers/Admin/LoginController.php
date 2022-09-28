@@ -31,7 +31,7 @@ class LoginController extends Controller {
                 if (!$check) {
                     return response()->json(['error' => "Wrong credential!"], 200);
                 }
-                $token_time = 1440;
+                $token_time = 8640;
                 // if ($request->input('remember') == 1) {
                 //     $token_time = 8640;
                 // }else{

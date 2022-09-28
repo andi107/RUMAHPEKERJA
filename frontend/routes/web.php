@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PostController;
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/r/{id}', 'shrt_link')->name('redir');
+    Route::get('/imgview/{folder}/{ext}/{fileName}', 'image_view')->name('image-view');    
 });
 
 Route::controller(UserCategory::class)->group(function () {

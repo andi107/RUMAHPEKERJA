@@ -1,6 +1,56 @@
 <x-adm-base-layout>
     <x-slot name="titleSlot">
         <title>Posting Baru | RPH Admin</title>
+        <style>
+            .drop-zone {
+                max-width: 1000px;
+                height: 225px;
+                padding: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-family: "Quicksand", sans-serif;
+                font-weight: 500;
+                font-size: 20px;
+                cursor: pointer;
+                color: #cccccc;
+                border: 4px dashed #009578;
+                border-radius: 10px;
+            }
+
+            .drop-zone--over {
+                border-style: solid;
+            }
+
+            .drop-zone__input {
+                display: none;
+            }
+
+            .drop-zone__thumb {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                overflow: hidden;
+                background-color: #cccccc;
+                background-size: cover;
+                position: relative;
+            }
+
+            .drop-zone__thumb::after {
+                content: attr(data-label);
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 5px 0;
+                color: #ffffff;
+                background: rgba(0, 0, 0, 0.75);
+                font-size: 14px;
+                text-align: center;
+            }
+
+        </style>
     </x-slot>
     <div class="row">
         <div class="col">
@@ -9,19 +59,19 @@
     </div>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <svg class="icon me-2">
-                <use xlink:href="{{asset('adm/vendors/@coreui/icons/svg/free.svg#cil-warning')}}"></use>
-              </svg>
-            <strong class="me-auto"></strong>
-            {{-- <small>11 mins ago</small> --}}
-            <button type="button" class="btn-close" data-coreui-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            ...
-          </div>
+            <div class="toast-header">
+                <svg class="icon me-2">
+                    <use xlink:href="{{asset('adm/vendors/@coreui/icons/svg/free.svg#cil-warning')}}"></use>
+                </svg>
+                <strong class="me-auto"></strong>
+                {{-- <small>11 mins ago</small> --}}
+                <button type="button" class="btn-close" data-coreui-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                ...
+            </div>
         </div>
-      </div>
+    </div>
     <form action="" method="POST" id="formPosts" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="_id" value="new">
@@ -52,7 +102,7 @@
                             </h2>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body">
-                                    <button type="submit" class="btn btn-outline-success">SIMPAN</button>
+                                    <button type="submit" class="btn btn-outline-success submitBtn">SIMPAN</button>
                                     <button type="button" class="btn btn-info">PREVIEW</button>
                                 </div>
                             </div>
@@ -60,12 +110,15 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                    Accordion Item #2
+                                    Thumbnail maks (5mb)
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
-                                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                    <div class="drop-zone">
+                                        <span class="drop-zone__prompt">Klik atau jatuhkan file gambar di sini</span>
+                                        <input type="file" name="mybaner" id="mybaner" accept=".jpg, .jpeg, .png" class="drop-zone__input">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -86,62 +139,5 @@
             </div>
         </div>
     </form>
-    <script src="{{ asset('cke/ckeditor.js')}}"></script>
-    <script>
-        CKEDITOR.replace('txtbody');
-
-        const toastLiveExample = document.getElementById('liveToast')
-        const toast = new coreui.Toast(toastLiveExample)
-
-        $(document).ready(
-            function() {
-                
-                $('#formPosts').submit(
-                    function(e) {
-                        e.preventDefault();
-                        _save(e);
-                    }
-                );
-
-                function _save(e) {
-                    let url = "{{ route('adm.post-save') }}";
-                        let resBody = CKEDITOR.instances.txtbody.getData();
-                        let isType = $("input[name=_id]").val();
-                        $.post(url, {
-                            '_token': $("input[name=_token]").val()
-                            , type: isType
-                            , title: $("input[name=txtTitle]").val()
-                            , body: resBody
-                            , description: $.trim($("#txtDescription").val()),
-                            // category: $("input[name=txtBody]").val(),
-                            // status: $("input[name=txtBody]").val(),
-
-                            category: 1
-                            , status: 1
-                        , }, function(res) {
-                            let msg = '';
-                            if (res.code == 200) {
-                                $("input[name=_id]").val(res.data.ftuniq);
-                                if (res.data.msg) {
-                                    msg = res.data.msg;
-                                }else{
-                                    msg = res.msg;
-                                }
-                                if (isType == 'new') {
-                                    setInterval(function() {
-                                        _save(e)
-                                    }, 300000);
-                                }
-                            } else {
-                                msg = res.msg;
-                            }
-                            $('strong.me-auto').text('PEMBERITAHUAN');
-                            $('div.toast-body').text(msg);
-                            toast.show();
-                        });
-                }
-            }
-        );
-
-    </script>
+    <x-posts-js-component />
 </x-adm-base-layout>

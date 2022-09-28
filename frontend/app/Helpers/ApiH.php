@@ -196,33 +196,35 @@ class ApiH
         try {
             switch ($file->getClientMimeType()) {
                 case 'image/png':
+                    $mimes = 'image/png';
                     $type = 'png';
                     break;
-                case 'image/svg+xml':
-                    $type = 'svg';
-                    break;
-                case 'image/jpeg':
+                case 'image/jpeg' || 'image/jpg':
+                    $mimes = 'image/jpg';
                     $type = 'jpg';
                     break;
                 default:
-                    return 'Invalid_file_type';
+                    return 'Invalid_file_type1';
                     break;
             }
 
             $setFileName = sprintf('%s.%s', $photoId, $type);
 
             if ($old_filename) {
-
-                if (Storage::exists($folder.$old_filename)) {
-                    Storage::delete($folder.$old_filename);
+                if (Storage::exists($folder.'/'.$old_filename)) {
+                    Storage::delete($folder.'/'.$old_filename);
                 }
             }
-
-            $file->move(storage_path('app/'.$folder), $setFileName);
-
-            return $type;
+            $path = $folder.'/'.$setFileName;
+            Storage::disk('local')->put($path, file_get_contents($file));
+            $data = [
+                'baner_id' => $photoId,
+                'mimes' => $mimes,
+                'ext' => $type
+            ];
+            return $data;
         } catch (\Throwable $th) {
-            return 'Invalid_file_type';
+            return 'Invalid_file_type2 ';
         }
     }
 }

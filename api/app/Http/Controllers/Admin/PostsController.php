@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 class PostsController extends Controller {
 
     public function __construct()
@@ -40,9 +41,17 @@ class PostsController extends Controller {
         $data = DB::table('posts')
         ->where('ftuniq','=',$uniq)
         ->first();
+        if ($data) {
+            $banerData = DB::table('galery')
+            ->where('fncontent_id','=', $data->id)
+            ->first();
+        } else {
+            $banerData = null;
+        }
 
         return response()->json([
-            'data' => $data
+            'data' => $data,
+            'banerdata' => $banerData
         ], 200);
     }
 
@@ -53,15 +62,36 @@ class PostsController extends Controller {
             'body' => 'required',
             'category' => 'required|numeric',
             'status' => 'required|numeric',
+            'baner_id' => 'required',
+            'isbaner' => 'required|numeric'
         ]);
-        $title = $request->input('title');
-        $description = $request->input('description');
-        $body = $request->input('body');
+        $title = urldecode($request->input('title'));
+        $description = urldecode($request->input('description'));
+        $body = urldecode($request->input('body'));
         $category = $request->input('category');
         $status = $request->input('status');
+        $baner_id = $request->input('baner_id');
+        $isbaner = $request->input('isbaner');
+        if ($isbaner == 1) {
+            $this->validate($request, [
+                'bfolder' => 'required',
+                'bmimes' => 'required',
+                'bext' => 'required',
+            ]);
+            $bfolder = $request->input('bfolder');
+            $bmimes = $request->input('bmimes');
+            $bext = $request->input('bext');
+        }else{
+            $bfolder = 'na';
+            $bmimes = 'na';
+            $bext = 'na';
+        }
         DB::beginTransaction();
         try {
             $dtnow = Carbon::now();
+
+            $uuidChk = Validator::make(['uuid' => $baner_id], ['uuid' => 'uuid']);
+            if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $baner_id ], 404); };
 
             $ckName = DB::table('posts')
             ->where('fttitle','=', $title)
@@ -72,6 +102,8 @@ class PostsController extends Controller {
                     'error' => $title.' sudah ada.',
                 ], 404);
             }
+
+            $resTitle = urlencode(str_replace(' ','-', $title));
 
             $getUniq = $this->getRandString();
             $save = DB::table('posts')
@@ -85,16 +117,32 @@ class PostsController extends Controller {
                 'fnupdated_by' => Auth::id(),
                 'fncreated_by' => Auth::id(),
                 'created_at' => $dtnow,
-                'updated_at' => $dtnow
+                'updated_at' => $dtnow,
+                'fttitle_url' => $resTitle
             ]);
+            $data = [
+                'name' => $baner_id,
+                'folder' => $bfolder,
+                'mimes' => $bmimes,
+                'ext' => $bext,
+                'content_id' => $save,
+                'created_at' => $dtnow,
+                'updated_at' => $dtnow,
+                'type' => 'baner'
+            ];
+            $this->saveGalery($data);
             $data = DB::table('posts')
-            ->selectRaw('id,fttitle, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
+            ->selectRaw('id,fttitle,fttitle_url, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
             ->where('id','=', $save)
+            ->first();
+            $dataBaner = DB::table('galery')
+            ->where('fncontent_id','=', $save)
             ->first();
 
             DB::commit();
             return response()->json([
-                'data' => $data
+                'data' => $data,
+                'dataBaner' => $dataBaner
             ], 200);
         } catch (\Throwable $th) {
             DB::rollback();
@@ -115,12 +163,25 @@ class PostsController extends Controller {
             'description' => 'required|max:255',
             'category' => 'required|numeric',
             'status' => 'required|numeric',
+            'isbaner' => 'required|numeric'
         ]);
+        
         $id = $request->input('id');
         $title = urldecode($request->input('title'));
         $description = urldecode($request->input('description'));
         $category = $request->input('category');
         $status = $request->input('status');
+        $isbaner = $request->input('isbaner');
+        if ($isbaner == 1) {
+            $this->validate($request, [
+                'bfolder' => 'required',
+                'bmimes' => 'required',
+                'bext' => 'required',
+            ]);
+            $bfolder = $request->input('bfolder');
+            $bmimes = $request->input('bmimes');
+            $bext = $request->input('bext');
+        }
         DB::beginTransaction();
         try {
             $dtnow = Carbon::now();
@@ -143,6 +204,8 @@ class PostsController extends Controller {
                     'error' => $title.' sudah ada.',
                 ], 404);
             }
+            
+            $resTitle = urlencode(str_replace(' ','-', $title));
 
             DB::table('posts')
             ->where('ftuniq','=',$id)
@@ -152,16 +215,32 @@ class PostsController extends Controller {
                 'fncategory' => $category,
                 'fnstatus' => $status,
                 'fnupdated_by' => Auth::id(),
-                'updated_at' => $dtnow
+                'updated_at' => $dtnow,
+                'fttitle_url' => $resTitle
             ]);
+            if ($isbaner == 1) {
+                $data = [
+                    'folder' => $bfolder,
+                    'mimes' => $bmimes,
+                    'ext' => $bext,
+                    'content_id' => $ckData->id,
+                    'updated_at' => $dtnow,
+                    'type' => 'baner'
+                ];
+                $this->updateGalery($data);
+            }
             $data = DB::table('posts')
-            ->selectRaw('id,fttitle, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
+            ->selectRaw('id,fttitle,fttitle_url, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
             ->where('ftuniq','=', $id)
+            ->first();
+            $dataBaner = DB::table('galery')
+            ->where('fncontent_id','=', $ckData->id)
             ->first();
 
             DB::commit();
             return response()->json([
-                'data' => $data
+                'data' => $data,
+                'dataBaner' => $dataBaner
             ], 200);
         } catch (\Throwable $th) {
             DB::rollback();
@@ -177,11 +256,11 @@ class PostsController extends Controller {
 
     public function update_body(Request $request) {
         $this->validate($request, [
-            'ftuniq' => 'required',
+            'id' => 'required',
             'body' => 'required',
         ]);
-        $id = $request->input('ftuniq');
-        $body = $request->input('body');
+        $id = $request->input('id');
+        $body = urldecode($request->input('body'));
 
         try {
             $dtnow = Carbon::now();

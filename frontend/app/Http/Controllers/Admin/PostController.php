@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\ApiH;
 use Illuminate\Support\Facades\Validator;
+use Webpatser\Uuid\Uuid;
 class PostController extends Controller
 {
 
@@ -95,25 +96,58 @@ class PostController extends Controller
                 'body.required' => 'Bodi konten harus di isi.',
                 'body.min' => 'Bodi konten harus lebih dari 100 karakter.'
             ]);
-            
             if ($validator->fails()) {
                 return response()->json([
                     'code' => 404,
                     'msg' => $validator->messages()->first(),
                 ]);
             }
+
             $resBody = 'Data berhasil tersimpan.';
+            
+            $baner = $req->file('mybaner');
+            if ($baner) {
+                $validator = Validator::make($req->all(), [
+                    'mybaner' => 'mimes:jpg,png|max:5000'
+                ],[
+                    'mybaner.mimes' => 'Format Baner hanya diperbolehkan *.jpg & *.png.',
+                    'mybaner.max' => 'Ukuran Baner maksimal 5mb.'
+                ]);
+                if ($validator->fails()) {
+                    return response()->json([
+                        'code' => 404,
+                        'msg' => $validator->messages()->first(),
+                    ]);
+                }
+            }
+
             if ($id == 'new') {
-                $res = $this->post_new($req);
+                $photoId = Uuid::generate(4)->string;
+                if ($baner) {
+                    $resImg = ApiH::file_create($baner,'postbaner',$photoId);
+                    $res = $this->post_new($req,$photoId,$resImg);
+                }else{
+                    $res = $this->post_new($req,$photoId,null);
+                }
             } else {
                 $c = ApiH::csrf();
-                $res = $this->post_update($req,$id,$c);
+                $res = 'null';
+                if ($baner) {
+                    $banerName = $req->input('baner_name');
+                    $banerExt = $req->input('baner_ext');
+                    $resImg = ApiH::file_create($baner,'postbaner',$banerName,$banerName .'.'. $banerExt);
+                    $res = $this->post_update($req,$id, $c,$resImg);
+                } else {
+                    $res = $this->post_update($req,$id, $c,null);
+                    // $res = $req->all();
+                }
                 $this->post_update_body($req,$id,$c);
             }
 
             return response()->json([
                 'code' => 200,
                 'msg' => $resBody,
+                // 'msg' => $banerName,
                 'data' => $res
             ]);
         } catch (\Throwable $th) {
@@ -124,15 +158,34 @@ class PostController extends Controller
         }
     }
 
-    function post_new($req) {
-        $body = [
-            'title' => urlencode($req->input('title')),
-            'description' => urlencode($req->input('description')),
-            'body' => $req->input('body'),
-            'category' => (int)$req->input('category'),
-            'status' => (int)$req->input('status'),
-            '_csrf' => ApiH::csrf()
-        ];
+    function post_new($req,$baner_id,$valid) {
+        if ($valid) {
+            $body = [
+                'title' => urlencode($req->input('title')),
+                'description' => urlencode($req->input('description')),
+                'body' => $req->input('body'),
+                'category' => (int)$req->input('category'),
+                'status' => (int)$req->input('status'),
+                '_csrf' => ApiH::csrf(),
+                'baner_id' => $baner_id,
+                'isbaner' => 1,
+                'bfolder' => 'postbaner',
+                'bmimes' => $valid['mimes'],
+                'bext' => $valid['ext'],
+            ];
+        }else{
+            $body = [
+                'title' => urlencode($req->input('title')),
+                'description' => urlencode($req->input('description')),
+                'body' => $req->input('body'),
+                'category' => (int)$req->input('category'),
+                'status' => (int)$req->input('status'),
+                'baner_id' => $baner_id,
+                'isbaner' => 0,
+                '_csrf' => ApiH::csrf()
+            ];
+        }
+        
 
         $createPost = ApiH::apiPostVar('/a/posts/create/save', $body);
         $res = $createPost->object();
@@ -156,18 +209,42 @@ class PostController extends Controller
         }
     }
 
-    function post_update($req,$id, $csrf) {
-        
-        $body = [
-            'id' => $id,
-            'title' => urlencode($req->input('title')),
-            'description' => urlencode($req->input('description')),
-            'category' => (int)$req->input('category'),
-            'status' => (int)$req->input('status'),
-            '_csrf' => $csrf
-        ];
+    function post_update($req,$id, $csrf,$valid) {
+        // $body = [
+        //     'id' => $id,
+        //     'title' => urlencode($req->input('title')),
+        //     'description' => urlencode($req->input('description')),
+        //     'category' => (int)$req->input('category'),
+        //     'status' => (int)$req->input('status'),
+        //     '_csrf' => $csrf
+        // ];
 
-        $update = ApiH::apiPutVar('/a/posts/update', $body);
+        if ($valid) {
+            $body = [
+                'id' => $id,
+                'title' => urlencode($req->input('title')),
+                'description' => urlencode($req->input('description')),
+                'category' => (int)$req->input('category'),
+                'status' => (int)$req->input('status'),
+                '_csrf' => ApiH::csrf(),
+                'isbaner' => 1,
+                'bfolder' => 'postbaner',
+                'bmimes' => $valid['mimes'],
+                'bext' => $valid['ext'],
+            ];
+        }else{
+            $body = [
+                'id' => $id,
+                'title' => urlencode($req->input('title')),
+                'description' => urlencode($req->input('description')),
+                'category' => (int)$req->input('category'),
+                'status' => (int)$req->input('status'),
+                'isbaner' => 0,
+                '_csrf' => ApiH::csrf()
+            ];
+        }
+        
+        $update = ApiH::apiPostVar('/a/posts/update', $body);
         $res = $update->object();
 
         if (isset($res->error)) {
@@ -197,7 +274,7 @@ class PostController extends Controller
             '_csrf' => $csrf
         ];
 
-        $update = ApiH::apiPutVar('/a/posts/update_body', $body);
+        $update = ApiH::apiPostVar('/a/posts/update_body', $body);
         $res = $update->object();
         
         if (isset($res->error)) {
