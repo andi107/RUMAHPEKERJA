@@ -62,10 +62,18 @@
                         $('#formPosts').css("opacity", ".5");
                     }
                     , success: function(res) {
-                        console.log(res.dataBaner)
+                        console.log(res)
                         let msg = '';
                         if (res.code == 200) {
-                            $("input[name=_id]").val(res.data.ftuniq);
+                            if (typeof(res.data.ftuniq) === 'undefined') {
+                                $("input[name=_id]").val(res.data.id);
+                            }else{
+                                $("input[name=_id]").val(res.data.ftuniq);
+                            }
+                            if (!typeof(res.dataBaner) === 'undefined') {
+                                $("input[name=baner_name]").val(res.dataBaner.baner_id);
+                                $("input[name=baner_ext]").val(res.dataBaner.ext);
+                            }
                             if (res.data.msg) {
                                 msg = res.data.msg;
                             } else {
@@ -77,12 +85,11 @@
                                 }, 300000);
                             }
                         } else {
+                            $("input[name=_id]").val('new');
                             msg = res.msg;
                         }
                         $('strong.me-auto').text('PEMBERITAHUAN');
                         $('div.toast-body').text(msg);
-                        $("input[name=baner_name]").val(res.dataBaner.baner_id);
-                        $("input[name=baner_ext]").val(res.dataBaner.ext);
                         toast.show();
 
                         $('#formPosts').css("opacity", "");

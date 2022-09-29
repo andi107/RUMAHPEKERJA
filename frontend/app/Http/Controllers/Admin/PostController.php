@@ -120,7 +120,8 @@ class PostController extends Controller
                     ]);
                 }
             }
-
+            $res = 'null';
+            $resImg = 'null';
             if ($id == 'new') {
                 $photoId = Uuid::generate(4)->string;
                 if ($baner) {
@@ -131,7 +132,6 @@ class PostController extends Controller
                 }
             } else {
                 $c = ApiH::csrf();
-                $res = 'null';
                 $banerName = $req->input('baner_name');
                 $banerExt = $req->input('baner_ext');
                 if ($baner) {
