@@ -46,7 +46,7 @@ class LoginController extends Controller
         if (env('APP_ENV') == 'production') {
             $resCapcha = $this->isvalidate($request);
             if(!$resCapcha->success) {
-                return view('admin.admlogin', ['errLogin' => 'Capcha tidak Valid!']);
+                return view('admin.admlogin', ['errLogin' => 'Capcha tidak Valid, Beri tahu kami jika anda bukan BOT!']);
                 // return redirect()->route('adm.login');
             }
         }
