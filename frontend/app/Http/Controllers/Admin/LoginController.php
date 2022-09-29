@@ -27,7 +27,6 @@ class LoginController extends Controller
     }
 
     function isvalidate($req) {
-        dd($req->input('h-captcha-response'));
         $data = array(
             'secret' => "my-secret (should start with 0x..)",
             'response' => $req->input('h-captcha-response')
