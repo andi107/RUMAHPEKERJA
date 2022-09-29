@@ -9,11 +9,11 @@
 		<div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
 			<div class="f2-s-1 p-r-30 m-tb-6">
 				<a href="{{route('home')}}" class="breadcrumb-item f1-s-3 cl9">
-					Home 
+					Beranda 
 				</a>
 
 				<a href="blog-list-01.html" class="breadcrumb-item f1-s-3 cl9">
-					Blog 
+					Category
 				</a>
 
 				<span class="breadcrumb-item f1-s-3 cl9">
@@ -42,9 +42,9 @@
 								Technology
 							</a>
 
-							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
+							<h1 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
 								Nulla non interdum metus non laoreet nisi tellus eget aliquam lorem pellentesque
-							</h3>
+							</h1>
 							
 							<div class="flex-wr-s-s p-b-40">
 								<span class="f1-s-3 cl8 m-r-15">

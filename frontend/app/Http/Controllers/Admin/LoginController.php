@@ -11,15 +11,36 @@ use App\Helpers\ApiH;
 
 class LoginController extends Controller
 {
-    public function __construct()
-    {
-        if (Cookie::get('API_TOKEN')) {
-            abort(404);
+    public function index() {
+        //=== Check ===
+        $res = ApiH::apiGetVar('/chk');
+        if ($res == null) {
+            return view('admin.admlogin');
         }
+        if (isset($res->error)) {
+            if ($res->error == "Unauthorized") {
+                return view('admin.admlogin');
+            }
+        }
+        //=== End Check ===
+        abort(404);
     }
 
-    public function index() {
-        return view('admin.admlogin');
+    function isvalidate($req) {
+        dd($req->input('h-captcha-response'));
+        $data = array(
+            'secret' => "my-secret (should start with 0x..)",
+            'response' => $req->input('h-captcha-response')
+        );
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($verify);
+        // var_dump($response);
+        return json_decode($response);
+        
     }
 
     public function go(Request $request) {
@@ -28,7 +49,13 @@ class LoginController extends Controller
         // if ($request->has('remember')) {
         //     $remember = 1;
         // }
-
+        $resCapcha = $this->isvalidate($request);
+        if(!$resCapcha->success) {
+            dd('return error to user; they did not pass');
+            return redirect()->route('adm.login');
+        }
+        dd('OKOK');
+        
         $response = Http::withToken(null)
             ->acceptJson()
             ->post(env('APP_API') . '/a/auth', [

@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="{{ asset('adm/css/vendors/simplebar.css')}}">
         <link href="{{ asset('adm/css/style.css')}}" rel="stylesheet">
     @endif
+    <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
 </head>
 <body>
     <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -41,14 +42,9 @@
                                             </svg></span>
                                         <input name="txtpassword" class="form-control" type="password" placeholder="Password" required>
                                     </div>
-                                    {{-- <div class="input-group mb-3">
-                                        <div class="form-check">
-                                            <input name="ckremember" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                            Ingat Saya
-                                            </label>
-                                        </div>
-                                    </div> --}}
+                                    <div class="input-group mb-3">
+                                        <div class="h-captcha" data-sitekey="e4b7276b-2232-4da5-aab5-b1a2c0ae14cf"></div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <button class="btn btn-primary px-4" type="submit">Masuk</button>

@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('adm.dashboard');
+        Route::get('/logout', 'go_logout')->name('adm.logout');
     });
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index')->name('adm.category');

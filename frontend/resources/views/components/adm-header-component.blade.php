@@ -38,7 +38,7 @@
                 <div class="dropdown-menu dropdown-menu-end pt-0">
                     <div class="dropdown-header bg-light py-2">
                         <div class="fw-semibold">Settings</div>
-                    </div><a class="dropdown-item" href="#">
+                    </div><a class="dropdown-item" href="{{ route('adm.logout') }}">
                         <svg class="icon me-2">
                             <use xlink:href="{{ asset('adm/vendors/@coreui/icons/svg/free.svg#cil-account-logout')}}"></use>
                         </svg> Logout</a>

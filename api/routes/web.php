@@ -11,12 +11,12 @@ $router->group([
     'middleware' => ['nocache','hideserver', 'security','csp','gzip'],
 ], function() use($router) {
     $router->get('chk', 'Admin\CheckController@index');
+    $router->get('logout', 'Admin\CheckController@go_logout');
     $router->group([
         'prefix' => 'a',
     ], function() use($router) {
         $router->group(['middleware' => ['throttle:5,1']], function () use ($router) {
             $router->post('auth', 'Admin\LoginController@index');
-            $router->post('logout', 'Admin\ProfileController@logout');
             $router->get('sysupdate', 'Admin\LoginController@go_migrate');
         });
         $router->group([

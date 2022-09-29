@@ -18,4 +18,9 @@ class CheckController extends Controller {
             'data' => 'ok'
         ], 200);
     }
+
+    public function go_logout() {
+        auth()->logout();
+        return response()->json(['message' => 'Successfully logged out']);
+    }
 }
