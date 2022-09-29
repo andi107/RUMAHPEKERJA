@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{ asset('adm/css/vendors/simplebar.css')}}">
         <link href="{{ asset('adm/css/style.css')}}" rel="stylesheet">
     @endif
-    <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </head>
 <body>
     <div class="bg-light min-vh-100 d-flex flex-row align-items-center">

@@ -28,33 +28,27 @@ class LoginController extends Controller
 
     function isvalidate($req) {
         $data = array(
-            'secret' => "my-secret (should start with 0x..)",
+            'secret' => env("CAP_SECRET"),
             'response' => $req->input('h-captcha-response')
         );
         $verify = curl_init();
+        
         curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
         curl_setopt($verify, CURLOPT_POST, true);
         curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($verify);
-        // var_dump($response);
         return json_decode($response);
         
     }
 
     public function go(Request $request) {
-        // dd('submitlogn',$request->all());
-        // $remember = 0;
-        // if ($request->has('remember')) {
-        //     $remember = 1;
-        // }
-        $resCapcha = $this->isvalidate($request);
-        if(!$resCapcha->success) {
-            dd('return error to user; they did not pass');
-            return redirect()->route('adm.login');
+        if (env('APP_ENV') == 'production') {
+            $resCapcha = $this->isvalidate($request);
+            if(!$resCapcha->success) {
+                return redirect()->route('adm.login');
+            }
         }
-        dd('OKOK');
-        
         $response = Http::withToken(null)
             ->acceptJson()
             ->post(env('APP_API') . '/a/auth', [
