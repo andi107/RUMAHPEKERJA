@@ -69,6 +69,11 @@
                                 $("input[name=_id]").val(res.data.id);
                             }else{
                                 $("input[name=_id]").val(res.data.ftuniq);
+                                if (isType == 'new') {
+                                    setInterval(function() {
+                                        _save()
+                                    }, 300000);
+                                }
                             }
                             if (!typeof(res.dataBaner) === 'undefined') {
                                 $("input[name=baner_name]").val(res.dataBaner.baner_id);
@@ -78,11 +83,6 @@
                                 msg = res.data.msg;
                             } else {
                                 msg = res.msg;
-                            }
-                            if (isType == 'new') {
-                                setInterval(function() {
-                                    _save()
-                                }, 300000);
                             }
                         } else {
                             $("input[name=_id]").val('new');
