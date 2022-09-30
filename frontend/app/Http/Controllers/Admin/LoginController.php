@@ -26,6 +26,7 @@ class LoginController extends Controller
         abort(404);
     }
 
+    //===VALIDASI DI API AJA
     function isvalidate($req) {
         $data = array(
             'secret' => env("CAP_SECRET"),
@@ -41,6 +42,7 @@ class LoginController extends Controller
         return json_decode($response);
         
     }
+    //===END E====
 
     public function go(Request $request) {
         if (env('APP_ENV') == 'production') {

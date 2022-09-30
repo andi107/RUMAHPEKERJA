@@ -36,4 +36,11 @@ $router->group([
             $router->post('update_body', 'Admin\PostsController@update_body');
         });
     });
+
+    $router->group([
+        'prefix' => 'post',
+    ], function() use($router) {
+        $router->get('list', 'User\PostController@index');
+        $router->get('detail/{cat_id}/{cont_id}/{title_url}', 'User\PostController@detail');
+    });
 });

@@ -1,6 +1,8 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-        <title>Beranda | Rumah Pekerja Hebat</title>
+        {!! OpenGraph::generate() !!}
+		{!! Twitter::generate() !!}
+		{!! JsonLd::generate() !!}
     </x-slot>
     
 	<!-- Headline -->

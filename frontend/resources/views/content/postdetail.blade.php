@@ -1,7 +1,9 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-        <title>RPH - Detail</title>
-		<meta name="asdasd" content="width=device-width, initial-scale=1">
+		{{-- {!! SEOMeta::generate() !!} --}}
+		{!! OpenGraph::generate() !!}
+		{!! Twitter::generate() !!}
+		{!! JsonLd::generate() !!}
     </x-slot>
 
     <!-- Breadcrumb -->
@@ -17,7 +19,7 @@
 				</a>
 
 				<span class="breadcrumb-item f1-s-3 cl9">
-					 Nulla non interdum metus non laoreet nisi tellus eget aliquam lorem pellentesque
+					{{ $data->data->fttitle }}
 				</span>
 			</div>
 
@@ -43,7 +45,7 @@
 							</a>
 
 							<h1 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-								Nulla non interdum metus non laoreet nisi tellus eget aliquam lorem pellentesque
+								{{ $data->data->fttitle }}
 							</h1>
 							
 							<div class="flex-wr-s-s p-b-40">
@@ -69,20 +71,10 @@
 							</div>
 
 							<div class="wrap-pic-max-w p-b-30">
-								<img src="{{ asset('src/images/blog-list-01.jpg')}}" alt="IMG">
+								<img src="{{ route('image-view', [$data->dataBaner->ftfolder,$data->dataBaner->ftext,$data->dataBaner->ftname]) }}" alt="IMG">
 							</div>
 
-							<p class="f1-s-11 cl6 p-b-25">
-								Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo. Vivamus sapien arcu, mollis eu pharetra vitae, condimentum in orci. Integer eu sodales dolor. Maecenas elementum arcu eu convallis rhoncus. Donec tortor sapien, euismod a faucibus eget, porttitor quis libero. 
-							</p>
-
-							<p class="f1-s-11 cl6 p-b-25">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
-							</p>
-
-							<p class="f1-s-11 cl6 p-b-25">
-								Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
-							</p>
+							{!! $data->data->ftbody !!}
 
 							<!-- Tag -->
 							<div class="flex-s-s p-t-12 p-b-15">
