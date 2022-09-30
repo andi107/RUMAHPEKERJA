@@ -1,8 +1,8 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-        {!! OpenGraph::generate() !!}
+        {{-- {!! OpenGraph::generate() !!}
 		{!! Twitter::generate() !!}
-		{!! JsonLd::generate() !!}
+		{!! JsonLd::generate() !!} --}}
     </x-slot>
     
 	<!-- Headline -->
