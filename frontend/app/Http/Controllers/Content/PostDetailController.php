@@ -54,7 +54,9 @@ class PostDetailController extends Controller
         JsonLd::setType('Article');
         JsonLd::addImage($addImg1);
         return view('content.postdetail',[
-            'data' => $res
+            'data' => $res,
+            'opengraph' => OpenGraph::class,
+            'jsonld' => JsonLd::class
         ]);
     }
 }

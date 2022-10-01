@@ -1,9 +1,9 @@
 <x-base-layout>
     <x-slot name="titleSlot">
 		{{-- {!! SEOMeta::generate() !!} --}}
-		{!! OpenGraph::generate() !!}
-		{!! Twitter::generate() !!}
-		{!! JsonLd::generate() !!}
+		{!! $opengraph::generate() !!}
+		{{-- {!! Twitter::generate() !!} --}}
+		{!! $jsonld::generate() !!}
     </x-slot>
 
     <!-- Breadcrumb -->
