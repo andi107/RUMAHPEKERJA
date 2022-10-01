@@ -3,7 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-
+use Artesaos\SEOTools\Facades\SEOMeta;
 class BaseLayout extends Component
 {
     /**
@@ -23,6 +23,9 @@ class BaseLayout extends Component
      */
     public function render()
     {
-        return view('components.base-layout');
+        
+        return view('components.base-layout',[
+            'seometa' => SEOMeta::class
+        ]);
     }
 }

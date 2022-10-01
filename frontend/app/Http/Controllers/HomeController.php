@@ -52,7 +52,9 @@ class HomeController extends Controller
         JsonLd::setType('Article');
         JsonLd::addImage($imgLogo);
         
-        return view('home');
+        return view('home',[
+            'seometa' => SEOMeta::class
+        ]);
     }
 
     public function shrt_link($id) {
