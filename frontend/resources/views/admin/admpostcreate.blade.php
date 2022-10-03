@@ -2,6 +2,7 @@
     <x-slot name="titleSlot">
         <title>Posting Baru | RPH Admin</title>
         <x-posts-css-component />
+        <x-posts-attach-css-component />
     </x-slot>
     <div class="row">
         <div class="col">
@@ -28,6 +29,7 @@
         <input type="hidden" name="_id" value="new">
         <input type="hidden" name="baner_name">
         <input type="hidden" name="baner_ext">
+        <input type="hidden" name="tmp_id" value="{{ $tmp_id }}">
         <div class="row gutters pt-4">
             <div class="col col-lg">
                 <div class="form-floating mb-3">
@@ -55,8 +57,10 @@
                             </h2>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body">
-                                    <button type="submit" class="btn btn-outline-success submitBtn">SIMPAN</button>
-                                    <button type="button" class="btn btn-info">PREVIEW</button>
+                                    <div class="mx-auto">
+                                        <button type="submit" class="btn btn-outline-success submitBtn">SIMPAN</button>
+                                        <button type="button" class="btn btn-info">PREVIEW</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -71,6 +75,7 @@
                                     <div class="drop-zone">
                                         <span class="drop-zone__prompt">Klik atau jatuhkan file gambar di sini</span>
                                         <input type="file" name="mybaner" id="mybaner" accept=".jpg, .jpeg, .png" class="drop-zone__input">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -78,12 +83,28 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                                 <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                    Accordion Item #3
+                                    Lampiran Gambar
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                                 <div class="accordion-body">
-                                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                    <div class="card">
+                                        {{-- <div class="top">
+                                            <p>Drag & drop image uploading</p>
+                                            <button type="button">Upload</button>
+                                        </div> --}}
+                                        <div class="drag-area">
+                                            <span class="visible">
+                                                {{-- <p>Klik atau jatuhkan file gambar di sini atau</p> --}}
+                                                <span class="select" role="button">Upload Lampiran</span>
+                                            </span>
+                                            <span class="on-drop">Drop images here</span>
+                                            <input id="imgattach" name="imgattach" type="file" class="file" accept=".jpg, .jpeg, .png" />
+                                        </div>
+                                
+                                        <!-- IMAGE PREVIEW CONTAINER -->
+                                        <div class="container"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -93,4 +114,5 @@
         </div>
     </form>
     <x-posts-js-component />
+    <x-posts-attach-js-component />
 </x-adm-base-layout>

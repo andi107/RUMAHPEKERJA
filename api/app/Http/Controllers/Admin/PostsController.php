@@ -63,7 +63,8 @@ class PostsController extends Controller {
             'category' => 'required|numeric',
             'status' => 'required|numeric',
             'baner_id' => 'required',
-            'isbaner' => 'required|numeric'
+            'isbaner' => 'required|numeric',
+            'tmp_id' => 'required'
         ]);
         $title = urldecode($request->input('title'));
         $description = urldecode($request->input('description'));
@@ -72,6 +73,7 @@ class PostsController extends Controller {
         $status = $request->input('status');
         $baner_id = $request->input('baner_id');
         $isbaner = $request->input('isbaner');
+        $tmp_id = $request->input('tmp_id');
         if ($isbaner == 1) {
             $this->validate($request, [
                 'bfolder' => 'required',
@@ -92,6 +94,8 @@ class PostsController extends Controller {
 
             $uuidChk = Validator::make(['uuid' => $baner_id], ['uuid' => 'uuid']);
             if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $baner_id ], 404); };
+            $uuidChk = Validator::make(['uuid' => $tmp_id], ['uuid' => 'uuid']);
+            if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $tmp_id ], 404); };
 
             $ckName = DB::table('posts')
             ->where('fttitle','=', $title)
@@ -118,7 +122,7 @@ class PostsController extends Controller {
                 'fncreated_by' => Auth::id(),
                 'created_at' => $dtnow,
                 'updated_at' => $dtnow,
-                'fttitle_url' => $resTitle
+                'fttitle_url' => $resTitle,
             ]);
             $data = [
                 'name' => $baner_id,
@@ -128,9 +132,17 @@ class PostsController extends Controller {
                 'content_id' => $save,
                 'created_at' => $dtnow,
                 'updated_at' => $dtnow,
-                'type' => 'baner'
+                'type' => 'baner',
+                'tmp_id' => null,
             ];
             $this->saveGalery($data);
+            $tmpData = [
+                'type' => 'attachment',
+                'tmp_id' => $tmp_id,
+                'updated_at' => $dtnow,
+                'content_id' => $save,
+            ];
+            $this->updateTmpAttach($tmpData);
             $data = DB::table('posts')
             ->selectRaw('id,fttitle,fttitle_url, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
             ->where('id','=', $save)
@@ -138,11 +150,16 @@ class PostsController extends Controller {
             $dataBaner = DB::table('galery')
             ->where('fncontent_id','=', $save)
             ->first();
+            $dataAttachment = DB::table('galery')
+            ->where('fttype','=', 'attachment')
+            ->where('fncontent_id','=',$save)
+            ->get();
 
             DB::commit();
             return response()->json([
                 'data' => $data,
-                'dataBaner' => $dataBaner
+                'dataBaner' => $dataBaner,
+                'dataAttachment' => $dataAttachment
             ], 200);
         } catch (\Throwable $th) {
             DB::rollback();
@@ -265,7 +282,7 @@ class PostsController extends Controller {
         ]);
         $id = $request->input('id');
         $body = urldecode($request->input('body'));
-
+        DB::beginTransaction();
         try {
             $dtnow = Carbon::now();
 
@@ -288,6 +305,57 @@ class PostsController extends Controller {
             DB::commit();
             return response()->json([
                 'data' => 'OK'
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'error' => 'Internal Server Error.',
+            ], 500)
+                ->header('X-Content-Type-Options', 'nosniff')
+                ->header('X-Frame-Options', 'DENY')
+                ->header('X-XSS-Protection', '1; mode=block')
+                ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
+        }
+    }
+
+    public function tmpattach(Request $request) {
+        $this->validate($request, [
+            'id' => 'required',
+            'name' => 'required',
+            'bfolder' => 'required',
+            'bmimes' => 'required',
+            'bext' => 'required',
+        ]);
+        $id = $request->input('id');
+        $bmimes = $request->input('bmimes');
+        $bext = $request->input('bext');
+        $name = $request->input('name');
+        $bfolder = $request->input('bfolder');
+        DB::beginTransaction();
+        try {
+            $uuidChk = Validator::make(['uuid' => $id], ['uuid' => 'uuid']);
+            if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $id ], 404); };
+            $uuidChk = Validator::make(['uuid' => $name], ['uuid' => 'uuid']);
+            if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $name ], 404); };
+            $dtnow = Carbon::now();
+            $data = [
+                'name' => $name,
+                'folder' => $bfolder,
+                'mimes' => $bmimes,
+                'ext' => $bext,
+                'content_id' => 0,
+                'created_at' => $dtnow,
+                'updated_at' => $dtnow,
+                'type' => 'attachment',
+                'tmp_id' => $id
+            ];
+            $save = $this->saveGalery($data);
+            $data = DB::table('galery')
+            ->where('id','=',$save)
+            ->first();
+            DB::commit();
+            return response()->json([
+                'data' => $data
             ], 200);
         } catch (\Throwable $th) {
             DB::rollback();

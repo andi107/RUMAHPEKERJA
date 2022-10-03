@@ -39,4 +39,24 @@
 @endif
 
 <style>
+    .btn {
+        outline: 0;
+        border: 0;
+        -webkit-appearence: none;
+        border-radius: 4px;
+        transition: 0.3s;
+        cursor: pointer;
+        font-weight: 400;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+        font-size: 0.8rem;
+        padding: 8px 13px;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+    .btn:active {
+        transform: translateY(5px);
+    }
 </style>

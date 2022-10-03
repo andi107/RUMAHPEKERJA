@@ -34,6 +34,7 @@ $router->group([
             $router->post('create/save', 'Admin\PostsController@create');
             $router->post('update', 'Admin\PostsController@update');
             $router->post('update_body', 'Admin\PostsController@update_body');
+            $router->post('tmpattach_save', 'Admin\PostsController@tmpattach');
         });
     });
 

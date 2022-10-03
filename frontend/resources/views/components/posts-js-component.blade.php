@@ -48,6 +48,7 @@
                     fd.append('baner_name',$("input[name=baner_name]").val());
                     fd.append('baner_ext',$("input[name=baner_ext]").val());
                 }
+                fd.append('tmp_id', $("input[name=tmp_id]").val());
 
                 $.ajax({
                     type: 'POST'

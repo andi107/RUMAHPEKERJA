@@ -47,5 +47,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/post/create', 'index')->name('adm.post-create-index');
         Route::get('/post/edit', 'index')->name('adm.post-edit-index');
         Route::post('/post/create/save', 'create_update')->name('adm.post-save');
+        Route::post('/post/save/tmp', 'tmpattachsave')->name('adm.post-tmp-save');
     });
 });

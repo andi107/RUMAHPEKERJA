@@ -72,7 +72,10 @@ class PostController extends Controller
                 'res_edit' => $res_edit
             ]);
         }else{
-            return view('admin.admpostcreate');
+            $tmp_id = Uuid::generate(4)->string;
+            return view('admin.admpostcreate',[
+                'tmp_id' => $tmp_id
+            ]);
         }
         
     }
@@ -88,13 +91,15 @@ class PostController extends Controller
                 'body' => 'required|min:100',
                 'category' => 'required|numeric',
                 'status' => 'required|numeric',
+                'tmp_id' => 'required',
             ],[
                 'title.required' => 'Mohon input Judul.',
                 'title.max' => 'Judul tidak lebih dari 255 karakter.',
                 'description.required' => 'Deskripsi harus di isi.',
                 'description.max' => 'Deskripsi tidak kurang dari 255 karakter.',
                 'body.required' => 'Bodi konten harus di isi.',
-                'body.min' => 'Bodi konten harus lebih dari 100 karakter.'
+                'body.min' => 'Bodi konten harus lebih dari 100 karakter.',
+                'tmp_id.required' => 'Temporary id dibutuhkan.'
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -177,6 +182,7 @@ class PostController extends Controller
                 'bfolder' => 'postbaner',
                 'bmimes' => $valid['mimes'],
                 'bext' => $valid['ext'],
+                'tmp_id' => $req->input('tmp_id'),
             ];
         }else{
             $body = [
@@ -187,7 +193,8 @@ class PostController extends Controller
                 'status' => (int)$req->input('status'),
                 'baner_id' => $baner_id,
                 'isbaner' => 0,
-                '_csrf' => ApiH::csrf()
+                '_csrf' => ApiH::csrf(),
+                'tmp_id' => $req->input('tmp_id'),
             ];
         }
         
@@ -215,15 +222,6 @@ class PostController extends Controller
     }
 
     function post_update($req,$id, $csrf,$valid) {
-        // $body = [
-        //     'id' => $id,
-        //     'title' => urlencode($req->input('title')),
-        //     'description' => urlencode($req->input('description')),
-        //     'category' => (int)$req->input('category'),
-        //     'status' => (int)$req->input('status'),
-        //     '_csrf' => $csrf
-        // ];
-
         if ($valid) {
             $body = [
                 'id' => $id,
@@ -299,6 +297,75 @@ class PostController extends Controller
         } else {
             return '$res->data'; //sukses
         }
+    }
+
+    public function tmpattachsave(Request $req) {
+        $validator = Validator::make($req->all(), [
+            'tmp_id' => 'required',
+            'imgattach' => 'required|mimes:jpg,png|max:5000'
+        ],[
+            'tmp_id.required' => 'Temporary id dibutuhkan.',
+            'imgattach.required' => 'Lampiran dibutuhkan.',
+            'imgattach.mimes' => 'Format lampiran hanya diperbolehkan *.jpg & *.png.',
+            'imgattach.max' => 'Ukuran lampiran maksimal 5mb.'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 404,
+                'msg' => $validator->messages()->first(),
+            ]);
+        }
+        $tmp_id = $req->input('tmp_id');
+        $attachFile = $req->file('imgattach');
+        
+        $uuidChk = Validator::make(['uuid' => $tmp_id], ['uuid' => 'uuid']);
+        if ($uuidChk->passes() == false) {
+            return response()->json([
+                'code' => 404,
+                'msg' => 'Temporary id Invalid.',
+            ]);
+        };
+
+        $imgId = Uuid::generate(4)->string;
+        $folder = 'postattachment';
+        $resImg = ApiH::file_create($attachFile,$folder,$imgId);
+        
+        $body = [
+            'id' => $tmp_id,
+            'name' => $imgId,
+            'bmimes' => $resImg['mimes'],
+            'bext' => $resImg['ext'],
+            'bfolder' => $folder,
+            '_csrf' => ApiH::csrf()
+        ];
+
+        $resBody = 'Lampiran berhasil tersimpan.';
+
+        $update = ApiH::apiPostVar('/a/posts/tmpattach_save', $body);
+        $res = $update->object();
+        
+        if (isset($res->error)) {
+            if ($res->error == "Unauthorized") { // Check Auth
+                return 'Sesi login telah habis, mohon untuk login kembali.';
+            } else {
+                if (is_string($res->error)) {
+                    return ['msg' => $res->error];
+                } else {
+                    return '$createPost->body()1';
+                }
+            }
+        }
+
+        // if (!isset($res->msg)) {
+        //     return $res->msg;
+        // } else {
+        //     return '$res->data'; //sukses
+        // }
+        return response()->json([
+            'code' => 200,
+            'msg' => $resBody,
+            'data' => $res->data,
+        ]);
     }
 
 }

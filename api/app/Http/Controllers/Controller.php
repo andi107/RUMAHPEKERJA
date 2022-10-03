@@ -30,11 +30,12 @@ class Controller extends BaseController
             'fncreated_by' => Auth::id(),
             'created_at' => $data['created_at'],
             'updated_at' => $data['updated_at'],
-            'fttype' => $data['type']
+            'fttype' => $data['type'],
+            'uuid_tmp_id' => $data['tmp_id']
         ]);
     }
 
-    function updateGalery($data) {
+    function updateGalery($data) {    
         DB::table('galery')
         ->where('fttype','=', $data['type'])
         ->where('fncontent_id','=',$data['content_id'])
@@ -44,6 +45,19 @@ class Controller extends BaseController
             'ftext' => $data['ext'],
             'fnupdated_by' => Auth::id(),
             'updated_at' => $data['updated_at'],
+        ]);
+    }
+
+    function updateTmpAttach($data) {
+        DB::table('galery')
+        ->where('fttype','=', $data['type'])
+        ->where('fncontent_id','=',0)
+        ->where('uuid_tmp_id','=', $data['tmp_id'])
+        ->update([
+            'fnupdated_by' => Auth::id(),
+            'updated_at' => $data['updated_at'],
+            'fncontent_id' => $data['content_id'],
+            'uuid_tmp_id' => null,
         ]);
     }
 }
