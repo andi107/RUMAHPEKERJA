@@ -54,7 +54,7 @@ class GenerateSitemap extends Command
             $sitemap->writeToFile(public_path('sm/posts.xml'));
 
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            echo $e->getMessage().PHP_EOL;
         }
     }
 }
