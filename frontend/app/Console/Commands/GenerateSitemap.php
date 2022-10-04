@@ -32,7 +32,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
         try {
-            echo Carbon::now();
+            echo Carbon::now().PHP_EOL;
             $sitemap = Sitemap::create();
             
             $sitemap->add(Url::create('/')
