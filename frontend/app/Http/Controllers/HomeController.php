@@ -28,7 +28,7 @@ class HomeController extends Controller
         SEOMeta::setTitle('Beranda');
         SEOMeta::setDescription($description);
         SEOMeta::addMeta('article:published_time', $created_at, 'property');
-        SEOMeta::addMeta('article:section', '$category_name', 'property');
+        // SEOMeta::addMeta('article:section', '$category_name', 'property');
         SEOMeta::addMeta('googlebot-news', 'index,follow', 'property');
         SEOMeta::addMeta('googlebot', 'index,follow', 'property');
         SEOMeta::addMeta('news_keywords','rumah pekerja hebat, rumah pekerja, pekerja hebat','property');
