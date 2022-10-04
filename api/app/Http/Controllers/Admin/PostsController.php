@@ -107,7 +107,7 @@ class PostsController extends Controller {
                 ], 404);
             }
 
-            $resTitle = urlencode(str_replace(' ','-', $title));
+            $resTitle = urlencode(str_replace(' ','-', strtolower($title)));
 
             $getUniq = $this->getRandString();
             $save = DB::table('posts')
@@ -226,7 +226,7 @@ class PostsController extends Controller {
                 ], 404);
             }
             
-            $resTitle = urlencode(str_replace(' ','-', $title));
+            $resTitle = urlencode(str_replace(' ','-', strtolower($title)));
 
             DB::table('posts')
             ->where('ftuniq','=',$id)

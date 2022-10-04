@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index() {
 
         $title = 'Beranda';
-        $description = 'Jl. Benteng Betawi, Gg. Blok Kepu Rt 05/01 No. 258 Poris Gaga Baru, Kota Tangerang-Banten Hubungi kami di (+62) 812-9715-0027';
+        $description = 'rumahpekerjahebat.com adalah sebuah portal web berisi berita, artikel, media komunikasi, dan jasa konsultasi, bagi masyarakat pekerja atau buruh Indonesia.';
         $created_at = '2022-09-28';
         $category_name = 'news';
         $keyWord = ['rumah pekerja hebat', 'rumah pekerja', 'pekerja hebat'];

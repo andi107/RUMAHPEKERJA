@@ -44,4 +44,9 @@ $router->group([
         $router->get('list', 'User\PostController@index');
         $router->get('detail/{cat_id}/{cont_id}/{title_url}', 'User\PostController@detail');
     });
+    $router->group([
+        'prefix' => 'st',
+    ], function() use($router) {
+        $router->get('posts', 'User\SiteMapController@st_posts');
+    });
 });
