@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Content\PostDetailController;
 use App\Http\Controllers\Content\CategoryController as UserCategory;
+use App\Http\Controllers\Sitemap\SiteMapController;
+
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -24,7 +26,11 @@ Route::controller(PostDetailController::class)->group(function () {
     Route::get('/c/{cid}/{id}/{title}', 'detail')->name('post-detail');
     // Route::get('/c/{category_name}/p/{title}', 'index')->name('post_detail');
 });
-
+Route::group(['prefix' => 'sitemap'], function () {
+    Route::controller(SiteMapController::class)->group(function () {
+        Route::get('posts', 'posts')->name('sitemap.posts');
+    });
+});
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function() {
         return redirect()->route('adm.dashboard');
@@ -49,4 +55,5 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/post/create/save', 'create_update')->name('adm.post-save');
         Route::post('/post/save/tmp', 'tmpattachsave')->name('adm.post-tmp-save');
     });
+    
 });
