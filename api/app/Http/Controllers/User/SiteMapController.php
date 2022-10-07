@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 class SiteMapController extends Controller {
 
+    public function st_sitemap() {
+        $data = DB::table('sitemap')
+        ->orderBy('created_at','desc')
+        ->get();
+        return response()->json([
+            'data' => $data
+        ], 200);
+    }
+
     public function st_posts() {
         // $data = DB::table('sitemap_posts')
         // ->where('fnstatus','=',1)

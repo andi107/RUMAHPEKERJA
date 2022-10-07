@@ -61,6 +61,14 @@ Route::group(['prefix' => 'sitemap'], function () {
         ]);
         return Response::make($content, '200')->header('Content-Type', 'text/xml');
     });
+    Route::get('sitemap', function () {
+        $res = ApiH::apiGetVar('/st/sitemap');
+        $content = View::make('sitemap.sitemap',[
+            'res' => $res,
+            'carbon' => Carbon::class,
+        ]);
+        return Response::make($content, '200')->header('Content-Type', 'text/xml');
+    });
     Route::get('posts', function () {
         $res = ApiH::apiGetVar('/st/posts');
         $content = View::make('sitemap.posts',[

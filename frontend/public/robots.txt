@@ -27,4 +27,4 @@ Disallow:
 User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
-Sitemap: https://rumahpekerjahebat.com/sm/site.xml
+Sitemap: https://rumahpekerjahebat.com/sitemap/index

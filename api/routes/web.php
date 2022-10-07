@@ -10,14 +10,25 @@ $router->group([
     'prefix' => 'api',
     'middleware' => ['nocache','hideserver', 'security','csp','gzip'],
 ], function() use($router) {
-    $router->get('chk', 'Admin\CheckController@index');
+    $router->group([
+        'prefix' => 'chk',
+    ], function() use($router) {
+        $router->get('/', 'Admin\CheckController@index');
+        $router->get('sysupdate', 'Admin\CheckController@go_migrate');
+    });
     $router->get('logout', 'Admin\CheckController@go_logout');
     $router->group([
         'prefix' => 'a',
     ], function() use($router) {
         $router->group(['middleware' => ['throttle:5,1']], function () use ($router) {
             $router->post('auth', 'Admin\LoginController@index');
-            $router->get('sysupdate', 'Admin\LoginController@go_migrate');
+            
+        });
+        $router->group([
+            'prefix' => 'sitemap',
+        ], function() use($router) {
+            $router->post('create', 'Admin\SiteMapController@create');
+            $router->put('update', 'Admin\SiteMapController@update');
         });
         $router->group([
             'prefix' => 'category',
@@ -47,6 +58,7 @@ $router->group([
     $router->group([
         'prefix' => 'st',
     ], function() use($router) {
+        $router->get('sitemap', 'User\SiteMapController@st_sitemap');
         $router->get('posts', 'User\SiteMapController@st_posts');
     });
 });

@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Artisan;
 class LoginController extends Controller {
 
     public function __construct() {
@@ -57,20 +56,4 @@ class LoginController extends Controller {
                 ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
         }
     }
-
-    public function go_migrate() {
-        try {
-            // Artisan::call('migrate');
-            Artisan::call('migrate', ["--force" => true ]);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error' => 'Internal Server Error.',
-            ], 500)
-                ->header('X-Content-Type-Options', 'nosniff')
-                ->header('X-Frame-Options', 'DENY')
-                ->header('X-XSS-Protection', '1; mode=block')
-                ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
-        }
-    }
-
 }
