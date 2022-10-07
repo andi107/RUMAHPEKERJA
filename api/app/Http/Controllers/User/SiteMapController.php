@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class SiteMapController extends Controller {
 
     public function st_posts() {
-        $data = DB::table('posts')
+        $data = DB::table('sitemap_posts')
         ->where('fnstatus','=',1)
         ->orderBy('updated_at','desc')
         ->get();

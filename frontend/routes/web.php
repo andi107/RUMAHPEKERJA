@@ -28,9 +28,6 @@ Route::controller(PostDetailController::class)->group(function () {
     // Route::get('/c/{category_name}/p/{title}', 'index')->name('post_detail');
 });
 Route::group(['prefix' => 'sitemap'], function () {
-    // Route::controller(SiteMapController::class)->group(function () {
-    //     Route::get('posts', 'posts')->name('sitemap.posts');
-    // });
     Route::get('posts', function () {
         $res = ApiH::apiGetVar('/st/posts');
         $content = View::make('sitemap.posts',[
@@ -38,9 +35,6 @@ Route::group(['prefix' => 'sitemap'], function () {
             'carbon' => Carbon::class,
         ]);
         return Response::make($content, '200')->header('Content-Type', 'text/xml');
-        // return response()->json([
-        //     'message' => 'WORLD'
-        // ], 200);
     });
 });
 Route::group(['prefix' => 'admin'], function () {

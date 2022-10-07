@@ -53,6 +53,7 @@ class GenerateSitemap extends Command
             //     }
             //     echo '3';
             // }
+            $sitemap->add(Url::create(env('APP_URL'))->addImage('https://example.com/images/home.jpg', 'Home page image'));
             $sitemap->writeToFile(public_path('posts.xml'));
             echo public_path('sm/posts.xml');
 
