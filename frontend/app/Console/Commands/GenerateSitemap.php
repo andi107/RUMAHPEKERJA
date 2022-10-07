@@ -39,21 +39,21 @@ class GenerateSitemap extends Command
             ->setLastModificationDate(Carbon::now())
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
             ->setPriority(0.1));
-            $res = ApiH::apiGetVar('/st/posts');
-            if (isset($res->data)) {
-                echo '1';
-                foreach ($res->data as $key) {
-                    $updated_at = Carbon::createFromFormat('Y-m-d H:i:s', $key->updated_at, 'UTC')
-                    ->setTimezone('Asia/Jakarta');
-                    $sitemap->add(Url::create('/c/'. $key->fncategory .'/'. $key->ftuniq .'/'.$key->fttitle_url)
-                    ->setLastModificationDate(Carbon::parse($updated_at))
-                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
-                    ->setPriority(0.2));
-                    echo '2';
-                }
-                echo '3';
-            }
-            $sitemap->writeToFile(public_path('sm/posts.xml'));
+            // $res = ApiH::apiGetVar('/st/posts');
+            // if (isset($res->data)) {
+            //     echo '1';
+            //     foreach ($res->data as $key) {
+            //         $updated_at = Carbon::createFromFormat('Y-m-d H:i:s', $key->updated_at, 'UTC')
+            //         ->setTimezone('Asia/Jakarta');
+            //         $sitemap->add(Url::create('/c/'. $key->fncategory .'/'. $key->ftuniq .'/'.$key->fttitle_url)
+            //         ->setLastModificationDate(Carbon::parse($updated_at))
+            //         ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
+            //         ->setPriority(0.2));
+            //         echo '2';
+            //     }
+            //     echo '3';
+            // }
+            $sitemap->writeToFile(public_path('posts.xml'));
             echo public_path('sm/posts.xml');
 
         } catch (\Exception $e) {
