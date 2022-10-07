@@ -6,7 +6,7 @@
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>{{ asset('src/images/icons/logo-01.png') }}</image:loc>
+            <image:loc>{{ asset('src/images/icons/logo-01.webp') }}</image:loc>
             <image:caption>Rumah Pekerja Hebat</image:caption>
         </image:image>
     </url>

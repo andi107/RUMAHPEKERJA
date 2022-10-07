@@ -20,9 +20,9 @@ class HomeController extends Controller
         $keyWord = ['rumah pekerja hebat', 'rumah pekerja', 'pekerja hebat'];
 
         if (config('app.env') === 'production') {
-            $imgLogo = secure_asset('src/images/icons/logo-01.png');
+            $imgLogo = secure_asset('src/images/icons/logo-01.webp');
         } else{
-            $imgLogo = asset('src/images/icons/logo-01.png');
+            $imgLogo = asset('src/images/icons/logo-01.webp');
         }
         
         SEOMeta::setTitle('Beranda');

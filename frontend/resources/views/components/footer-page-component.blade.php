@@ -5,7 +5,7 @@
                 <div class="col-lg-4 p-b-20">
                     <div class="size-h-3 flex-s-c">
                         <a href="{{ route('home')}}">
-                            <img class="max-s-full" width="150" height="60" src="{{ asset('src/images/icons/logo-02.png')}}" alt="LOGO">
+                            <img class="max-s-full" width="150" height="60" src="{{ asset('src/images/icons/logo-02.webp')}}" alt="LOGO">
                         </a>
                     </div>
 
