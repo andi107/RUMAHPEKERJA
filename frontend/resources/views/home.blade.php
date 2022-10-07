@@ -2506,7 +2506,7 @@
 
 			<div class="wrap-video-mo-01">
 				<div class="video-mo-01">
-					<iframe src="https://www.youtube.com/embed/tqyePbOZL74?rel=0" allowfullscreen></iframe>
+					{{-- <iframe src="https://www.youtube.com/embed/tqyePbOZL74?rel=0" allowfullscreen></iframe> --}}
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{{ asset('src/images/icons/favicon.png')}}" />
+    <link rel="icon" type="image/png" href="{{ asset('src/images/icons/favicon.webp')}}" />
     
     {!! $seometa::generate() !!}
 
@@ -44,7 +44,7 @@
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-5F792S9"></script>
     @endif
 </head>
-<body class="animsition">
+<body class='animsition data-animsition-in-class="fade-in" data-animsition-in-duration="100" data-animsition-out-class="fade-out" data-animsition-out-duration="80"'>
     <!-- Header -->
     <x-header-page-component />
     <!-- Content -->
