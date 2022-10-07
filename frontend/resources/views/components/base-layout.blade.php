@@ -41,6 +41,7 @@
             gtag('config', 'G-XB7PG0P5TG');
 
         </script>
+        <script src="https://www.googleoptimize.com/optimize.js?id=OPT-5F792S9"></script>
     @endif
 </head>
 <body class="animsition">
