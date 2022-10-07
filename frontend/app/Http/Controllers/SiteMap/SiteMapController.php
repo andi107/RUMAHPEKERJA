@@ -29,7 +29,6 @@ class SiteMapController extends Controller
             'res' => $res,
             'carbon' => Carbon::class,
         ]);
-
         return Response::make($content, '200')->header('Content-Type', 'text/xml');
 
         // return view('sitemap.posts')

@@ -1,11 +1,12 @@
 <?php
+use App\Helpers\ApiH;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Content\PostDetailController;
 use App\Http\Controllers\Content\CategoryController as UserCategory;
 use App\Http\Controllers\Sitemap\SiteMapController;
-
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -27,8 +28,19 @@ Route::controller(PostDetailController::class)->group(function () {
     // Route::get('/c/{category_name}/p/{title}', 'index')->name('post_detail');
 });
 Route::group(['prefix' => 'sitemap'], function () {
-    Route::controller(SiteMapController::class)->group(function () {
-        Route::get('posts', 'posts')->name('sitemap.posts');
+    // Route::controller(SiteMapController::class)->group(function () {
+    //     Route::get('posts', 'posts')->name('sitemap.posts');
+    // });
+    Route::get('posts', function () {
+        $res = ApiH::apiGetVar('/st/posts');
+        $content = View::make('sitemap.posts',[
+            'res' => $res,
+            'carbon' => Carbon::class,
+        ]);
+        return Response::make($content, '200')->header('Content-Type', 'text/xml');
+        // return response()->json([
+        //     'message' => 'WORLD'
+        // ], 200);
     });
 });
 Route::group(['prefix' => 'admin'], function () {
