@@ -11,7 +11,3 @@
     <script src="{{ asset('src/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('src/js/main.js') }}"></script>
 @endif
-
-<script>
-    console.log('first')
-</script>
