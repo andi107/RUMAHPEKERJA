@@ -21,7 +21,7 @@ class SiteMapController extends Controller {
                 from posts pst left join galery gal
                     on (pst.id = gal.fncontent_id and gal.fttype = 'baner')
             ) a left join category ctg
-            on (a.fncategory = ctg.id)");
+            on (a.fncategory = ctg.id) where a.fnstatus = 1 order by a.created_at desc");
         return response()->json([
             'data' => $data
         ], 200);
