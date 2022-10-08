@@ -1,24 +1,27 @@
 <footer>
     <div class="bg2 p-t-40 p-b-25">
         <div class="container">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 <div class="col-lg-4 p-b-20">
-                    <div class="size-h-3 flex-s-c">
+                    <div class="d-flex justify-content-center size-h-3 flex-s-c">
                         <a href="{{ route('home')}}">
                             <img class="max-s-full" width="150" height="60" src="{{ asset('src/images/icons/logo-02.webp')}}" alt="LOGO">
                         </a>
                     </div>
 
                     <div>
-                        <p class="f1-s-1 cl11 p-b-16">
+                        <p class="text-center f1-s-1 cl11 p-b-16">
                             Jl. Benteng Betawi, Gg. Blok Kepu Rt 05/01 No. 258 Poris Gaga Baru, Kota Tangerang-Banten
                         </p>
 
                         <p class="f1-s-1 cl11 p-b-16">
-                            Hubungi kami di (+62) 812-9715-0027
+                            <a class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5"
+                            href="https://wa.me/6281297150027" target="_blank"><span class="fab fa-whatsapp"></span>
+                            &nbsp;&nbsp;
+                            (+62) 812-9715-0027</a>
                         </p>
 
-                        <div class="p-t-15">
+                        <div class="d-flex justify-content-center p-t-15">
                             <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-facebook-f"></span>
                             </a>
@@ -32,110 +35,6 @@
                             </a>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 p-b-20">
-                    <div class="size-h-3 flex-s-c">
-                        <h5 class="f1-m-7 cl0">
-                            Popular Posts
-                        </h5>
-                    </div>
-
-                    <ul>
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{{ asset('src/images/popular-post-01.jpg')}}" alt="IMG">
-                            </a>
-
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Donec metus orci, malesuada et lectus vitae
-                                    </a>
-                                </h6>
-
-                                <span class="f1-s-3 cl6">
-                                    Feb 17
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{{ asset('src/images/popular-post-02.jpg')}}" alt="IMG">
-                            </a>
-
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Lorem ipsum dolor sit amet, consectetur
-                                    </a>
-                                </h6>
-
-                                <span class="f1-s-3 cl6">
-                                    Feb 16
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{{ asset('src/images/popular-post-03.jpg')}}" alt="IMG">
-                            </a>
-
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Suspendisse dictum enim quis imperdiet auctor
-                                    </a>
-                                </h6>
-
-                                <span class="f1-s-3 cl6">
-                                    Feb 15
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 p-b-20">
-                    <div class="size-h-3 flex-s-c">
-                        <h5 class="f1-m-7 cl0">
-                            Category
-                        </h5>
-                    </div>
-
-                    <ul class="m-t--12">
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Fashion (22)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Technology (29)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Street Style (15)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Life Style (28)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                DIY & Crafts (16)
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
