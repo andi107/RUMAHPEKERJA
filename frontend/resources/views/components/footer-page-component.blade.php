@@ -45,7 +45,7 @@
             <span class="f1-s-1 cl0 txt-center">
                 Copyright © 2022 
 
-                <a href="#" class="f1-s-1 cl10 hov-link1">Rumah Pekerja Hebat.</a>
+                <a href="{{ route('home') }}" class="f1-s-1 cl10 hov-link1">Rumah Pekerja Hebat.</a>
 
                 All rights reserved.
             </span>
