@@ -380,4 +380,48 @@ class PostController extends Controller
         ]);
     }
 
+    public function attachdelete(Request $req) {
+        $validator = Validator::make($req->all(), [
+            'id' => 'required',
+            'file_name' => 'required',
+            'tmp_id' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 404,
+                'msg' => $validator->messages()->first(),
+            ]);
+        }
+        $id = $req->input('id');
+        $tmp_id = $req->input('tmp_id');
+        $filename = $req->input('file_name');
+        
+        $uuidChk = Validator::make(['uuid' => $tmp_id], ['uuid' => 'uuid']);
+        if ($uuidChk->passes() == false) {
+            $tmp_id = '';
+        };
+
+        $body = [
+            'id' => $id,
+            'file_name' => $filename,
+            'tmp_id' => $tmp_id,
+            '_csrf' => ApiH::csrf()
+        ];
+
+        $resBody = 'Lampiran terhapus.';
+
+        $res = ApiH::apiPostVar('/a/posts/attach_delete', $body);
+        $res = $res->object();
+        
+        if (isset($res->error)) {
+            if (is_string($res->error)) {
+                return ['msg' => $res->error];
+            }
+        }
+        return response()->json([
+            'code' => 200,
+            'msg' => $resBody,
+            'data' => $res,
+        ]);
+    }
 }

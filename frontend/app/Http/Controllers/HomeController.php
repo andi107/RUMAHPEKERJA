@@ -9,13 +9,14 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Illuminate\Support\Facades\URL;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     public function index() {
 
         $title = 'Beranda';
         $description = 'rumahpekerjahebat.com adalah sebuah portal web berisi berita, artikel, media komunikasi, dan jasa konsultasi, bagi masyarakat pekerja atau buruh Indonesia.';
-        $created_at = '2022-09-28';
+        $created_at = Carbon::now()->setTimezone('Asia/Jakarta')->toIso8601String();
         $category_name = 'news';
         $keyWord = ['rumah pekerja hebat', 'rumah pekerja', 'pekerja hebat'];
 

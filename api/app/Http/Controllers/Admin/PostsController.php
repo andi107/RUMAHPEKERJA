@@ -402,4 +402,57 @@ class PostsController extends Controller {
                 ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
         }
     }
+
+    public function attach_delete(Request $request) {
+        $this->validate($request, [
+            'id' => 'required',
+            'file_name' => 'required',
+        ]);
+        $id = $request->input('id');
+        $file_name = $request->input('file_name');
+        $tmp_id = $request->input('tmp_id');
+        DB::beginTransaction();
+        try {
+            $dtnow = Carbon::now();
+            $uuidChk = Validator::make(['uuid' => $file_name], ['uuid' => 'uuid']);
+            if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $file_name ], 404); };
+            if ($tmp_id) {
+                $uuidChk = Validator::make(['uuid' => $tmp_id], ['uuid' => 'uuid']);
+                if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $tmp_id ], 404); };    
+                
+                $chkData = DB::table('galery')
+                ->where('id','=',$id)
+                ->where('ftname','=',$file_name)
+                ->where('fttype','=','attachment')
+                ->where('uuid_tmp_id','=', $tmp_id)
+                ->delete();
+            }else{
+                $chkData = DB::table('galery')
+                ->where('id','=',$id)
+                ->where('ftname','=',$file_name)
+                ->where('fttype','=','attachment')
+                ->delete();
+            }
+            DB::commit();
+            if ($chkData == 0) {
+                return response()->json([
+                    'id' => $id,
+                    'data' => 'Data tidak ada.'
+                ], 200);
+            }
+            return response()->json([
+                'id' => $id,
+                'data' => 'Terhapus.'
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'error' => 'Internal Server Error.',
+            ], 500)
+                ->header('X-Content-Type-Options', 'nosniff')
+                ->header('X-Frame-Options', 'DENY')
+                ->header('X-XSS-Protection', '1; mode=block')
+                ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
+        }
+    }
 }

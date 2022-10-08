@@ -83,53 +83,72 @@
         });
     }
 
-    /* DELETE IMAGE */
+    var _tmpDel = [];
+
     function delImage(id,fileName,tmp_id) {
-        $('#' + id).remove();
+        _tmpDel.push({
+            'id': id,
+            'fileName': fileName,
+            'tmp_id': tmp_id
+        });
+        $('#modalDelImg').modal('show');
+        console.log(_tmpDel)
+    }
+
+    /* DELETE IMAGE */
+    function yesDelImage() {
+        
+        
+        
         // files.splice(index, 1);
         // showImages();
-        // let url = "{{ route('adm.post-tmp-save') }}";
-        // var fd = new FormData();
-        // fd.append('_token', $("input[name=_token]").val());
-        // fd.append('file_id', id);
-        // fd.append('file_name', fileName);
-        // fd.append('tmp_id', tmp_id);
-        // $.ajax({
-        //     type: 'POST'
-        //     , url: url
-        //     , data: fd
-        //     , dataType: 'json'
-        //     , contentType: false
-        //     , cache: false
-        //     , processData: false
-        //     , beforeSend: function() {
-        //         $('.submitBtn').attr("disabled", "disabled");
-        //         $('#formPosts').css("opacity", ".5");
-        //     }
-        //     , success: function(res) {
-        //         console.log(res)
-        //         // let msg = '';
-        //         // if (res.code == 200) {
-        //         //     if (typeof(res.data.id) !== 'undefined') {
-        //         //         // filePush(file)
-        //         //         $('#' + id).remove();
-        //         //     }
-        //         //     if (res.data.msg) {
-        //         //         msg = res.data.msg;
-        //         //     } else {
-        //         //         msg = res.msg;
-        //         //     }
-        //         // } else {
-        //         //     msg = res.msg;
-        //         // }
-        //         // $('strong.me-auto').text('PEMBERITAHUAN');
-        //         // $('div.toast-body').text(msg);
-        //         // toast.show();
+        let url = "{{ route('adm.post-attach-del') }}";
+        var fd = new FormData();
+        fd.append('_token', $("input[name=_token]").val());
+        fd.append('id', _tmpDel[0].id);
+        fd.append('file_name', _tmpDel[0].fileName);
+        fd.append('tmp_id', _tmpDel[0].tmp_id);
+        console.log(_tmpDel)
+        $.ajax({
+            type: 'POST'
+            , url: url
+            , data: fd
+            , dataType: 'json'
+            , contentType: false
+            , cache: false
+            , processData: false
+            , beforeSend: function() {
+                $('.submitBtn').attr("disabled", "disabled");
+                $('#formPosts').css("opacity", ".5");
+            }
+            , success: function(res) {
+                console.log(res.data.id, _tmpDel)
+                
+                $('#' + res.data.id).remove();
+                $('#modalDelImg').modal('hide');
+                // let msg = '';
+                // if (res.code == 200) {
+                //     if (typeof(res.data.id) !== 'undefined') {
+                //         // filePush(file)
+                //         $('#' + id).remove();
+                //     }
+                //     if (res.data.msg) {
+                //         msg = res.data.msg;
+                //     } else {
+                //         msg = res.msg;
+                //     }
+                // } else {
+                //     msg = res.msg;
+                // }
+                // $('strong.me-auto').text('PEMBERITAHUAN');
+                // $('div.toast-body').text(msg);
+                // toast.show();
 
-        //         $('#formPosts').css("opacity", "");
-        //         $(".submitBtn").removeAttr("disabled");
-        //     }
-        // });
+                $('#formPosts').css("opacity", "");
+                $(".submitBtn").removeAttr("disabled");
+            }
+        });
+        _tmpDel = [];
     }
 
     function loadAttach() {

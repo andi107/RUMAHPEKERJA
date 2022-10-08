@@ -47,6 +47,7 @@ $router->group([
             $router->post('update', 'Admin\PostsController@update');
             $router->post('update_body', 'Admin\PostsController@update_body');
             $router->post('tmpattach_save', 'Admin\PostsController@tmpattach');
+            $router->post('attach_delete', 'Admin\PostsController@attach_delete');
         });
     });
 
