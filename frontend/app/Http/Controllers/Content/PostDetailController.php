@@ -48,7 +48,6 @@ class PostDetailController extends Controller
         
         OpenGraph::addImage($addImg1);
         
-
         JsonLd::setTitle($title);
         JsonLd::setDescription($description);
         JsonLd::setType('Article');

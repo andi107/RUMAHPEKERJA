@@ -44,6 +44,7 @@ class PostsController extends Controller {
         if ($data) {
             $banerData = DB::table('galery')
             ->where('fncontent_id','=', $data->id)
+            ->where('fttype','=','baner')
             ->first();
         } else {
             $banerData = null;
@@ -51,7 +52,27 @@ class PostsController extends Controller {
 
         return response()->json([
             'data' => $data,
-            'banerdata' => $banerData
+            'banerdata' => $banerData,
+        ], 200);
+    }
+
+    public function detail_attach_list($uniq) {
+        $uniq = urldecode($uniq);
+
+        $data = DB::table('posts')
+        ->where('ftuniq','=',$uniq)
+        ->first();
+        if ($data) {
+            $attachData = DB::table('galery')
+            ->where('fncontent_id','=', $data->id)
+            ->where('fttype','=','attachment')
+            ->get();
+        } else {
+            $attachData = null;
+        }
+
+        return response()->json([
+            'attachdata' => $attachData
         ], 200);
     }
 
@@ -123,6 +144,7 @@ class PostsController extends Controller {
                 'created_at' => $dtnow,
                 'updated_at' => $dtnow,
                 'fttitle_url' => $resTitle,
+                'uuid_tmp_id' => $tmp_id
             ]);
             $data = [
                 'name' => $baner_id,
@@ -180,7 +202,8 @@ class PostsController extends Controller {
             'description' => 'required|max:255',
             'category' => 'required|numeric',
             'status' => 'required|numeric',
-            'isbaner' => 'required|numeric'
+            'isbaner' => 'required|numeric',
+            'tmp_id' => 'required'
         ]);
         
         $id = $request->input('id');
@@ -189,6 +212,7 @@ class PostsController extends Controller {
         $category = $request->input('category');
         $status = $request->input('status');
         $isbaner = $request->input('isbaner');
+        $tmp_id = $request->input('tmp_id');
         if ($isbaner == 1) {
             $this->validate($request, [
                 'bfolder' => 'required',
@@ -205,6 +229,8 @@ class PostsController extends Controller {
         }
         DB::beginTransaction();
         try {
+            $uuidChk = Validator::make(['uuid' => $tmp_id], ['uuid' => 'uuid']);
+            if ($uuidChk->passes() == false) { return response()->json([ 'error' => 'Invalid '. $tmp_id ], 404); };
             $dtnow = Carbon::now();
 
             $ckData = DB::table('posts')
@@ -237,7 +263,8 @@ class PostsController extends Controller {
                 'fnstatus' => $status,
                 'fnupdated_by' => Auth::id(),
                 'updated_at' => $dtnow,
-                'fttitle_url' => $resTitle
+                'fttitle_url' => $resTitle,
+                'uuid_tmp_id' => $tmp_id,
             ]);
             if ($isbaner == 1) {
                 $data = [
@@ -250,6 +277,13 @@ class PostsController extends Controller {
                 ];
                 $this->updateGalery($data);
             }
+            $tmpData = [
+                'type' => 'attachment',
+                'tmp_id' => $tmp_id,
+                'updated_at' => $dtnow,
+                'content_id' => $ckData->id,
+            ];
+            $this->updateTmpAttach($tmpData);
             $data = DB::table('posts')
             ->selectRaw('id,fttitle,fttitle_url, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
             ->where('ftuniq','=', $id)

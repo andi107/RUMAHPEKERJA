@@ -42,6 +42,7 @@ $router->group([
         ], function() use($router) {
             $router->get('/', 'Admin\PostsController@index');
             $router->get('/detail/{uniq}', 'Admin\PostsController@detail');
+            $router->get('/detail/attach/{uniq}', 'Admin\PostsController@detail_attach_list');
             $router->post('create/save', 'Admin\PostsController@create');
             $router->post('update', 'Admin\PostsController@update');
             $router->post('update_body', 'Admin\PostsController@update_body');

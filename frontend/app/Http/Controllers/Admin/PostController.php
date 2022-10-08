@@ -65,19 +65,29 @@ class PostController extends Controller
         }
         //=== End Check ===
         $id = $req->input('edit');
+        $tmp_id = Uuid::generate(4)->string;
         if ($id) {
             $res_edit = ApiH::apiGetVar('/a/posts/detail/'. urlencode($id));
-            // dd($res_edit);
+            if (!$res_edit->data->uuid_tmp_id) {
+                $res_edit->data->uuid_tmp_id = $tmp_id;
+            }
             return view('admin.admpostedit', [
                 'res_edit' => $res_edit
             ]);
         }else{
-            $tmp_id = Uuid::generate(4)->string;
             return view('admin.admpostcreate',[
                 'tmp_id' => $tmp_id
             ]);
         }
-        
+    }
+
+    public function indexAttachList(Request $req) {
+        $id = $req->input('uniq');
+        $res_attach = ApiH::apiGetVar('/a/posts/detail/attach/'. urlencode($id));
+        return response()->json([
+            'code' => 200,
+            'data' => $res_attach,
+        ]);
     }
 
     public function create_update(Request $req) {
@@ -156,7 +166,7 @@ class PostController extends Controller
             return response()->json([
                 'code' => 200,
                 'msg' => $resBody,
-                // 'msg' => $banerName .'.'. $banerExt,
+                //  'msg' => $req->input('tmp_id'),
                 'data' => $res,
                 'dataBaner' => $resImg
             ]);
@@ -234,6 +244,7 @@ class PostController extends Controller
                 'bfolder' => 'postbaner',
                 'bmimes' => $valid['mimes'],
                 'bext' => $valid['ext'],
+                'tmp_id' => $req->input('tmp_id')
             ];
         }else{
             $body = [
@@ -243,7 +254,8 @@ class PostController extends Controller
                 'category' => (int)$req->input('category'),
                 'status' => (int)$req->input('status'),
                 'isbaner' => 0,
-                '_csrf' => ApiH::csrf()
+                '_csrf' => ApiH::csrf(),
+                'tmp_id' => $req->input('tmp_id')
             ];
         }
         

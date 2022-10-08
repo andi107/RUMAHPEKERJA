@@ -1,27 +1,17 @@
 <script>
-    /** Variables */
     let files = []
         , dragArea = document.querySelector('.drag-area')
         , input = document.querySelector('.drag-area input')
         , button = document.querySelector('.card button')
         , select = document.querySelector('.drag-area .select')
-        , container = document.querySelector('.container');
-
-    /** CLICK LISTENER */
+        , container = document.querySelector('.container')
+        , isId = $("input[name=_id]").val();
+        
     select.addEventListener('click', () => input.click());
-
-    // function filePush(isFIle) {
-    //     for (let i = 0; i < isFIle.length; i++) {
-    //         console.log('filePush',i)
-    //         if (isFIle[i].type.split("/")[0] != 'image') continue;
-    //         if (!files.some(e => e.name == isFIle[i].name)) files.push(isFIle[i])
-    //     }
-    // }
 
     function save() {
         let url = "{{ route('adm.post-tmp-save') }}";
         var imgattach = $('#imgattach')[0].files[0];
-        console.log(imgattach)
         var fd = new FormData();
         let tmp_id = $("input[name=tmp_id]").val();
         fd.append('_token', $("input[name=_token]").val());
@@ -65,53 +55,21 @@
         });
     }
 
-    /* INPUT CHANGE EVENT */
     input.addEventListener('change', () => {
-        // let file = input.files;
-        // if (file.length == 0) return;
         save();
     });
 
-    /* DROP EVENT */
-    // dragArea.addEventListener('drop', e => {
-    //     e.preventDefault()
-    //     dragArea.classList.remove('dragover');
-    //     // let file = e.dataTransfer.files;
-    //     console.log('TES')
-    //     save();
-    // });
-
-    /** SHOW IMAGES */
     function showImages(res = null,tmp_id) {
-        console.log(res)
-        // container.innerHTML = files.reduce((prev, curr, index) => {
-            // if (res == null) {
-            //     return `${prev}
-            //     <div class="image">
-            //         <span onclick="delImage(${index})">&times;</span>
-            //         <img src="${URL.createObjectURL(curr)}" />
-            //     </div>`;
-            // } else {
         let fileName = "{{ route('image-view', ['@folder','@ext','@name']) }}";
         fileName = fileName.replace('@folder',res.ftfolder);
         fileName = fileName.replace('@ext',res.ftext);
         fileName = fileName.replace('@name',res.ftname);
-        console.log('filename',fileName)
-        // return `${prev}
-        // <div class="image">
-        //     <button type="button" onclick="urlCopy('imgattach_${res.id}')">Copy Url</button>
-        //     <input type="hidden" name="imgattach_${res.id}" value="${fileName}">
-        //     <span onclick="delImage(${index})">&times;</span>
-        //     <img src="${URL.createObjectURL(curr)}" />
-        // </div>`;
         $( ".container" ).append(`<div class="image" id="${res.id}">
             <button type="button" onclick="urlCopy('imgattach_${res.id}')">Salin Url</button>
             <input type="hidden" name="imgattach_${res.id}" value="${fileName}">
             <span onclick="delImage('${res.id}','${res.ftname}','${tmp_id}');">&times;</span>
             <img src="${fileName}" />
         </div>`);
-            // }
-        // }, '');
     }
 
     function urlCopy(e) {
@@ -174,16 +132,17 @@
         // });
     }
 
-    // /* DRAG & DROP */
-    // dragArea.addEventListener('dragover', e => {
-    //     e.preventDefault()
-    //     dragArea.classList.add('dragover')
-    // })
-
-    // /* DRAG LEAVE */
-    // dragArea.addEventListener('dragleave', e => {
-    //     e.preventDefault()
-    //     dragArea.classList.remove('dragover')
-    // });
+    function loadAttach() {
+        $.get('{{ route("adm.post-edit-index-attach")."?uniq=" }}' + isId, function(res){
+            if (res.data.attachdata) {
+                res.data.attachdata.forEach(e => {
+                    showImages(e,isId)
+                });
+            }
+        });
+    }
+    $(document).ready(function() {
+        loadAttach();
+    });
 
 </script>
