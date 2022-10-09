@@ -82,7 +82,7 @@ var CKBUILDER_CONFIG = {
 		'horizontalrule' : 1,
 		'htmlwriter' : 1,
 		'iframe' : 1,
-		'image' : 1,
+		// 'image' : 1,
 		'indentblock' : 1,
 		'indentlist' : 1,
 		'justify' : 1,
@@ -119,10 +119,12 @@ var CKBUILDER_CONFIG = {
 		'templates' : 1,
 		'toolbar' : 1,
 		'undo' : 1,
-		'uploadimage' : 1,
+		// 'uploadimage' : 1,
 		'wordcount' : 1,
 		'wysiwygarea' : 1,
-		'youtube' : 1
+		'youtube' : 1,
+		// 'imageresize' : 1,
+		// 'imageresizerowandcolumn' : 1
 	},
 	languages : {
 		'en' : 1,

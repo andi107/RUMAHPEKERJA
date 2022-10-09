@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Illuminate\Support\Facades\URL;
 use Carbon\Carbon;
+use Response;
 class HomeController extends Controller
 {
     public function index() {
@@ -71,11 +73,17 @@ class HomeController extends Controller
                 if (!Storage::exists($fileLocation)) {
                     abort(404);
                 }
-                $headers = ['Content-Type' => 'image/png'];
-                return Storage::download($fileLocation, 'ContentFile' , $headers);
+                // $headers = ['Content-Type' => 'image/png'];
+                // return Storage::download($fileLocation, 'ContentFile' , $headers);
             }
-            $headers = ['Content-Type' => 'image/'.$ext];
-            return Storage::download($fileLocation, 'ContentFile' , $headers);
+            // $headers = ['Content-Type' => 'image/'.$ext];
+            // return Storage::download($fileLocation, 'ContentFile' , $headers);
+            $file = Storage::disk('local')->get($fileLocation);
+            $type = Storage::mimeType($fileLocation);
+
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+            return $response;
         } catch (\Throwable $th) {
             abort(404);
         }

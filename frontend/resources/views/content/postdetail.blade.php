@@ -1,6 +1,6 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-		{{-- {!! SEOMeta::generate() !!} --}}
+		{!! $seometa::generate() !!}
 		{!! $opengraph::generate() !!}
 		{{-- {!! Twitter::generate() !!} --}}
 		{!! $jsonld::generate() !!}
@@ -75,7 +75,8 @@
 							</div>
 
 							{!! $data->data->ftbody !!}
-
+						</div>
+						<div class="p-b-70">
 							<!-- Tag -->
 							<div class="flex-s-s p-t-12 p-b-15">
 								<span class="f1-s-12 cl5 m-r-8">
@@ -122,7 +123,6 @@
 								</div>
 							</div>
 						</div>
-
 						<!-- Leave a comment -->
 						<div>
 							<h4 class="f1-l-4 cl3 p-b-12">

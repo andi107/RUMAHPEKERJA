@@ -9,7 +9,7 @@
             <h5>EDIT POST</h5>
         </div>
     </div>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <svg class="icon me-2">
@@ -113,15 +113,13 @@
                     <p>Lampiran akan di hapus permanen. Ingin melanjutkan?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">BATAL</button>
+                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">TIDAK</button>
                     <button type="submit" class="btn btn-primary" onclick="yesDelImage()">YA</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('cke/ckeditor.js')}}"></script>
     <script>
-        
         function picimg(inputElement) {
             const dropZoneElement = inputElement.closest(".drop-zone");
             let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");

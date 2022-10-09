@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{ secure_asset('src/vendor/css-hamburgers/hamburgers.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ secure_asset('src/vendor/animsition/css/animsition.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ secure_asset('src/css/util.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ secure_asset('src/css/main.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ secure_asset('src/css/main.min.css')}}">
 @else
 <link rel="stylesheet" type="text/css" href="{{ asset('src/vendor/bootstrap/css/bootstrap.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('src/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css')}}">
@@ -15,5 +15,12 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('src/vendor/css-hamburgers/hamburgers.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('src/vendor/animsition/css/animsition.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('src/css/util.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('src/css/main.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('src/css/main.min.css')}}">
 @endif
+
+<style>
+    #attach_img_size {
+        width:90%;
+        max-width:600px;
+    }
+</style>

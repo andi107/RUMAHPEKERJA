@@ -9,7 +9,7 @@
             <h5>POST BARU</h5>
         </div>
     </div>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <svg class="icon me-2">
@@ -124,7 +124,7 @@
                     <p>Lampiran akan di hapus permanen. Ingin melanjutkan?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">BATAL</button>
+                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">TIDAK</button>
                     <button type="submit" class="btn btn-primary" onclick="yesDelImage()">YA</button>
                 </div>
             </div>

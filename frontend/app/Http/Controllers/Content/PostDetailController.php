@@ -23,7 +23,7 @@ class PostDetailController extends Controller
 // dd($res);
         $title = $res->data->fttitle;
         $description = $res->data->ftdescription;
-        $created_at = $res->data->created_at;
+        $created_at = Carbon::parse($res->data->created_at)->setTimezone('Asia/Jakarta')->toIso8601String();
         $category_name = '$res->data->ftcategory_name';
         $keyWord = ['key1', 'key2', 'key3'];
         $addImg1 = route('image-view', [$res->dataBaner->ftfolder,$res->dataBaner->ftext,$res->dataBaner->ftname]);
@@ -54,6 +54,7 @@ class PostDetailController extends Controller
         JsonLd::addImage($addImg1);
         return view('content.postdetail',[
             'data' => $res,
+            'seometa' => SEOMeta::class,
             'opengraph' => OpenGraph::class,
             'jsonld' => JsonLd::class
         ]);

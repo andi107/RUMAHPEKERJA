@@ -2,11 +2,36 @@
 <script>
     CKEDITOR.replace('txtbody');
 
-    const toastLiveExample = document.getElementById('liveToast')
-    const toast = new coreui.Toast(toastLiveExample)
+    CKEDITOR.on('dialogDefinition', function(ev) {
+        var dialogName = ev.data.name;
+        var dialogDefinition = ev.data.definition;
+        var editor = ev.editor;
+        console.log('dialogName', dialogName, ev);
+        if (dialogName == 'image2') {
+            dialogDefinition.onOk = function(e) {
+                console.log('e',e,'e.sender',e.sender)
+                // var imageSrcUrl = e.sender.originalElement.$.src
+                //     , imageWidth = e.sender.originalElement.$.width
+                //     , imageHeight = e.sender.originalElement.$.height
+                //     , imageAlt = e.sender.originalElement.$.alt;
+                // // console.log(imageWidth, imageHeight) //width='" + imageWidth + "' height='"+ imageHeight +"'
+                // editor.insertElement(CKEDITOR.dom.element.createFromHtml("<img id='attach_img_size' src='" + imageSrcUrl + "' alt='" + imageAlt + "'>"));
+            };
+        }
+    })
+
+    
+
+    // <div class="wrap-pic-max-w p-b-30"><img alt="" src="http://localhost:8000/imgview/postattachment/png/c40ecfdb-b545-4442-9b01-e0bdbcee47a8"></div>
+
+    const toastLiveExample = document.getElementById('liveToast');
+    const toast = new coreui.Toast(toastLiveExample);
 
     $(document).ready(
         function() {
+
+            // var editor = $("textarea", "#txtbody");
+            
 
             $('#formPosts').submit(
                 function(e) {
@@ -31,7 +56,13 @@
 
             function _save() {
                 let url = "{{ route('adm.post-save') }}";
+
+                // var editor = CKEDITOR.instances.txtbody.getData()
+                // CKEDITOR.instances.txtbody.setData(editor.replace(/<img>/gi, "<img class='thiny_p'>"));
+                // editor.text(editor.val())
+
                 let resBody = CKEDITOR.instances.txtbody.getData();
+                console.log(resBody)
                 let isType = $("input[name=_id]").val();
 
                 var fd = new FormData();
@@ -45,8 +76,8 @@
                 fd.append('category', 1);
                 fd.append('status', 1);
                 if (isType !== 'new') {
-                    fd.append('baner_name',$("input[name=baner_name]").val());
-                    fd.append('baner_ext',$("input[name=baner_ext]").val());
+                    fd.append('baner_name', $("input[name=baner_name]").val());
+                    fd.append('baner_ext', $("input[name=baner_ext]").val());
                 }
                 fd.append('tmp_id', $("input[name=tmp_id]").val());
 
@@ -68,7 +99,7 @@
                         if (res.code == 200) {
                             if (typeof(res.data.ftuniq) === 'undefined') {
                                 $("input[name=_id]").val(res.data.id);
-                            }else{
+                            } else {
                                 $("input[name=_id]").val(res.data.ftuniq);
                                 if (isType == 'new') {
                                     setInterval(function() {

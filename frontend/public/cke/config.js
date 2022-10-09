@@ -4,7 +4,7 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	config.language = 'id';
+	config.language = 'en';
 	config.uiColor = '#FFFFF';
 	config.height = 600;
 	config.toolbarGroups = [
@@ -23,5 +23,6 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'others', groups: [ 'others' ] },
 		{ name: 'about', groups: [ 'about' ] }
 	];
+	config.extraPlugins = 'image2';
 	config.removeButtons = 'Source,NewPage,Save,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,About,Youtube';
 };
