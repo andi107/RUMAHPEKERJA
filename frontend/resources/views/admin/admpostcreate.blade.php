@@ -113,6 +113,23 @@
             </div>
         </div>
     </form>
+    <div class="modal fade" id="modalDelImg" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Lampiran akan di hapus permanen. Ingin melanjutkan?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">BATAL</button>
+                    <button type="submit" class="btn btn-primary" onclick="yesDelImage()">YA</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <x-posts-js-component />
     <x-posts-attach-js-component />
 </x-adm-base-layout>

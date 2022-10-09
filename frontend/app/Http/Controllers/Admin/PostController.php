@@ -368,11 +368,6 @@ class PostController extends Controller
             }
         }
 
-        // if (!isset($res->msg)) {
-        //     return $res->msg;
-        // } else {
-        //     return '$res->data'; //sukses
-        // }
         return response()->json([
             'code' => 200,
             'msg' => $resBody,
@@ -384,7 +379,9 @@ class PostController extends Controller
         $validator = Validator::make($req->all(), [
             'id' => 'required',
             'file_name' => 'required',
-            'tmp_id' => 'required'
+            'tmp_id' => 'required',
+            'folder' => 'required',
+            'ext' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -395,6 +392,8 @@ class PostController extends Controller
         $id = $req->input('id');
         $tmp_id = $req->input('tmp_id');
         $filename = $req->input('file_name');
+        $folder = $req->input('folder');
+        $ext = $req->input('ext');
         
         $uuidChk = Validator::make(['uuid' => $tmp_id], ['uuid' => 'uuid']);
         if ($uuidChk->passes() == false) {
@@ -418,9 +417,13 @@ class PostController extends Controller
                 return ['msg' => $res->error];
             }
         }
+
+        $resDel = ApiH::file_delete($folder,$filename.'.'.$ext);
+
         return response()->json([
             'code' => 200,
             'msg' => $resBody,
+            // 'msg' => $resDel.' | '. $folder,
             'data' => $res,
         ]);
     }

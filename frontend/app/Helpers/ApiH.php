@@ -187,7 +187,7 @@ class ApiH
             if (isset($res->data)) {
                 $data = $res->data;
                 return 'data:'. $data->ftmimes .';base64,'. $data->ftblob;
-            }   
+            }
         } catch (\Throwable $th) {}
         return env('APP_URL').'/icon/noimage.png';
     }
@@ -225,6 +225,16 @@ class ApiH
             return $data;
         } catch (\Throwable $th) {
             return 'Invalid_file_type2 ';
+        }
+    }
+
+    public static function file_delete($folder,$filename) {
+        try {
+            if (Storage::exists($folder.'/'.$filename)) {
+                Storage::delete($folder.'/'.$filename);
+            }
+        } catch (\Throwable $th) {
+            return 'Invalid_file_delete';
         }
     }
 }

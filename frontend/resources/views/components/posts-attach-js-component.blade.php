@@ -67,7 +67,7 @@
         $( ".container" ).append(`<div class="image" id="${res.id}">
             <button type="button" onclick="urlCopy('imgattach_${res.id}')">Salin Url</button>
             <input type="hidden" name="imgattach_${res.id}" value="${fileName}">
-            <span onclick="delImage('${res.id}','${res.ftname}','${tmp_id}');">&times;</span>
+            <span onclick="delImage('${res.id}','${res.ftname}','${tmp_id}','${res.ftfolder}','${res.ftext}');">&times;</span>
             <img src="${fileName}" />
         </div>`);
     }
@@ -85,21 +85,19 @@
 
     var _tmpDel = [];
 
-    function delImage(id,fileName,tmp_id) {
+    function delImage(id,fileName,tmp_id,folder,ext) {
         _tmpDel.push({
             'id': id,
             'fileName': fileName,
-            'tmp_id': tmp_id
+            'tmp_id': tmp_id,
+            'folder': folder,
+            'ext': ext
         });
         $('#modalDelImg').modal('show');
         console.log(_tmpDel)
     }
 
-    /* DELETE IMAGE */
     function yesDelImage() {
-        
-        
-        
         // files.splice(index, 1);
         // showImages();
         let url = "{{ route('adm.post-attach-del') }}";
@@ -108,6 +106,9 @@
         fd.append('id', _tmpDel[0].id);
         fd.append('file_name', _tmpDel[0].fileName);
         fd.append('tmp_id', _tmpDel[0].tmp_id);
+        fd.append('folder', _tmpDel[0].folder);
+        fd.append('ext', _tmpDel[0].ext);
+        
         console.log(_tmpDel)
         $.ajax({
             type: 'POST'
@@ -122,27 +123,24 @@
                 $('#formPosts').css("opacity", ".5");
             }
             , success: function(res) {
-                console.log(res.data.id, _tmpDel)
-                
-                $('#' + res.data.id).remove();
-                $('#modalDelImg').modal('hide');
-                // let msg = '';
-                // if (res.code == 200) {
-                //     if (typeof(res.data.id) !== 'undefined') {
-                //         // filePush(file)
-                //         $('#' + id).remove();
-                //     }
-                //     if (res.data.msg) {
-                //         msg = res.data.msg;
-                //     } else {
-                //         msg = res.msg;
-                //     }
-                // } else {
-                //     msg = res.msg;
-                // }
-                // $('strong.me-auto').text('PEMBERITAHUAN');
-                // $('div.toast-body').text(msg);
-                // toast.show();
+                let msg = '';
+                if (res.code == 200) {
+                    if (typeof(res.data.id) !== 'undefined') {
+                        console.log(res.data.id, _tmpDel)
+                        $('#' + res.data.id).remove();
+                        $('#modalDelImg').modal('hide');
+                    }
+                    if (res.data.msg) {
+                        msg = res.data.msg;
+                    } else {
+                        msg = res.msg;
+                    }
+                } else {
+                    msg = res.msg;
+                }
+                $('strong.me-auto').text('PEMBERITAHUAN');
+                $('div.toast-body').text(msg);
+                toast.show();
 
                 $('#formPosts').css("opacity", "");
                 $(".submitBtn").removeAttr("disabled");
