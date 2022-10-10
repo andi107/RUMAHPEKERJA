@@ -17,10 +17,6 @@ class SiteMapController extends Controller {
     }
 
     public function st_posts() {
-        // $data = DB::table('sitemap_posts')
-        // ->where('fnstatus','=',1)
-        // ->orderBy('updated_at','desc')
-        // ->get();
         $data = DB::select("select
             a.*,ctg.ftname as ftcategory_name
             from (

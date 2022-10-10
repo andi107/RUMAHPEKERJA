@@ -4,8 +4,12 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{{ asset('src/images/icons/favicon.webp')}}" />
     
+    <link rel="shortcut icon" href="{{ asset('src/images/logos/favicon.webp')}}" type="image/webp">
+    <link rel="icon" href="{{ asset('src/images/logos/favicon.webp')}}" type="image/webp">
+    {{-- <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"> --}}
+    
+
     {!! $seometa::generate() !!}
 
     <x-corecss-component />
@@ -44,20 +48,14 @@
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-5F792S9"></script>
     @endif
 </head>
-<body class='animsition data-animsition-in-class="fade-in" data-animsition-in-duration="100" data-animsition-out-class="fade-out" data-animsition-out-duration="80"'>
-    <!-- Header -->
+<body class="animsition">
+    
     <x-header-page-component />
-    <!-- Content -->
+    
     {{ $slot }}
-    <!-- Footer -->
+    
     <x-footer-page-component />
 
-    <!-- Back to top -->
-    <div class="btn-back-to-top" id="myBtn">
-        <span class="symbol-btn-back-to-top">
-            <span class="fas fa-angle-up"></span>
-        </span>
-    </div>
     <x-corejs-component />
     {{ $jsPage ?? '' }}
 

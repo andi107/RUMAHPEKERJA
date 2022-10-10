@@ -1,43 +1,46 @@
 @if (config('app.env') === 'production')
-<script src="{{ secure_asset('src/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+{{-- <script src="{{ secure_asset('src/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ secure_asset('src/vendor/animsition/js/animsition.min.js') }}"></script>
 <script src="{{ secure_asset('src/vendor/bootstrap/js/popper.min.js') }}"></script>
-<script src="{{ secure_asset('src/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ secure_asset('src/js/main.min.js') }}"></script>
-@else
-<script src="{{ asset('src/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ asset('src/vendor/animsition/js/animsition.min.js') }}"></script>
-<script src="{{ asset('src/vendor/bootstrap/js/popper.min.js') }}"></script>
-<script src="{{ asset('src/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('src/js/main.min.js') }}"></script>
+<script src="{{ secure_asset('src/vendor/bootstrap-5/js/bootstrap.min.js') }}"></script>
+<script src="{{ secure_asset('src/js/main.min.js') }}"></script> --}}
 @endif
 
+<script src="{{asset('src/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('src/plugins/jquery/jquery.lazyload.min.js')}}"></script>
+<script src="{{asset('src/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('src/plugins/slick-carousel/slick.min.js')}}"></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+<script src="{{asset('src/plugins/google-map/gmap.js')}}"></script> --}}
+<script src="{{asset('anim/js/animsition.min.js')}}"></script>
+<script src="{{asset('src/js/custom.js')}}"></script>
+
 <script>
-    // $(document).ready(function() {
-    //     $(".animsition").animsition({
-    //         inClass: 'fade-in'
-    //         , outClass: 'fade-out'
-    //         , inDuration: 1500
-    //         , outDuration: 800
-    //         , linkElement: '.animsition-link',
-    //         // e.g. linkElement: 'a:not([target="_blank"]):not([href^="#"])'
-    //         loading: true
-    //         , loadingParentElement: 'body', //animsition wrapper element
-    //         loadingClass: 'animsition-loading'
-    //         , loadingInner: '', // e.g '<img src="loading.svg" />'
-    //         timeout: false
-    //         , timeoutCountdown: 5000
-    //         , onLoadEvent: true
-    //         , browser: ['animation-duration', '-webkit-animation-duration'],
-    //         // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
-    //         // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
-    //         overlay: false
-    //         , overlayClass: 'animsition-overlay-slide'
-    //         , overlayParentElement: 'body'
-    //         , transition: function(url) {
-    //             window.location.href = url;
-    //         }
-    //     });
-    // });
+    $("img.lazy").lazyload({
+        effect : "fadeIn"
+    });
+    $(document).ready(function() {
+        $(".animsition").animsition({
+            inClass: 'fade-in-down-sm'
+            , outClass: 'fade-out-up-sm'
+            , inDuration: 500
+            , outDuration: 50
+            , linkElement: 'a',
+            loading: true
+            , loadingParentElement: 'body',
+            loadingClass: 'animsition-loading'
+            , loadingInner: '',
+            timeout: false
+            , timeoutCountdown: 5000
+            , onLoadEvent: true
+            , browser: ['animation-duration', '-webkit-animation-duration'],
+            overlay: false
+            , overlayClass: 'animsition-overlay-slide'
+            , overlayParentElement: 'body'
+            , transition: function(url) {
+                window.location.href = url;
+            }
+        });
+    });
 
 </script>
