@@ -12,9 +12,10 @@ use Artesaos\SEOTools\Facades\JsonLd;
 use Illuminate\Support\Facades\URL;
 use Carbon\Carbon;
 use Response;
+use App\Helpers\ApiH;
 class HomeController extends Controller
 {
-    public function index() {
+    public function index(Request $req) {
 
         $title = 'Beranda';
         $description = 'rumahpekerjahebat.com adalah sebuah portal web berisi berita, artikel, media komunikasi, dan jasa konsultasi, bagi masyarakat pekerja atau buruh Indonesia.';
@@ -55,14 +56,30 @@ class HomeController extends Controller
         JsonLd::setType('Article');
         JsonLd::addImage($imgLogo);
         
+        $page = 1;
+        $perPage = 10;
+        $url = '/post';
+
+        if ($req->has('page')) {
+            $url = $url . '?page=' . $req->input('page');
+            $page = $req->input('page');
+        }
+        $firstrow = (($page * $perPage) - $perPage) + 1;
+
+        $res = ApiH::apiGetVar($url);
+        $res = ApiH::fixPagination(route('home'), $res->data);
+        
         return view('home',[
-            'seometa' => SEOMeta::class
+            'firstrow' => $firstrow,
+            'hlp' => ApiH::class,
+            'seometa' => SEOMeta::class,
+            'res' => $res
         ]);
     }
 
     public function shrt_link($id) {
 
-        return redirect(env('APP_URL') .'/asd/asdasd/asdasdasd');
+       // return redirect(env('APP_URL') .'/asd/asdasd/asdasdasd');
     }
 
     public function image_view($folder, $ext, $fileName) {
@@ -73,11 +90,7 @@ class HomeController extends Controller
                 if (!Storage::exists($fileLocation)) {
                     abort(404);
                 }
-                // $headers = ['Content-Type' => 'image/png'];
-                // return Storage::download($fileLocation, 'ContentFile' , $headers);
             }
-            // $headers = ['Content-Type' => 'image/'.$ext];
-            // return Storage::download($fileLocation, 'ContentFile' , $headers);
             $file = Storage::disk('local')->get($fileLocation);
             $type = Storage::mimeType($fileLocation);
 
