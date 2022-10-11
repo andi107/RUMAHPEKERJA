@@ -87,8 +87,8 @@ class PostDetailController extends Controller
             'data' => $res,
             'seometa' => SEOMeta::class,
             'opengraph' => OpenGraph::class,
+            'jsonld' => JsonLd::class,
             'carbon' => Carbon::class,
-            'jsonld' => JsonLd::class
         ]);
     }
 }

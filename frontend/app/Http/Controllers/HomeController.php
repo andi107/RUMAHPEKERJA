@@ -74,6 +74,8 @@ class HomeController extends Controller
             'firstrow' => $firstrow,
             'hlp' => ApiH::class,
             'seometa' => SEOMeta::class,
+            'opengraph' => OpenGraph::class,
+            'jsonld' => JsonLd::class,
             'carbon' => Carbon::class,
             'res' => $res
         ]);
