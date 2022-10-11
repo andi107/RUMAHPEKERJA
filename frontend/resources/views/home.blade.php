@@ -17,14 +17,14 @@
                                     <div class="post-list-block">
                                         <div class="post-block-wrapper post-float clearfix">
                                             <div class="post-thumbnail">
-                                                <a href="{{ route('post-detail',[$r->fncategory,$r->ftuniq,$r->fttitle_url]) }}">
+                                                <a href="{{ route('post-detail',[$r->ftcategory_name,$r->fttitle_url,$r->fncategory,$r->ftuniq]) }}">
                                                     <img class="img-fluid lazy" data-original="{{route('image-view', [$r->ftgalery_folder,$r->ftgalery_ext,$r->ftgalery_name])}}" alt="{{$r->fttitle}}"/>
                                                 </a>
                                             </div>
                 
                                             <div class="post-content">
                                                 <h2 class="post-title title-sm">
-                                                    <a href="{{ route('post-detail',[$r->fncategory,$r->ftuniq,$r->fttitle_url]) }}">
+                                                    <a href="{{ route('post-detail',[$r->ftcategory_name,$r->fttitle_url,$r->fncategory,$r->ftuniq]) }}">
                                                         {{ $r->fttitle }}
                                                     </a>
                                                 </h2>

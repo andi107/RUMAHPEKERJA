@@ -174,8 +174,9 @@ class PostController extends Controller
                 'code' => 200,
                 'msg' => $resBody,
                 //  'msg' => $req->input('tmp_id'),
-                'data' => $res,
-                'dataBaner' => $resImg
+                'data' => $res->data,
+                'dataBaner' => $resImg,
+                'dataCategory' => $res->dataCategory
             ]);
         } catch (\Throwable $th) {
             return response()->json([
@@ -231,7 +232,7 @@ class PostController extends Controller
             }
         }
 
-        return $res->data;
+        return $res;
     }
 
     function post_update($req,$id, $csrf,$valid) {
@@ -276,7 +277,7 @@ class PostController extends Controller
                 }
             }
         }
-        return $res->data;
+        return $res;
     }
 
     function post_update_body($req,$id,$csrf) {

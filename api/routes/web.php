@@ -55,7 +55,7 @@ $router->group([
         'prefix' => 'post',
     ], function() use($router) {
         $router->get('/', 'User\PostController@index');
-        $router->get('detail/{cat_id}/{cont_id}/{title_url}', 'User\PostController@detail');
+        $router->get('detail/{cat_id}/{cont_id}/{title_url}/{category_name}', 'User\PostController@detail');
     });
     $router->group([
         'prefix' => 'st',

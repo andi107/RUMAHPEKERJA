@@ -46,13 +46,18 @@ class PostsController extends Controller {
             ->where('fncontent_id','=', $data->id)
             ->where('fttype','=','baner')
             ->first();
+            $categoryData = DB::table('category')
+            ->where('id','=', $data->fncategory)
+            ->first();
         } else {
             $banerData = null;
+            $categoryData = null;
         }
 
         return response()->json([
             'data' => $data,
             'banerdata' => $banerData,
+            'categorydata' => $categoryData
         ], 200);
     }
 
@@ -176,12 +181,16 @@ class PostsController extends Controller {
             ->where('fttype','=', 'attachment')
             ->where('fncontent_id','=',$save)
             ->get();
+            $dataCategory = DB::table('category')
+            ->where('id','=',$category)
+            ->first();
 
             DB::commit();
             return response()->json([
                 'data' => $data,
                 'dataBaner' => $dataBaner,
-                'dataAttachment' => $dataAttachment
+                'dataAttachment' => $dataAttachment,
+                'dataCategory' => $dataCategory
             ], 200);
         } catch (\Throwable $th) {
             DB::rollback();
@@ -291,11 +300,15 @@ class PostsController extends Controller {
             $dataBaner = DB::table('galery')
             ->where('fncontent_id','=', $ckData->id)
             ->first();
+            $dataCategory = DB::table('category')
+            ->where('id','=',$ckData->fncategory)
+            ->first();
 
             DB::commit();
             return response()->json([
                 'data' => $data,
-                'dataBaner' => $dataBaner
+                'dataBaner' => $dataBaner,
+                'dataCategory' => $dataCategory
             ], 200);
         } catch (\Throwable $th) {
             DB::rollback();

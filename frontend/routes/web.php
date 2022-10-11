@@ -24,12 +24,11 @@ Route::controller(UserCategory::class)->group(function () {
 });
 
 Route::controller(PostDetailController::class)->group(function () {
-    Route::get('/c/{cid}/{id}/{title}', 'detail')->name('post-detail');
+    Route::get('/{category_name}/c/{title}/{cid}/{id}', 'detail')->name('post-detail');
 });
 
 Route::controller(UsersController::class)->group(function () {
     Route::get('/profile/{username}/{fullname}', 'author_profile')->name('user-profile');
-    // Route::get('/c/{category_name}/p/{title}', 'index')->name('post_detail');
 });
 
 Route::group(['prefix' => 'admin'], function () {

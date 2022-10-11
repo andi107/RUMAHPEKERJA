@@ -25,7 +25,12 @@
         </div>
     </div>
     <div class="text-muted">
-        <input type="text" name="tittle_url" class="form-control" disabled value="{{ route('post-detail',[$res_edit->data->fncategory,$res_edit->data->ftuniq,$res_edit->data->fttitle_url]) }}">
+        <input type="text" name="tittle_url" class="form-control" disabled value="{{ route('post-detail',[
+            $res_edit->categorydata->ftname,
+            $res_edit->data->fttitle_url,
+            $res_edit->data->fncategory,
+            $res_edit->data->ftuniq
+        ]) }}">
     </div>
     <form action="" method="POST" id="formPosts" enctype="multipart/form-data">
         @csrf

@@ -8,23 +8,23 @@
 
     CKEDITOR.replace('txtbody');
 
-    CKEDITOR.on('dialogDefinition', function(ev) {
-        var dialogName = ev.data.name;
-        var dialogDefinition = ev.data.definition;
-        var editor = ev.editor;
-        console.log('dialogName', dialogName, ev);
-        if (dialogName == 'image2') {
-            dialogDefinition.onOk = function(e) {
-                console.log('e',e,'e.sender',e.sender)
-                // var imageSrcUrl = e.sender.originalElement.$.src
-                //     , imageWidth = e.sender.originalElement.$.width
-                //     , imageHeight = e.sender.originalElement.$.height
-                //     , imageAlt = e.sender.originalElement.$.alt;
-                // // console.log(imageWidth, imageHeight) //width='" + imageWidth + "' height='"+ imageHeight +"'
-                // editor.insertElement(CKEDITOR.dom.element.createFromHtml("<img id='attach_img_size' src='" + imageSrcUrl + "' alt='" + imageAlt + "'>"));
-            };
-        }
-    })
+    // CKEDITOR.on('dialogDefinition', function(ev) {
+    //     var dialogName = ev.data.name;
+    //     var dialogDefinition = ev.data.definition;
+    //     var editor = ev.editor;
+    //     console.log('dialogName', dialogName, ev);
+    //     if (dialogName == 'image2') {
+    //         dialogDefinition.onOk = function(e) {
+    //             console.log('e',e,'e.sender',e.sender)
+    //             // var imageSrcUrl = e.sender.originalElement.$.src
+    //             //     , imageWidth = e.sender.originalElement.$.width
+    //             //     , imageHeight = e.sender.originalElement.$.height
+    //             //     , imageAlt = e.sender.originalElement.$.alt;
+    //             // // console.log(imageWidth, imageHeight) //width='" + imageWidth + "' height='"+ imageHeight +"'
+    //             // editor.insertElement(CKEDITOR.dom.element.createFromHtml("<img id='attach_img_size' src='" + imageSrcUrl + "' alt='" + imageAlt + "'>"));
+    //         };
+    //     }
+    // })
 
     
 
@@ -103,14 +103,15 @@
                                 $("input[name=_id]").val(res.data.id);
                             } else {
                                 $("input[name=_id]").val(res.data.ftuniq);
-                                let tittle_url = "{{ route('post-detail',['@category','@id','@tittle_url']) }}";
+                                let tittle_url = "{{ route('post-detail',['@category_name','@tittle_url','@category','@id']) }}";
+                                tittle_url = tittle_url.replace('@category_name',res.dataCategory.ftname);
                                 tittle_url = tittle_url.replace('@category',res.data.fncategory);
                                 tittle_url = tittle_url.replace('@id',res.data.ftuniq);
                                 tittle_url = tittle_url.replace('@tittle_url',res.data.fttitle_url);
                                 $("input[name=tittle_url]").val(tittle_url);
                                 if (isType == 'new') {
                                     setInterval(function() {
-                                        _save()
+                                        _save();
                                     }, 300000);
                                 }
                             }

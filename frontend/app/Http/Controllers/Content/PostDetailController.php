@@ -12,11 +12,14 @@ use Artesaos\SEOTools\Facades\JsonLd;
 use Illuminate\Support\Facades\URL;
 class PostDetailController extends Controller
 {
-    public function detail($cid,$id,$title) {
+    // public function detail($cid,$id,$title) {
+    public function detail($category_name,$title,$cid,$id) {
+        
         $cid = urlencode($cid);
         $id = urlencode($id);
         $title = urlencode($title);
-        $res = ApiH::apiGetVar('/post/detail/'.$cid.'/'.$id.'/'.$title);
+        $category_name = urlencode($category_name);
+        $res = ApiH::apiGetVar('/post/detail/'.$cid.'/'.$id.'/'.$title.'/'.$category_name);
         if ($res == null or isset($res->error) or isset($res->msg)) {
             abort(404);
         }

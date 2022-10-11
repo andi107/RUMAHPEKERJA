@@ -25,7 +25,7 @@ class PostController extends Controller {
         ], 200);
     }
 
-    public function detail($cat_id,$cont_id,$title_url) {
+    public function detail($cat_id,$cont_id,$title_url,$category_name) {
         try {
             $data = DB::table('posts')
             ->join('category', 'posts.fncategory', '=', 'category.id')
@@ -37,6 +37,7 @@ class PostController extends Controller {
             ->where('posts.ftuniq','=',$cont_id)
             ->where('posts.fncategory','=', $cat_id)
             ->where('posts.fttitle_url','=', $title_url)
+            ->where('category.ftname','=', $category_name)
             ->first();
             if (!$data){
                 return response()->json([
