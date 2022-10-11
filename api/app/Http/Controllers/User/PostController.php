@@ -48,9 +48,14 @@ class PostController extends Controller {
             ->where('fncontent_id','=',$data->id)
             ->where('fttype','=','baner')
             ->first();
+            $dataKeyword = [
+                'Turun Ke Jalan','Turun Ke Jalan Tolak','Ke Jalan Tolak kenaikan','Aliansi Buruh Turun Ke',
+                'Buruh Turun Ke Jalan','RUMAH PEKERJA','PEKERJA','RUMAH','HEBAT','Buruh'
+            ];
             return response()->json([
                 'data' => $data,
-                'dataBaner' => $dataBaner
+                'dataBaner' => $dataBaner,
+                'dataKeyword' => $dataKeyword
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([

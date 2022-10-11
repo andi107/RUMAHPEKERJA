@@ -30,7 +30,7 @@ class PostDetailController extends Controller
         $created_at = Carbon::parse($res->data->created_at)->toIso8601String();
         $updated_at = Carbon::parse($res->data->updated_at)->toIso8601String();
         $category_name = '$res->data->ftcategory_name';
-        $keyWord = ['key1', 'key2', 'key3'];
+        $keyWord = $res->dataKeyword;
         $addImg1 = route('image-view', [$res->dataBaner->ftfolder,$res->dataBaner->ftext,$res->dataBaner->ftname]);
         $published_by = $res->data->published_by;
         SEOMeta::setTitle($title);
