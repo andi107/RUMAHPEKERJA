@@ -24,8 +24,6 @@ class BaseLayout extends Component
     public function render()
     {
         
-        return view('components.base-layout',[
-            'seometa' => SEOMeta::class
-        ]);
+        return view('components.base-layout');
     }
 }

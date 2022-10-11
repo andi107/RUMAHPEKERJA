@@ -39,7 +39,7 @@
                         </div>
                         <div class="post-body">
                             <div class="post-featured-image">
-                                <img class="img-fluid lazy" data-original="{{route('image-view', [$data->dataBaner->ftfolder,$data->dataBaner->ftext,$data->dataBaner->ftname])}}" alt="featured-image" />
+                                <img class="img-fluid lazy" data-original="{{route('image-view', [$data->dataBaner->ftfolder,$data->dataBaner->ftext,$data->dataBaner->ftname])}}" alt="{{ $data->data->fttitle_url }}" />
                             </div>
                             <div class="entry-content">
                                 {!! $data->data->ftbody !!}
