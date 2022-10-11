@@ -1,6 +1,9 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-
+        {!! $seometa::generate() !!}
+        {!! $opengraph::generate() !!}
+        {{-- {!! Twitter::generate() !!} --}}
+        {!! $jsonld::generate() !!}
     </x-slot>
 
     <section class="section-padding">
