@@ -15,9 +15,9 @@
                     <div class="single-post">
                         <div class="post-header mb-5">
                             <a class="post-category" href="#">{{ $data->data->ftcategory_name }}</a>
-                            <h2 class="post-title">
+                            <h1 class="post-title">
                                 {{ $data->data->fttitle }}
-                            </h2>
+                            </h1>
                             <div class="post-meta">
                                 <p>
                                     Dipublikasikan 

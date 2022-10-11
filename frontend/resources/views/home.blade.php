@@ -23,11 +23,11 @@
                                             </div>
                 
                                             <div class="post-content">
-                                                <h2 class="post-title title-sm">
+                                                <h1 class="post-title title-sm">
                                                     <a href="{{ route('post-detail',[$r->ftcategory_name,$r->fttitle_url,$r->fncategory,$r->ftuniq]) }}">
                                                         {{ $r->fttitle }}
                                                     </a>
-                                                </h2>
+                                                </h1>
                                                 <p class="lead">
                                                     {{ $hlp::string_limit($r->ftdescription,165) }}
                                                 </p>
