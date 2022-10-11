@@ -33,11 +33,11 @@
         <div class="row gutters pt-4">
             <div class="col col-lg">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Judul...">
+                    <input maxlength="255" type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Judul...">
                     <label for="txtTitle">Judul</label>
                 </div>
                 <div class="form-floating">
-                    <textarea class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px"></textarea>
+                    <textarea maxlength="255" onkeydown = "noareturnkey(event)" class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px"></textarea>
                     <label for="txtDescription">Deskripsi</label>
                 </div>
             </div>

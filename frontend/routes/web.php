@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Content\PostDetailController;
 use App\Http\Controllers\Content\CategoryController as UserCategory;
+use App\Http\Controllers\Profile\UsersController;
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -24,6 +25,10 @@ Route::controller(UserCategory::class)->group(function () {
 
 Route::controller(PostDetailController::class)->group(function () {
     Route::get('/c/{cid}/{id}/{title}', 'detail')->name('post-detail');
+});
+
+Route::controller(UsersController::class)->group(function () {
+    Route::get('/profile/{username}/{fullname}', 'author_profile')->name('user-profile');
     // Route::get('/c/{category_name}/p/{title}', 'index')->name('post_detail');
 });
 

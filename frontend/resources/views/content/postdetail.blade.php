@@ -1,446 +1,355 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-		{!! $seometa::generate() !!}
-		{!! $opengraph::generate() !!}
-		{{-- {!! Twitter::generate() !!} --}}
-		{!! $jsonld::generate() !!}
+        {!! $seometa::generate() !!}
+        {!! $opengraph::generate() !!}
+        {{-- {!! Twitter::generate() !!} --}}
+        {!! $jsonld::generate() !!}
     </x-slot>
 
-    <!-- Breadcrumb -->
-	<div class="container">
-		<div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-			<div class="f2-s-1 p-r-30 m-tb-6">
-				<a href="{{route('home')}}" class="breadcrumb-item f1-s-3 cl9">
-					Beranda 
-				</a>
-
-				<a href="blog-list-01.html" class="breadcrumb-item f1-s-3 cl9">
-					Category
-				</a>
-
-				<span class="breadcrumb-item f1-s-3 cl9">
-					{{ $data->data->fttitle }}
-				</span>
-			</div>
-
-			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search">
-				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-					<i class="zmdi zmdi-search"></i>
-				</button>
-			</div>
-		</div>
-	</div>
-
-	<!-- Content -->
-	<section class="bg0 p-b-140 p-t-10">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-10 col-lg-8 p-b-30">
-					<div class="p-r-10 p-r-0-sr991">
-						<!-- Blog Detail -->
-						<div class="p-b-70">
-							<a href="#" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
-								Technology
-							</a>
-
-							<h1 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-								{{ $data->data->fttitle }}
-							</h1>
-							
-							<div class="flex-wr-s-s p-b-40">
-								<span class="f1-s-3 cl8 m-r-15">
-									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-										by John Alvarado
-									</a>
-
-									<span class="m-rl-3">-</span>
-
-									<span>
-										Feb 18
-									</span>
-								</span>
-
-								<span class="f1-s-3 cl8 m-r-15">
-									5239 Views
-								</span>
-
-								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
-									0 Comment
-								</a>
-							</div>
-
-							<div class="wrap-pic-max-w p-b-30">
-								<img src="{{ route('image-view', [$data->dataBaner->ftfolder,$data->dataBaner->ftext,$data->dataBaner->ftname]) }}" alt="IMG">
-							</div>
-
-							{!! $data->data->ftbody !!}
-						</div>
-						<div class="p-b-70">
-							<!-- Tag -->
-							<div class="flex-s-s p-t-12 p-b-15">
-								<span class="f1-s-12 cl5 m-r-8">
-									Tags:
-								</span>
-								
-								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Streetstyle
-									</a>
-
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Crafts
-									</a>
-								</div>
-							</div>
-
-							<!-- Share -->
-							<div class="flex-s-s">
-								<span class="f1-s-12 cl5 p-t-1 m-r-15">
-									Share:
-								</span>
-								
-								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-facebook-f m-r-7"></i>
-										Facebook
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-twitter m-r-7"></i>
-										Twitter
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-google-plus-g m-r-7"></i>
-										Google+
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-pinterest-p m-r-7"></i>
-										Pinterest
-									</a>
-								</div>
-							</div>
-						</div>
-						<!-- Leave a comment -->
-						<div>
-							<h4 class="f1-l-4 cl3 p-b-12">
-								Leave a Comment
-							</h4>
-
-							<p class="f1-s-13 cl8 p-b-40">
-								Your email address will not be published. Required fields are marked *
-							</p>
-
-							<form>
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Name*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
-
-								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-									Post Comment
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Sidebar -->
-				<div class="col-md-10 col-lg-4 p-b-30">
-					<div class="p-l-10 p-rl-0-sr991 p-t-70">						
-						<!-- Category -->
-						<div class="p-b-60">
-							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Category
-								</h3>
-							</div>
-
-							<ul class="p-t-35">
-								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										Fashion
-									</a>
-								</li>
-
-								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										Beauty
-									</a>
-								</li>
-
-								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										Street Style
-									</a>
-								</li>
-
-								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										Life Style
-									</a>
-								</li>
-
-								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										DIY & Crafts
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<!-- Archive -->
-						<div class="p-b-37">
-							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Archive
-								</h3>
-							</div>
-
-							<ul class="p-t-32">
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											July 2018
-										</span>
-
-										<span>
-											(9)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											June 2018
-										</span>
-
-										<span>
-											(39)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											May 2018
-										</span>
-
-										<span>
-											(29)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											April  2018
-										</span>
-
-										<span>
-											(35)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											March 2018
-										</span>
-
-										<span>
-											(22)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											February 2018
-										</span>
-
-										<span>
-											(32)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											January 2018
-										</span>
-
-										<span>
-											(21)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-rl-4 p-b-19">
-									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
-										<span>
-											December 2017
-										</span>
-
-										<span>
-											(26)
-										</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<!-- Popular Posts -->
-						<div class="p-b-30">
-							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Popular Post
-								</h3>
-							</div>
-
-							<ul class="p-t-35">
-								<li class="flex-wr-sb-s p-b-30">
-									<a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="{{ asset('src/images/popular-post-04.jpg')}}" alt="IMG">
-									</a>
-
-									<div class="size-w-11">
-										<h6 class="p-b-4">
-											<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-												Donec metus orci, malesuada et lectus vitae
-											</a>
-										</h6>
-
-										<span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Music
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												Feb 18
-											</span>
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-wr-sb-s p-b-30">
-									<a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="{{ asset('src/images/popular-post-05.jpg')}}" alt="IMG">
-									</a>
-
-									<div class="size-w-11">
-										<h6 class="p-b-4">
-											<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-												Donec metus orci, malesuada et lectus vitae
-											</a>
-										</h6>
-
-										<span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Game
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												Feb 16
-											</span>
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-wr-sb-s p-b-30">
-									<a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="{{ asset('src/images/popular-post-06.jpg')}}" alt="IMG">
-									</a>
-
-									<div class="size-w-11">
-										<h6 class="p-b-4">
-											<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-												Donec metus orci, malesuada et lectus vitae
-											</a>
-										</h6>
-
-										<span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Celebrity
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												Feb 12
-											</span>
-										</span>
-									</div>
-								</li>
-							</ul>
-						</div>
-
-						<!-- Tag -->
-						<div>
-							<div class="how2 how2-cl4 flex-s-c m-b-30">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Tags
-								</h3>
-							</div>
-
-							<div class="flex-wr-s-s m-rl--5">
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Fashion
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Crafts
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Magazine
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									News
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Blogs
-								</a>
-							</div>	
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <x-breadcrumb-component />
+
+    <section class="block-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                    <div class="single-post">
+                        <div class="post-header mb-5">
+                            <a class="post-category" href="post-category-1.html">Health</a>
+                            <h2 class="post-title">
+                                First Look At Self-Portrait's Autumn Collection
+                            </h2>
+                            <p>
+                                It was a cheerful prospect. I asked Perry what he thought
+                                about it; but he only shrugged his shoulders and continued a
+                                longwinded prayer he had been at for some time. He was wont to
+                                say that the only redeeming feature of our captivity was the
+                                ample time it gave him for the improvisation of prayers
+                            </p>
+                        </div>
+                        <div class="post-body">
+                            <div class="post-featured-image">
+                                <img src="{{asset('src/images/news/img-2.jpg')}}" class="img-fluid" alt="featured-image" />
+                            </div>
+                            <div class="entry-content">
+                                <p>
+                                    It was a cheerful prospect. I asked Perry what he thought
+                                    about it; but he only shrugged his shoulders and continued a
+                                    longwinded prayer he had been at for some time. He was wont
+                                    to say that the only redeeming feature of our captivity was
+                                    the ample time it gave him for the improvisation of
+                                    prayers—it was becoming an obsession with him. The Sagoths
+                                    had begun to take notice of his habit of declaiming
+                                    throughout entire marches. One of them asked him what he was
+                                    saying—to whom he was talking. The question gave me an idea,
+                                    so I answered quickly before Perry could say anything.
+                                </p>
+                                <h2>Perfect design & code delivered to you</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Repellat sapiente neque iusto praesentium adipisci itaque
+                                    error, commodi laborum doloremque. Esse?
+                                </p>
+                                <div class="media mb-4 single-media">
+                                    <img src="{{asset('src/images/news/img-1.jpg')}}" alt="post-ads" class="img-fluid mr-4" />
+                                    <div class="media-body">
+                                        <p>
+                                            Oblique facilisi vix ei, quo ignota appetere lucilius
+                                            at. Apeirian voluptatibus ius ei, an periculis imperdiet
+                                            consequat sea. His ea everti placerat. Ad mea utroque
+                                            convenire, an quo reque aperiam, has et unum cibo
+                                            adipiscing. Brute instructior te vix, consequat
+                                            definitiones conclusionemque et usu, et per idque
+                                            quaerendum. Id pro ridens appareat, vim in verear
+                                            pertinacia.
+                                        </p>
+                                    </div>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Unde cum delectus exercitationem natus quidem enim error
+                                    suscipit. Iure cupiditate nobis quaerat consectetur! Vero
+                                    aliquam, amet ipsum ullam reiciendis nostrum voluptate
+                                    accusantium provident ut blanditiis incidunt.
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Voluptates ab ratione animi nobis in et consequatur earum
+                                    modi repellendus, qui, non debitis pariatur tempora
+                                    consequuntur!
+                                </p>
+                            </div>
+
+                            <div class="share-block d-flex justify-content-between align-items-center border-top border-bottom mt-5">
+                                <div class="post-tags">
+                                    <span>Tags</span>
+                                    <a href="post-category-2.html">Health</a>
+                                    <a href="post-category-2.html">Game</a>
+                                    <a href="post-category-2.html">Tour</a>
+                                </div>
+
+                                <ul class="share-icons list-unstyled">
+                                    <li class="facebook">
+                                        <a href="#">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="twitter">
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="gplus">
+                                        <a href="#">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li class="pinterest">
+                                        <a href="#">
+                                            <i class="fa fa-pinterest"></i>
+                                        </a>
+                                    </li>
+                                    <li class="reddit">
+                                        <a href="#">
+                                            <i class="fa fa-reddit-alien"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <nav class="post-navigation clearfix">
+                        <div class="previous-post">
+                            <a href="single-post.html">
+                                <h6 class="text-uppercase">Next</h6>
+                                <h3>Intel’s new smart glasses actually look good</h3>
+                            </a>
+                        </div>
+                        <div class="next-post">
+                            <a href="single-post.html">
+                                <h6 class="text-uppercase">Previous</h6>
+
+                                <h3>Free Two-Hour Delivery From Whole Foods</h3>
+                            </a>
+                        </div>
+                    </nav>
+                    <div class="author-block">
+                        <div class="author-thumb">
+                            <img src="{{asset('src/images/news/author-02.jpg')}}" alt="author-image" />
+                        </div>
+                        <div class="author-content">
+                            <h3><a href="author.html">Lint Handson</a></h3>
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit
+                                quod molestias delectus illum quisquam. Quasi iure perferendis
+                                suscipit officiis dicta!
+                            </p>
+
+                            <div class="authors-social">
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pinterest-p"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-dribbble"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="related-posts-block">
+                        <h3 class="news-title">
+                            <span>Related Posts</span>
+                        </h3>
+                        <div class="news-style-two-slide">
+                            <div class="item">
+                                <div class="post-block-wrapper clearfix">
+                                    <div class="post-thumbnail mb-0">
+                                        <a href="single-post.html">
+                                            <img class="img-fluid" src="{{asset('src/images/news/news-04.jpg')}}" alt="post-thumbnail" />
+                                        </a>
+                                    </div>
+                                    <a class="post-category" href="post-category-1.html">Tech</a>
+                                    <div class="post-content">
+                                        <h2 class="post-title title-sm">
+                                            <a href="single-post.html">Intel’s new smart glasses actually look good</a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="post-block-wrapper clearfix">
+                                    <div class="post-thumbnail mb-0">
+                                        <a href="single-post.html">
+                                            <img class="img-fluid" src="{{asset('src/images/news/news-10.jpg')}}" alt="post-thumbnail" />
+                                        </a>
+                                    </div>
+                                    <a class="post-category" href="post-category-1.html">Food</a>
+                                    <div class="post-content">
+                                        <h2 class="post-title title-sm">
+                                            <a href="single-post.html">Free Two-Hour Delivery From Whole Foods</a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="post-block-wrapper clearfix">
+                                    <div class="post-thumbnail mb-0">
+                                        <a href="single-post.html">
+                                            <img class="img-fluid" src="{{asset('src/images/news/news-11.jpg')}}" alt="post-thumbnail" />
+                                        </a>
+                                    </div>
+                                    <a class="post-category" href="post-category-1.html">Tour</a>
+                                    <div class="post-content">
+                                        <h2 class="post-title title-sm">
+                                            <a href="single-post.html">Snow and Freezing Rain in Paris Forces the</a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="post-block-wrapper clearfix">
+                                    <div class="post-thumbnail mb-0">
+                                        <a href="single-post.html">
+                                            <img class="img-fluid" src="{{asset('src/images/news/news-18.jpg')}}" alt="post-thumbnail" />
+                                        </a>
+                                    </div>
+                                    <a class="post-category" href="post-category-1.html">Beauty</a>
+                                    <div class="post-content">
+                                        <h2 class="post-title title-sm">
+                                            <a href="single-post.html">The Best Eye Makeup Tutorials for all</a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="comments" class="comments-block block">
+                        <h3 class="news-title">
+                            <span>02 Comments</span>
+                        </h3>
+                        <ul class="all-comments">
+                            <li>
+                                <div class="comment">
+                                    <img class="commented-person" alt="" src="{{asset('src/images/news/author-01.jpg')}}" />
+                                    <div class="comment-body">
+                                        <div class="meta-data">
+                                            <span class="commented-person-name">Jack Anderson</span>
+                                            <span class="comment-hour d-block"><i class="fa fa-clock-o mr-2"></i>February 6, 2019 at
+                                                12:20 pm</span>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>
+                                                Lorem ipsum, dolor sit amet consectetur adipisicing
+                                                elit. Dicta perferendis asperiores voluptatum saepe
+                                                repellat atque obcaecati dolores nulla, explicabo
+                                                harum inventore sed corrupti molestiae aspernatur.
+                                            </p>
+                                        </div>
+                                        <div class="text-left">
+                                            <a class="comment-reply" href="#"><i class="fa fa-reply"></i> Reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="comments-reply">
+                                    <li>
+                                        <div class="comment">
+                                            <img class="commented-person" alt="" src="{{asset('src/images/news/author-02.jpg')}}" />
+                                            <div class="comment-body">
+                                                <div class="meta-data">
+                                                    <span class="commented-person-name">Jhonny American</span>
+                                                    <span class="comment-hour d-block"><i class="fa fa-clock-o mr-2"></i>March 9, 2019
+                                                        at 12:20 pm</span>
+                                                </div>
+                                                <div class="comment-content">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet consectetur,
+                                                        adipisicing elit. Qui expedita magnam ea tempora
+                                                        consectetur fugit dolorum numquam at obcaecati
+                                                        voluptatibus.
+                                                    </p>
+                                                </div>
+                                                <div class="text-left">
+                                                    <a class="comment-reply" href="#"><i class="fa fa-reply"></i> Reply</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="comment last">
+                                    <img class="commented-person" alt="" src="{{asset('src/images/news/author-03.jpg')}}" />
+                                    <div class="comment-body">
+                                        <div class="meta-data">
+                                            <span class="commented-person-name">Vicky Fong</span>
+                                            <span class="comment-hour d-block"><i class="fa fa-clock-o mr-2"></i>June 6, 2019 at
+                                                12:20 pm</span>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>
+                                                Lorem, ipsum dolor sit amet consectetur adipisicing
+                                                elit. Error, ipsa dolor exercitationem culpa obcaecati
+                                                illo veniam voluptatem perferendis hic nisi tempora
+                                                omnis, mollitia unde doloribus.
+                                            </p>
+                                        </div>
+                                        <div class="text-left">
+                                            <a class="comment-reply" href="#"><i class="fa fa-reply"></i> Reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="comment-form">
+                        <h3 class="title-normal">Leave a Reply</h3>
+                        <p class="mb-4">
+                            Your email address will not be published. Required fields are
+                            marked *
+                        </p>
+                        <form role="form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control required-field" id="message" placeholder="Messege" rows="8" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input class="form-control" name="name" id="name" placeholder="Name" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input class="form-control" name="email" id="email" placeholder="Email" type="email" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Website" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button class="comments-btn btn btn-primary" type="submit">
+                                        Post Comment
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <x-sidebar-right-component />
+            </div>
+        </div>
+    </section>
 </x-base-layout>

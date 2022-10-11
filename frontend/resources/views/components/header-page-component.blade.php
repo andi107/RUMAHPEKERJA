@@ -127,11 +127,12 @@
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Pages
+                                    KATEGORI
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="404.html">404 Page</a>
-                                    <a class="dropdown-item" href="search.html">Search Page</a>
+                                    <a class="dropdown-item" href="#">Dummy Category</a>
+                                    <a class="dropdown-item" href="#">Dummy Category</a>
+                                    <a class="dropdown-item" href="#">Dummy Category</a>
                                 </div>
                             </li>
 

@@ -1,5 +1,11 @@
 <script src="{{ asset('cke/ckeditor.js')}}"></script>
 <script>
+
+    function noreturnkey(event) {
+        var x = event.which || event.keyCode;
+        if (x == '13') event.preventDefault();
+    }
+
     CKEDITOR.replace('txtbody');
 
     CKEDITOR.on('dialogDefinition', function(ev) {
@@ -29,10 +35,6 @@
 
     $(document).ready(
         function() {
-
-            // var editor = $("textarea", "#txtbody");
-            
-
             $('#formPosts').submit(
                 function(e) {
                     e.preventDefault();
@@ -62,7 +64,7 @@
                 // editor.text(editor.val())
 
                 let resBody = CKEDITOR.instances.txtbody.getData();
-                console.log(resBody)
+                // console.log(resBody)
                 let isType = $("input[name=_id]").val();
 
                 var fd = new FormData();
@@ -94,13 +96,18 @@
                         $('#formPosts').css("opacity", ".5");
                     }
                     , success: function(res) {
-                        // console.log(res)
+                        console.log(res)
                         let msg = '';
                         if (res.code == 200) {
                             if (typeof(res.data.ftuniq) === 'undefined') {
                                 $("input[name=_id]").val(res.data.id);
                             } else {
                                 $("input[name=_id]").val(res.data.ftuniq);
+                                let tittle_url = "{{ route('post-detail',['@category','@id','@tittle_url']) }}";
+                                tittle_url = tittle_url.replace('@category',res.data.fncategory);
+                                tittle_url = tittle_url.replace('@id',res.data.ftuniq);
+                                tittle_url = tittle_url.replace('@tittle_url',res.data.fttitle_url);
+                                $("input[name=tittle_url]").val(tittle_url);
                                 if (isType == 'new') {
                                     setInterval(function() {
                                         _save()
@@ -117,7 +124,7 @@
                                 msg = res.msg;
                             }
                         } else {
-                            $("input[name=_id]").val('new');
+                            // $("input[name=_id]").val('new');
                             msg = res.msg;
                         }
                         $('strong.me-auto').text('PEMBERITAHUAN');

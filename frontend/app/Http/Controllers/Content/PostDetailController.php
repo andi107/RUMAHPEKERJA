@@ -20,13 +20,16 @@ class PostDetailController extends Controller
         if ($res == null or isset($res->error) or isset($res->msg)) {
             abort(404);
         }
-// dd($res);
+        
+        $logo = asset('src/images/logos/logo.webp');
         $title = $res->data->fttitle;
         $description = $res->data->ftdescription;
-        $created_at = Carbon::parse($res->data->created_at)->setTimezone('Asia/Jakarta')->toIso8601String();
+        $created_at = Carbon::parse($res->data->created_at)->toIso8601String();
+        $updated_at = Carbon::parse($res->data->updated_at)->toIso8601String();
         $category_name = '$res->data->ftcategory_name';
         $keyWord = ['key1', 'key2', 'key3'];
         $addImg1 = route('image-view', [$res->dataBaner->ftfolder,$res->dataBaner->ftext,$res->dataBaner->ftname]);
+        $published_by = $res->data->published_by;
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
         SEOMeta::addMeta('article:published_time', $created_at, 'property');
@@ -38,20 +41,45 @@ class PostDetailController extends Controller
         OpenGraph::setDescription($description);
         OpenGraph::setTitle($title);
         OpenGraph::setUrl(URL::full());
-        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addProperty('type', 'NewsArticle');
         OpenGraph::addProperty('locale', 'id-ID');
         OpenGraph::addProperty('locale:alternate', ['id-ID']);
         OpenGraph::addProperty('site_name','Rumah Pekerja Hebat');
         OpenGraph::addProperty('image:type',$res->dataBaner->ftmimes);
-        OpenGraph::addProperty('image:width','1000');
-        OpenGraph::addProperty('image:height','529');
+        OpenGraph::addProperty('image:width','700');
+        OpenGraph::addProperty('image:height','393');
         
         OpenGraph::addImage($addImg1);
         
-        JsonLd::setTitle($title);
         JsonLd::setDescription($description);
-        JsonLd::setType('Article');
-        JsonLd::addImage($addImg1);
+        JsonLd::setType('NewsArticle');
+        JsonLd::addValue('headLine', $title);
+        JsonLd::addValue('datePublished', $created_at);
+        JsonLd::addValue('dateModified', $updated_at);
+
+        JsonLd::addValue('image', [
+            '@type' => 'ImageObject',
+            'url' => $addImg1,
+            'width' => 700,
+            'height' => 393
+        ]);
+        JsonLd::addValue('author', [
+            '@type' => 'Person',
+            'url' => route('user-profile',['@'.$published_by, 'administrator']),
+            'name' => 'x-root'
+        ]);
+        JsonLd::addValue('publisher', [
+            '@type' => 'Organization',
+            'name' => 'RPH Teams',
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => $logo,
+                'width' => 255,
+                'height' => 114
+            ]
+        ]);
+        JsonLd::addValue('thumbnailUrl', $addImg1);
+        
         return view('content.postdetail',[
             'data' => $res,
             'seometa' => SEOMeta::class,

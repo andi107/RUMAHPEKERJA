@@ -128,8 +128,8 @@ class PostsController extends Controller {
                 ], 404);
             }
 
-            $resTitle = urlencode(str_replace(' ','-', strtolower($title)));
-
+            // $resTitle = urlencode(str_replace(' ','-', strtolower($title)));
+            $resTitle = $this->text_clean(urlencode(str_replace(' ','-', strtolower($title))));
             $getUniq = $this->getRandString();
             $save = DB::table('posts')
             ->insertGetId([
@@ -252,8 +252,8 @@ class PostsController extends Controller {
                 ], 404);
             }
             
-            $resTitle = urlencode(str_replace(' ','-', strtolower($title)));
-
+            // $resTitle = urlencode(str_replace(' ','-', strtolower($title)));
+            $resTitle = $this->text_clean(urlencode(str_replace(' ','-', strtolower($title))));
             DB::table('posts')
             ->where('ftuniq','=',$id)
             ->update([

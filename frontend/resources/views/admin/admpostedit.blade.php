@@ -24,6 +24,9 @@
             </div>
         </div>
     </div>
+    <div class="text-muted">
+        <input type="text" name="tittle_url" class="form-control" disabled value="{{ route('post-detail',[$res_edit->data->fncategory,$res_edit->data->ftuniq,$res_edit->data->fttitle_url]) }}">
+    </div>
     <form action="" method="POST" id="formPosts" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="_id" value="{{ $res_edit->data->ftuniq }}">
@@ -33,11 +36,11 @@
         <div class="row gutters pt-4">
             <div class="col col-lg">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Judul..." value="{{ $res_edit->data->fttitle }}">
+                    <input maxlength="255" type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Judul..." value="{{ $res_edit->data->fttitle }}">
                     <label for="txtTitle">Judul</label>
                 </div>
                 <div class="form-floating">
-                    <textarea class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px">{{ $res_edit->data->ftdescription }}</textarea>
+                    <textarea maxlength="255" onkeydown="noreturnkey(event)" class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px">{{ $res_edit->data->ftdescription }}</textarea>
                     <label for="txtDescription">Deskripsi</label>
                 </div>
             </div>

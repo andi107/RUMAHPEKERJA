@@ -237,4 +237,14 @@ class ApiH
             return 'Invalid_file_delete';
         }
     }
+
+    public static function string_limit($string,$limit = 100) {
+        if (strlen($string) > $limit) {
+            $stringCut = substr($string, 0, 500);
+            $endPoint = strrpos($stringCut, ' ');
+            $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+            return $string . '...';
+        }
+        return $string;
+    }
 }

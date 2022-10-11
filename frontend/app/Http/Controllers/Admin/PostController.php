@@ -92,9 +92,16 @@ class PostController extends Controller
 
     public function create_update(Request $req) {
         try {
+            // return response()->json([
+            //     'code' => 200,
+            //     'msg' => '$id',
+            //     //  'msg' => $req->input('tmp_id'),
+            //     'data' => strlen( $req->input('description')),
+            //     'dataBaner' => $req->input('description')
+            // ]);
         
             $id = $req->input('type');
-
+            
             $validator = Validator::make($req->all(), [
                 'title' => 'required|max:255',
                 'description' => 'required|max:255',
@@ -106,7 +113,7 @@ class PostController extends Controller
                 'title.required' => 'Mohon input Judul.',
                 'title.max' => 'Judul tidak lebih dari 255 karakter.',
                 'description.required' => 'Deskripsi harus di isi.',
-                'description.max' => 'Deskripsi tidak kurang dari 255 karakter.',
+                'description.max' => 'Deskripsi tidak lebih dari 255 karakter.',
                 'body.required' => 'Bodi konten harus di isi.',
                 'body.min' => 'Bodi konten harus lebih dari 100 karakter.',
                 'tmp_id.required' => 'Temporary id dibutuhkan.'
@@ -181,8 +188,8 @@ class PostController extends Controller
     function post_new($req,$baner_id,$valid) {
         if ($valid) {
             $body = [
-                'title' => urlencode($req->input('title')),
-                'description' => urlencode($req->input('description')),
+                'title' => $req->input('title'),
+                'description' => $req->input('description'),
                 'body' => $req->input('body'),
                 'category' => (int)$req->input('category'),
                 'status' => (int)$req->input('status'),
@@ -196,8 +203,8 @@ class PostController extends Controller
             ];
         }else{
             $body = [
-                'title' => urlencode($req->input('title')),
-                'description' => urlencode($req->input('description')),
+                'title' => $req->input('title'),
+                'description' => $req->input('description'),
                 'body' => $req->input('body'),
                 'category' => (int)$req->input('category'),
                 'status' => (int)$req->input('status'),
@@ -224,19 +231,15 @@ class PostController extends Controller
             }
         }
 
-        if (!isset($res->msg)) {
-            return $res->data;
-        } else {
-            return '$res->data'; //sukses
-        }
+        return $res->data;
     }
 
     function post_update($req,$id, $csrf,$valid) {
         if ($valid) {
             $body = [
                 'id' => $id,
-                'title' => urlencode($req->input('title')),
-                'description' => urlencode($req->input('description')),
+                'title' => $req->input('title'),
+                'description' => $req->input('description'),
                 'category' => (int)$req->input('category'),
                 'status' => (int)$req->input('status'),
                 '_csrf' => ApiH::csrf(),
@@ -249,8 +252,8 @@ class PostController extends Controller
         }else{
             $body = [
                 'id' => $id,
-                'title' => urlencode($req->input('title')),
-                'description' => urlencode($req->input('description')),
+                'title' => $req->input('title'),
+                'description' => $req->input('description'),
                 'category' => (int)$req->input('category'),
                 'status' => (int)$req->input('status'),
                 'isbaner' => 0,
@@ -273,12 +276,7 @@ class PostController extends Controller
                 }
             }
         }
-
-        if (!isset($res->msg)) {
-            return $res->data;
-        } else {
-            return '$res->data'; //sukses
-        }
+        return $res->data;
     }
 
     function post_update_body($req,$id,$csrf) {

@@ -19,10 +19,11 @@ class HomeController extends Controller
 
         $title = 'Beranda';
         $description = 'rumahpekerjahebat.com adalah sebuah portal web berisi berita, artikel, media komunikasi, dan jasa konsultasi, bagi masyarakat pekerja atau buruh Indonesia.';
-        $created_at = Carbon::now()->setTimezone('Asia/Jakarta')->toIso8601String();
+        $created_at = Carbon::now()->toIso8601String();
         $category_name = 'news';
         $keyWord = ['rumah pekerja hebat', 'rumah pekerja', 'pekerja hebat'];
-
+        
+        
         if (config('app.env') === 'production') {
             $imgLogo = secure_asset('src/images/icons/logo-01.webp');
         } else{
@@ -41,7 +42,7 @@ class HomeController extends Controller
         OpenGraph::setDescription($description);
         OpenGraph::setTitle($title);
         OpenGraph::setUrl(URL::full());
-        OpenGraph::addProperty('type', 'article');
+        // OpenGraph::addProperty('type', 'article');
         OpenGraph::addProperty('locale', 'id-ID');
         OpenGraph::addProperty('locale:alternate', ['id-ID']);
         OpenGraph::addProperty('site_name','Rumah Pekerja Hebat');
@@ -73,6 +74,7 @@ class HomeController extends Controller
             'firstrow' => $firstrow,
             'hlp' => ApiH::class,
             'seometa' => SEOMeta::class,
+            'carbon' => Carbon::class,
             'res' => $res
         ]);
     }

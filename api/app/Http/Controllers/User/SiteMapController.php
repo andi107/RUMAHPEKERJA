@@ -31,4 +31,13 @@ class SiteMapController extends Controller {
             'data' => $data
         ], 200);
     }
+
+    public function st_category() {
+        $data = DB::table('category')
+        ->orderBy('created_at','desc')
+        ->get();
+        return response()->json([
+            'data' => $data
+        ], 200);
+    }
 }
