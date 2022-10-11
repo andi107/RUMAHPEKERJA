@@ -79,11 +79,12 @@ class PostDetailController extends Controller
             ]
         ]);
         JsonLd::addValue('thumbnailUrl', $addImg1);
-        
+        // dd($res);
         return view('content.postdetail',[
             'data' => $res,
             'seometa' => SEOMeta::class,
             'opengraph' => OpenGraph::class,
+            'carbon' => Carbon::class,
             'jsonld' => JsonLd::class
         ]);
     }

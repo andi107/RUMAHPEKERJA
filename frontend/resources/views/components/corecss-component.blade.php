@@ -1335,8 +1335,8 @@
     }
 
     .single-post .post-title {
-        font-size: 48px;
-        line-height: 58px;
+        font-size: 23px;
+        line-height: 31px;
         padding: 15px 0 8px 0;
         margin: 0;
         font-weight: 800;

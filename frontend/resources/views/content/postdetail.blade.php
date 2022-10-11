@@ -14,77 +14,43 @@
                 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                     <div class="single-post">
                         <div class="post-header mb-5">
-                            <a class="post-category" href="post-category-1.html">Health</a>
+                            <a class="post-category" href="#">{{ $data->data->ftcategory_name }}</a>
                             <h2 class="post-title">
-                                First Look At Self-Portrait's Autumn Collection
+                                {{ $data->data->fttitle }}
                             </h2>
-                            <p>
-                                It was a cheerful prospect. I asked Perry what he thought
-                                about it; but he only shrugged his shoulders and continued a
-                                longwinded prayer he had been at for some time. He was wont to
-                                say that the only redeeming feature of our captivity was the
-                                ample time it gave him for the improvisation of prayers
-                            </p>
+                            <div class="post-meta">
+                                <p>
+                                    Dipublikasikan 
+                                    @php
+                                        $isNow = $carbon::now();
+                                        $published_at = $data->data->created_at;
+                                        $publicDate = $carbon::parse($published_at);
+                                        if ($publicDate->diffInDays($isNow) >= 5) {
+                                            echo ' '.$carbon::createFromFormat('Y-m-d H:i:s', $published_at)->formatLocalized('%A, %d %B %Y %H:%M:00').' WIB';
+                                        }else{
+                                            echo ' '.$carbon::createFromTimeStamp(strtotime($published_at))->diffForHumans().' WIB';
+                                        }
+                                    @endphp
+                                </p>
+                                <span class="post-author">oleh
+                                    <a href="{{ route('user-profile',['@'.$data->data->published_by, 'administrator']) }}">{{ $data->data->published_by }}</a>
+                                </span>
+                            </div>
                         </div>
                         <div class="post-body">
                             <div class="post-featured-image">
-                                <img src="{{asset('src/images/news/img-2.jpg')}}" class="img-fluid" alt="featured-image" />
+                                <img class="img-fluid lazy" data-original="{{route('image-view', [$data->dataBaner->ftfolder,$data->dataBaner->ftext,$data->dataBaner->ftname])}}" alt="featured-image" />
                             </div>
                             <div class="entry-content">
-                                <p>
-                                    It was a cheerful prospect. I asked Perry what he thought
-                                    about it; but he only shrugged his shoulders and continued a
-                                    longwinded prayer he had been at for some time. He was wont
-                                    to say that the only redeeming feature of our captivity was
-                                    the ample time it gave him for the improvisation of
-                                    prayers—it was becoming an obsession with him. The Sagoths
-                                    had begun to take notice of his habit of declaiming
-                                    throughout entire marches. One of them asked him what he was
-                                    saying—to whom he was talking. The question gave me an idea,
-                                    so I answered quickly before Perry could say anything.
-                                </p>
-                                <h2>Perfect design & code delivered to you</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Repellat sapiente neque iusto praesentium adipisci itaque
-                                    error, commodi laborum doloremque. Esse?
-                                </p>
-                                <div class="media mb-4 single-media">
-                                    <img src="{{asset('src/images/news/img-1.jpg')}}" alt="post-ads" class="img-fluid mr-4" />
-                                    <div class="media-body">
-                                        <p>
-                                            Oblique facilisi vix ei, quo ignota appetere lucilius
-                                            at. Apeirian voluptatibus ius ei, an periculis imperdiet
-                                            consequat sea. His ea everti placerat. Ad mea utroque
-                                            convenire, an quo reque aperiam, has et unum cibo
-                                            adipiscing. Brute instructior te vix, consequat
-                                            definitiones conclusionemque et usu, et per idque
-                                            quaerendum. Id pro ridens appareat, vim in verear
-                                            pertinacia.
-                                        </p>
-                                    </div>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Unde cum delectus exercitationem natus quidem enim error
-                                    suscipit. Iure cupiditate nobis quaerat consectetur! Vero
-                                    aliquam, amet ipsum ullam reiciendis nostrum voluptate
-                                    accusantium provident ut blanditiis incidunt.
-                                </p>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Voluptates ab ratione animi nobis in et consequatur earum
-                                    modi repellendus, qui, non debitis pariatur tempora
-                                    consequuntur!
-                                </p>
+                                {!! $data->data->ftbody !!}
                             </div>
 
                             <div class="share-block d-flex justify-content-between align-items-center border-top border-bottom mt-5">
                                 <div class="post-tags">
                                     <span>Tags</span>
-                                    <a href="post-category-2.html">Health</a>
-                                    <a href="post-category-2.html">Game</a>
-                                    <a href="post-category-2.html">Tour</a>
+                                    <a href="post-category-2.html">Dummy Tags</a>
+                                    <a href="post-category-2.html">Dummy Tags</a>
+                                    <a href="post-category-2.html">Dummy Tags</a>
                                 </div>
 
                                 <ul class="share-icons list-unstyled">
