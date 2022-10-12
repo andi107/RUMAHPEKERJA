@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     @foreach ($res->data as $key => $r)
         <url>
-            <loc>{{env('APP_URL').'/sitemap/'.$r->ftname}}</loc>
+            <loc>{{route('home').'/sitemap/'.$r->ftname}}</loc>
             <lastmod>{{ $carbon::now()->setTimezone('Asia/Jakarta')->toIso8601String() }}</lastmod>
             <changefreq>daily</changefreq>
         </url>
