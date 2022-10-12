@@ -20,17 +20,7 @@
                             </h1>
                             <div class="post-meta">
                                 <p>
-                                    Dipublikasikan 
-                                    @php
-                                        $isNow = $carbon::now();
-                                        $published_at = $data->data->created_at;
-                                        $publicDate = $carbon::parse($published_at);
-                                        if ($publicDate->diffInDays($isNow) >= 5) {
-                                            echo ' '.$carbon::createFromFormat('Y-m-d H:i:s', $published_at)->formatLocalized('%A, %d %B %Y %H:%M:00').' WIB';
-                                        }else{
-                                            echo ' '.$carbon::createFromTimeStamp(strtotime($published_at))->diffForHumans().' WIB';
-                                        }
-                                    @endphp
+                                    {{ ' '.$carbon::createFromFormat('Y-m-d H:i:s', $data->data->created_at)->formatLocalized('%A, %d %B %Y %H:%M:00').' WIB' }}
                                 </p>
                                 <span class="post-author">oleh
                                     <a href="{{ route('user-profile',['@'.$data->data->published_by, 'administrator']) }}">{{ $data->data->published_by }}</a>
