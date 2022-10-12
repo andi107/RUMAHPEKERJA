@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('src/images/logos/favicon.webp')}}" type="image/webp">
     <link rel="icon" href="{{ asset('src/images/logos/favicon.webp')}}" sizes="32x32" type="image/webp">
     {{-- <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"> --}}
-    
+    <meta http-equiv="refresh" content="3600">
     <x-corecss-component />
     {{ $cssPage ?? '' }}
     {{ $titleSlot }}

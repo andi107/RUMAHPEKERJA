@@ -30,18 +30,21 @@ class PostDetailController extends Controller
             }
             
             $logo = asset('src/images/logos/logo.webp');
-            $title = $res->data->fttitle;
+            $title = ApiH::string_limit($res->data->fttitle,60,false);
+            
             $description = $res->data->ftdescription;
             $created_at = Carbon::parse($res->data->created_at)->toIso8601String();
             $updated_at = Carbon::parse($res->data->updated_at)->toIso8601String();
-            $category_name = '$res->data->ftcategory_name';
+            $category_name = $res->data->ftcategory_name;
             $keyWord = $res->dataKeyword;
             $addImg1 = route('image-view', [$res->dataBaner->ftfolder,$res->dataBaner->ftext,$res->dataBaner->ftname]);
             $published_by = $res->data->published_by;
+            $img_width = 1200;
+            $img_height = 630;
             SEOMeta::setTitle($title);
             SEOMeta::setDescription($description);
             SEOMeta::addMeta('article:published_time', $created_at, 'property');
-            SEOMeta::addMeta('article:section', '$category_name', 'property');
+            SEOMeta::addMeta('article:section', $category_name, 'property');
             SEOMeta::addMeta('googlebot-news', 'index,follow', 'property');
             SEOMeta::addMeta('googlebot', 'index,follow', 'property');
             SEOMeta::addKeyword($keyWord);
@@ -54,8 +57,8 @@ class PostDetailController extends Controller
             OpenGraph::addProperty('locale:alternate', ['id-ID']);
             OpenGraph::addProperty('site_name','Rumah Pekerja Hebat');
             OpenGraph::addProperty('image:type',$res->dataBaner->ftmimes);
-            OpenGraph::addProperty('image:width','700');
-            OpenGraph::addProperty('image:height','393');
+            OpenGraph::addProperty('image:width',$img_width);
+            OpenGraph::addProperty('image:height',$img_height);
             
             OpenGraph::addImage($addImg1);
             
@@ -68,8 +71,8 @@ class PostDetailController extends Controller
             JsonLd::addValue('image', [
                 '@type' => 'ImageObject',
                 'url' => $addImg1,
-                'width' => 700,
-                'height' => 393
+                'width' => $img_width,
+                'height' => $img_height
             ]);
             JsonLd::addValue('author', [
                 '@type' => 'Person',

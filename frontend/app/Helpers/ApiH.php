@@ -238,13 +238,21 @@ class ApiH
         }
     }
 
-    public static function string_limit($string,$limit = 100) {
+    public static function string_limit($string,$limit = 100,$with_dot = true) {
         if (strlen($string) > $limit) {
-            $stringCut = substr($string, 0, 500);
+            $stringCut = substr($string, 0, $limit);
             $endPoint = strrpos($stringCut, ' ');
             $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-            return $string . '...';
+            if ($with_dot) {
+                return $string . '...';
+            }
         }
         return $string;
     }
+
+    public static function text_clean($string) {
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+        $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+        return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
+     }
 }
