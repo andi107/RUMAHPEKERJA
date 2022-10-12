@@ -103,9 +103,7 @@
                                 $("input[name=_id]").val(res.data.id);
                             } else {
                                 $("input[name=_id]").val(res.data.ftuniq);
-                                let tittle_url = "{{ route('post-detail',['@category_name','@tittle_url','@category','@id']) }}";
-                                tittle_url = tittle_url.replace('@category_name',res.dataCategory.ftname);
-                                tittle_url = tittle_url.replace('@category',res.data.fncategory);
+                                let tittle_url = "{{ route('post-detail',['@id@@tittle_url']) }}";
                                 tittle_url = tittle_url.replace('@id',res.data.ftuniq);
                                 tittle_url = tittle_url.replace('@tittle_url',res.data.fttitle_url);
                                 $("input[name=tittle_url]").val(tittle_url);

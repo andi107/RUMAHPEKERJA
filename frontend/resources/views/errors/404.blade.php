@@ -1,6 +1,6 @@
 <x-base-layout>
     <x-slot name="titleSlot">
-
+        <title>404 | RPH</title>
     </x-slot>
 
     <section class="error-404 section-padding">

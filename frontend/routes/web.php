@@ -24,7 +24,8 @@ Route::controller(UserCategory::class)->group(function () {
 });
 
 Route::controller(PostDetailController::class)->group(function () {
-    Route::get('/{category_name}/c/{title}/{cid}/{id}', 'detail')->name('post-detail');
+    Route::get('post/{data}', 'detail')->name('post-detail');
+    // Route::get('/{category_name}/c/{title}/{cid}/{id}', 'detail')->name('post-detail');
 });
 
 Route::controller(UsersController::class)->group(function () {

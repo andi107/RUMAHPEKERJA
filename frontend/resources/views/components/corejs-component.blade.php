@@ -1,11 +1,3 @@
-@if (config('app.env') === 'production')
-{{-- <script src="{{ secure_asset('src/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ secure_asset('src/vendor/animsition/js/animsition.min.js') }}"></script>
-<script src="{{ secure_asset('src/vendor/bootstrap/js/popper.min.js') }}"></script>
-<script src="{{ secure_asset('src/vendor/bootstrap-5/js/bootstrap.min.js') }}"></script>
-<script src="{{ secure_asset('src/js/main.min.js') }}"></script> --}}
-@endif
-
 <script src="{{asset('src/plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('src/plugins/jquery/jquery.lazyload.min.js')}}"></script>
 <script src="{{asset('src/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
