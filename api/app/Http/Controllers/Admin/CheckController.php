@@ -36,16 +36,23 @@ class CheckController extends Controller {
             }
             $step = $request->input('step');
             if ($step) {
-                Artisan::call('migrate:rollback', [
-                    "--step" => $step,
-                    "--force" => true
+                // Artisan::call('migrate:rollback', [
+                //     "--step" => $step,
+                //     "--force" => true
+                // ]);
+               $res = Artisan::call('migrate:rollback', [
+                    "--step" => $step
                 ]);
             }else {
-                Artisan::call('migrate', ["--force" => true ]);
+                // Artisan::call('migrate', ["--force" => true ]);
+                $res = Artisan::call('migrate');
             }
+            return response()->json([
+                'error' => $res,
+            ], 500);
         } catch (\Throwable $th) {
             return response()->json([
-                'error' => 'Internal Server Error.',
+                'error' => 'Internal Server Error.#2',
             ], 500)
                 ->header('X-Content-Type-Options', 'nosniff')
                 ->header('X-Frame-Options', 'DENY')
