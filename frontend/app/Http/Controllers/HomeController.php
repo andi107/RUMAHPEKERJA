@@ -30,7 +30,7 @@ class HomeController extends Controller
             $imgLogo = asset('src/images/icons/logo-01.webp');
         }
         
-        SEOMeta::setTitle('Beranda');
+        SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
         SEOMeta::addMeta('article:published_time', $created_at, 'property');
         // SEOMeta::addMeta('article:section', '$category_name', 'property');
