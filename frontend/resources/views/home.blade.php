@@ -11,9 +11,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                     <div class="all-news-block">
-                        <h3 class="news-title">
+                        <h1 class="news-title">
                             <span>Terbaru</span>
-                        </h3>
+                        </h1>
                         <div class="all-news">
                             <div class="row">
                                 @foreach ($res->data as $key => $r)
