@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index(Request $req) {
 
         $title = 'Rumah Pekerja Hebat';
-        $description = 'Rumah Pekerja Hebat .com adalah sebuah portal web berisi berita, artikel, media komunikasi, dan jasa konsultasi, bagi masyarakat pekerja atau buruh Indonesia.';
+        $description = 'Rumah Pekerja Hebat adalah sebuah portal web berisi berita, artikel, media komunikasi, dan jasa konsultasi, bagi masyarakat pekerja di Indonesia.';
         $created_at = Carbon::now()->toIso8601String();
         $category_name = 'news';
         $keyWord = ['rumah pekerja hebat', 'rumah pekerja', 'pekerja hebat'];
@@ -42,7 +42,7 @@ class HomeController extends Controller
         OpenGraph::setDescription($description);
         OpenGraph::setTitle($title);
         OpenGraph::setUrl(URL::full());
-        // OpenGraph::addProperty('type', 'article');
+        OpenGraph::addProperty('type', 'website');
         OpenGraph::addProperty('locale', 'id-ID');
         OpenGraph::addProperty('locale:alternate', ['id-ID']);
         OpenGraph::addProperty('site_name','Rumah Pekerja Hebat');
