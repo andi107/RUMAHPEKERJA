@@ -39,6 +39,7 @@ class PostDetailController extends Controller
             $keyWord = $res->dataKeyword;
             $addImg1 = route('image-view', [$res->dataBaner->ftfolder,$res->dataBaner->ftext,$res->dataBaner->ftname]);
             $published_by = $res->data->published_by;
+            //default w= 700,h = 393
             $img_width = 1200;
             $img_height = 630;
             SEOMeta::setTitle($title);
