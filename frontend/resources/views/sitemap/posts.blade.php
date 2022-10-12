@@ -4,7 +4,7 @@
         <url>
             <loc>{{route('post-detail',[$r->fttitle_url.'@'.$r->ftuniq])}}</loc>
             
-            <lastmod>{{ $carbon::createFromFormat('Y-m-d H:i:s', $r->updated_at, 'UTC')->setTimezone('Asia/Jakarta')->toIso8601String() }}</lastmod>
+            <lastmod>{{ $carbon::now()->setTimezone('Asia/Jakarta')->toIso8601String() }}</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
             <image:image>

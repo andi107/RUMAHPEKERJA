@@ -24,6 +24,9 @@
             </div>
         </div>
     </div>
+    <div class="text-muted">
+        <input type="text" name="tittle_url" class="form-control" disabled value="" placeholder="URL akan tersedia disini">
+    </div>
     <form action="" method="POST" id="formPosts" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="_id" value="new">
@@ -89,21 +92,33 @@
                             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                                 <div class="accordion-body">
                                     <div class="card">
-                                        {{-- <div class="top">
-                                            <p>Drag & drop image uploading</p>
-                                            <button type="button">Upload</button>
-                                        </div> --}}
                                         <div class="drag-area">
                                             <span class="visible">
-                                                {{-- <p>Klik atau jatuhkan file gambar di sini atau</p> --}}
                                                 <span class="select" role="button">Upload Lampiran</span>
                                             </span>
                                             <span class="on-drop">Drop images here</span>
                                             <input id="imgattach" name="imgattach" type="file" class="file" accept=".jpg, .jpeg, .png" />
                                         </div>
-                                
-                                        <!-- IMAGE PREVIEW CONTAINER -->
                                         <div class="container"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingEmpat">
+                                <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#panelsStayOpen-collapseEmpat" aria-expanded="false" aria-controls="panelsStayOpen-collapseEmpat">
+                                    TERBITKAN
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseEmpat" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEmpat">
+                                <div class="accordion-body">
+                                    <div class="card">
+                                        <select class="js-example-basic-single" name="state">
+                                            <option value="AL">Alabama</option>
+                                              ...
+                                            <option value="WY">Wyoming</option>
+                                            <option value="ID">Indo</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -132,4 +147,9 @@
     </div>
     <x-posts-js-component />
     <x-posts-attach-js-component />
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 </x-adm-base-layout>
