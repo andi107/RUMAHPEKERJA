@@ -36,7 +36,6 @@
                                                 </p>
                                                 <div class="post-meta">
                                                     <p class="text-muted">
-                                                        Dipublikasikan 
                                                         @php
                                                             $isNow = $carbon::now();
                                                             $publicDate = $carbon::parse($r->updated_at);
