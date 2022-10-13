@@ -38,9 +38,9 @@
                             <div class="share-block d-flex justify-content-between align-items-center border-top border-bottom mt-5">
                                 <div class="post-tags">
                                     <span>Tags</span>
-                                    <a href="post-category-2.html">Dummy Tags</a>
-                                    <a href="post-category-2.html">Dummy Tags</a>
-                                    <a href="post-category-2.html">Dummy Tags</a>
+                                    <a href="#">Dummy Tags1</a>
+                                    <a href="#">Dummy Tags2</a>
+                                    <a href="#">Dummy Tags3</a>
                                 </div>
 
                                 <ul class="share-icons list-unstyled">
@@ -76,13 +76,13 @@
 
                     <nav class="post-navigation clearfix">
                         <div class="previous-post">
-                            <a href="single-post.html">
+                            <a href="#">
                                 <h6 class="text-uppercase">Next</h6>
                                 <h3>Intel’s new smart glasses actually look good</h3>
                             </a>
                         </div>
                         <div class="next-post">
-                            <a href="single-post.html">
+                            <a href="#">
                                 <h6 class="text-uppercase">Previous</h6>
 
                                 <h3>Free Two-Hour Delivery From Whole Foods</h3>
@@ -94,7 +94,7 @@
                             <img src="{{asset('src/images/news/author-02.jpg')}}" alt="author-image" />
                         </div>
                         <div class="author-content">
-                            <h3><a href="author.html">Lint Handson</a></h3>
+                            <h3><a href="#">Lint Handson</a></h3>
                             <p>
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit
                                 quod molestias delectus illum quisquam. Quasi iure perferendis
@@ -128,14 +128,14 @@
                             <div class="item">
                                 <div class="post-block-wrapper clearfix">
                                     <div class="post-thumbnail mb-0">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="{{asset('src/images/news/news-04.jpg')}}" alt="post-thumbnail" />
                                         </a>
                                     </div>
-                                    <a class="post-category" href="post-category-1.html">Tech</a>
+                                    <a class="post-category" href="#">Tech</a>
                                     <div class="post-content">
                                         <h2 class="post-title title-sm">
-                                            <a href="single-post.html">Intel’s new smart glasses actually look good</a>
+                                            <a href="#">Intel’s new smart glasses actually look good</a>
                                         </h2>
                                     </div>
                                 </div>
@@ -143,14 +143,14 @@
                             <div class="item">
                                 <div class="post-block-wrapper clearfix">
                                     <div class="post-thumbnail mb-0">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="{{asset('src/images/news/news-10.jpg')}}" alt="post-thumbnail" />
                                         </a>
                                     </div>
-                                    <a class="post-category" href="post-category-1.html">Food</a>
+                                    <a class="post-category" href="#">Food</a>
                                     <div class="post-content">
                                         <h2 class="post-title title-sm">
-                                            <a href="single-post.html">Free Two-Hour Delivery From Whole Foods</a>
+                                            <a href="#">Free Two-Hour Delivery From Whole Foods</a>
                                         </h2>
                                     </div>
                                 </div>
@@ -158,14 +158,14 @@
                             <div class="item">
                                 <div class="post-block-wrapper clearfix">
                                     <div class="post-thumbnail mb-0">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="{{asset('src/images/news/news-11.jpg')}}" alt="post-thumbnail" />
                                         </a>
                                     </div>
-                                    <a class="post-category" href="post-category-1.html">Tour</a>
+                                    <a class="post-category" href="#">Tour</a>
                                     <div class="post-content">
                                         <h2 class="post-title title-sm">
-                                            <a href="single-post.html">Snow and Freezing Rain in Paris Forces the</a>
+                                            <a href="#">Snow and Freezing Rain in Paris Forces the</a>
                                         </h2>
                                     </div>
                                 </div>
@@ -173,14 +173,14 @@
                             <div class="item">
                                 <div class="post-block-wrapper clearfix">
                                     <div class="post-thumbnail mb-0">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="{{asset('src/images/news/news-18.jpg')}}" alt="post-thumbnail" />
                                         </a>
                                     </div>
-                                    <a class="post-category" href="post-category-1.html">Beauty</a>
+                                    <a class="post-category" href="#">Beauty</a>
                                     <div class="post-content">
                                         <h2 class="post-title title-sm">
-                                            <a href="single-post.html">The Best Eye Makeup Tutorials for all</a>
+                                            <a href="#">The Best Eye Makeup Tutorials for all</a>
                                         </h2>
                                     </div>
                                 </div>

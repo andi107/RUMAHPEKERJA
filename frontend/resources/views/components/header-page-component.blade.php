@@ -130,14 +130,14 @@
                                     KATEGORI
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Dummy Category</a>
-                                    <a class="dropdown-item" href="#">Dummy Category</a>
-                                    <a class="dropdown-item" href="#">Dummy Category</a>
+                                    <a class="dropdown-item" href="#">Dummy Category1</a>
+                                    <a class="dropdown-item" href="#">Dummy Category2</a>
+                                    <a class="dropdown-item" href="#">Dummy Category3</a>
                                 </div>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="#">Contact</a>
                             </li>
 
                         </ul>

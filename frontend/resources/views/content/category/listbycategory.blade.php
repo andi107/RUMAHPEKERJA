@@ -11,7 +11,7 @@
 					Home 
 				</a>
 
-				<a href="category-01.html" class="breadcrumb-item f1-s-3 cl9">
+				<a href="#" class="breadcrumb-item f1-s-3 cl9">
 					Category
 				</a>
 
@@ -42,7 +42,7 @@
 			<div class="row m-rl--1">
 				<div class="col-12 p-rl-1 p-b-2">
 					<div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url({{ asset('src/images/entertaiment-16.jpg')}});">
-						<a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
+						<a href="#" class="dis-block how1-child1 trans-03"></a>
 
 						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
 							<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
@@ -50,7 +50,7 @@
 							</a>
 
 							<h3 class="how1-child2 m-t-14 m-b-10">
-								<a href="blog-detail-01.html" class="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
+								<a href="#" class="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
 									Music quisque at ipsum vel orci eleifend ultrices
 								</a>
 							</h3>
@@ -74,7 +74,7 @@
 
 				<div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
 					<div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url({{ asset('src/images/entertaiment-02.jpg')}});">
-						<a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
+						<a href="#" class="dis-block how1-child1 trans-03"></a>
 
 						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
 							<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
@@ -82,7 +82,7 @@
 							</a>
 
 							<h3 class="how1-child2 m-t-14">
-								<a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+								<a href="#" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
 									Pellentesque dui nibh, pellen-tesque ut dapibus ut
 								</a>
 							</h3>
@@ -92,7 +92,7 @@
 
 				<div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
 					<div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url({{ asset('src/images/entertaiment-03.jpg')}});">
-						<a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
+						<a href="#" class="dis-block how1-child1 trans-03"></a>
 
 						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
 							<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
@@ -100,7 +100,7 @@
 							</a>
 
 							<h3 class="how1-child2 m-t-14">
-								<a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+								<a href="#" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
 									Motobike Vestibulum vene-natis purus nec nibh volutpat
 								</a>
 							</h3>
@@ -110,7 +110,7 @@
 
 				<div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
 					<div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url({{ asset('src/images/entertaiment-04.jpg')}});">
-						<a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
+						<a href="#" class="dis-block how1-child1 trans-03"></a>
 
 						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
 							<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
@@ -118,7 +118,7 @@
 							</a>
 
 							<h3 class="how1-child2 m-t-14">
-								<a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+								<a href="#" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
 									Pellentesque dui nibh, pellen-tesque ut dapibus ut
 								</a>
 							</h3>
@@ -128,7 +128,7 @@
 
 				<div class="col-sm-6 col-md-3 p-rl-1 p-b-2">
 					<div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url({{ asset('src/images/entertaiment-05.jpg')}});">
-						<a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
+						<a href="#" class="dis-block how1-child1 trans-03"></a>
 
 						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
 							<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
@@ -136,7 +136,7 @@
 							</a>
 
 							<h3 class="how1-child2 m-t-14">
-								<a href="blog-detail-01.html" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+								<a href="#" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
 									Motobike Vestibulum vene-natis purus nec nibh volutpat
 								</a>
 							</h3>
@@ -156,13 +156,13 @@
 						<div class="col-sm-6 p-r-25 p-r-15-sr991">
 							<!-- Item -->
 							<div class="p-b-53">
-								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+								<a href="#" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ asset('src/images/entertaiment-06.jpg')}}" alt="IMG">
 								</a>
 
 								<div class="flex-col-s-c p-t-16">
 									<h5 class="p-b-5 txt-center">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="#" class="f1-m-3 cl2 hov-cl10 trans-03">
 											You wish lorem ipsum dolor sit amet consectetur 
 										</a>
 									</h5>
@@ -185,7 +185,7 @@
 										Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo.
 									</p>
 
-									<a href="blog-detail-01.html" class="f1-s-1 cl9 hov-cl10 trans-03">
+									<a href="#" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Read More
 										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
 									</a>
@@ -194,13 +194,13 @@
 
 							<!-- Item -->
 							<div class="p-b-53">
-								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+								<a href="#" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ asset('src/images/entertaiment-17.jpg')}}" alt="IMG">
 								</a>
 
 								<div class="flex-col-s-c p-t-16">
 									<h5 class="p-b-5 txt-center">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="#" class="f1-m-3 cl2 hov-cl10 trans-03">
 											Curabitur lacinia nisl eget aliquet porttitor
 										</a>
 									</h5>
@@ -223,7 +223,7 @@
 										Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo.
 									</p>
 
-									<a href="blog-detail-01.html" class="f1-s-1 cl9 hov-cl10 trans-03">
+									<a href="#" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Read More
 										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
 									</a>
@@ -232,13 +232,13 @@
 
 							<!-- Item -->
 							<div class="p-b-53">
-								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+								<a href="#" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ asset('src/images/entertaiment-18.jpg')}}" alt="IMG">
 								</a>
 
 								<div class="flex-col-s-c p-t-16">
 									<h5 class="p-b-5 txt-center">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="#" class="f1-m-3 cl2 hov-cl10 trans-03">
 											Vestibulum euismod lorem sed porttitor bibendum
 										</a>
 									</h5>
@@ -261,7 +261,7 @@
 										Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo.
 									</p>
 
-									<a href="blog-detail-01.html" class="f1-s-1 cl9 hov-cl10 trans-03">
+									<a href="#" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Read More
 										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
 									</a>
@@ -272,13 +272,13 @@
 						<div class="col-sm-6 p-r-25 p-r-15-sr991">
 							<!-- Item -->
 							<div class="p-b-53">
-								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+								<a href="#" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ asset('src/images/entertaiment-19.jpg')}}" alt="IMG">
 								</a>
 
 								<div class="flex-col-s-c p-t-16">
 									<h5 class="p-b-5 txt-center">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="#" class="f1-m-3 cl2 hov-cl10 trans-03">
 											Dolor sit amet consectetur adipiscing elit
 										</a>
 									</h5>
@@ -301,7 +301,7 @@
 										Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo.
 									</p>
 
-									<a href="blog-detail-01.html" class="f1-s-1 cl9 hov-cl10 trans-03">
+									<a href="#" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Read More
 										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
 									</a>
@@ -310,13 +310,13 @@
 
 							<!-- Item -->
 							<div class="p-b-53">
-								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+								<a href="#" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ asset('src/images/entertaiment-20.jpg')}}" alt="IMG">
 								</a>
 
 								<div class="flex-col-s-c p-t-16">
 									<h5 class="p-b-5 txt-center">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="#" class="f1-m-3 cl2 hov-cl10 trans-03">
 											Leo enim interdum nisl non mollis lacus est nec 
 										</a>
 									</h5>
@@ -339,7 +339,7 @@
 										Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo.
 									</p>
 
-									<a href="blog-detail-01.html" class="f1-s-1 cl9 hov-cl10 trans-03">
+									<a href="#" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Read More
 										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
 									</a>
@@ -348,13 +348,13 @@
 
 							<!-- Item -->
 							<div class="p-b-53">
-								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+								<a href="#" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ asset('src/images/entertaiment-21.jpg')}}" alt="IMG">
 								</a>
 
 								<div class="flex-col-s-c p-t-16">
 									<h5 class="p-b-5 txt-center">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="#" class="f1-m-3 cl2 hov-cl10 trans-03">
 											Vestibulum justo nunc pulvinar nec mi eget
 										</a>
 									</h5>
@@ -377,7 +377,7 @@
 										Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit, fringilla metus id, maximus leo.
 									</p>
 
-									<a href="blog-detail-01.html" class="f1-s-1 cl9 hov-cl10 trans-03">
+									<a href="#" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Read More
 										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
 									</a>

@@ -12,7 +12,7 @@
                             <img src="{{asset('src/images/news/author-02.jpg')}}" alt="author-image">
                         </div>
                         <div class="author-content">
-                            <h3><a href="author.html">Lint Handson</a></h3>
+                            <h3><a href="#">Lint Handson</a></h3>
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quod molestias delectus illum quisquam.
                                 Quasi iure perferendis suscipit officiis dicta!
                             </p>
@@ -41,19 +41,19 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="post-block-wrapper post-grid-view clearfix">
                                     <div class="post-thumbnail">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="images/news/news-17.jpg" alt="post-thumbnail" />
                                         </a>
                                     </div>
                                     <div class="post-content">
-                                        <a class="post-category" href="post-category-2.html">Google</a>
+                                        <a class="post-category" href="#">Google</a>
                                         <h2 class="post-title mt-3">
-                                            <a href="single-post.html">Ex-Googler warns coding bootcamps are lacking</a>
+                                            <a href="#">Ex-Googler warns coding bootcamps are lacking</a>
                                         </h2>
                                         <div class="post-meta">
                                             <span class="posted-time">an hour ago</span>
                                             <span class="post-author">by
-                                                <a href="author.html">John Snow</a>
+                                                <a href="#">John Snow</a>
                                             </span>
                                         </div>
                                         <p>
@@ -66,19 +66,19 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="post-block-wrapper post-grid-view clearfix">
                                     <div class="post-thumbnail">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="images/news/news-05.jpg" alt="post-thumbnail" />
                                         </a>
                                     </div>
                                     <div class="post-content">
-                                        <a class="post-category" href="post-category-2.html">Food</a>
+                                        <a class="post-category" href="#">Food</a>
                                         <h2 class="post-title mt-3">
-                                            <a href="single-post.html">Here's How To Get Free Pizza On</a>
+                                            <a href="#">Here's How To Get Free Pizza On</a>
                                         </h2>
                                         <div class="post-meta">
                                             <span class="posted-time">an hour ago</span>
                                             <span class="post-author">by
-                                                <a href="author.html">John Snow</a>
+                                                <a href="#">John Snow</a>
                                             </span>
                                         </div>
 
@@ -92,21 +92,21 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="post-block-wrapper post-grid-view clearfix">
                                     <div class="post-thumbnail">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="images/news/news-14.jpg" alt="post-thumbnail" />
                                         </a>
                                     </div>
                                     <div class="post-content">
-                                        <a class="post-category" href="post-category-2.html">Travel</a>
+                                        <a class="post-category" href="#">Travel</a>
 
                                         <h2 class="post-title mt-3">
-                                            <a href="single-post.html">Snow and Freezing Rain in Paris Forces the</a>
+                                            <a href="#">Snow and Freezing Rain in Paris Forces the</a>
                                         </h2>
 
                                         <div class="post-meta">
                                             <span class="posted-time">an hour ago</span>
                                             <span class="post-author">by
-                                                <a href="author.html">John Snow</a>
+                                                <a href="#">John Snow</a>
                                             </span>
                                         </div>
                                         <p>
@@ -120,20 +120,20 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="post-block-wrapper post-grid-view clearfix">
                                     <div class="post-thumbnail">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="images/news/news-04.jpg" alt="post-thumbnail" />
                                         </a>
                                     </div>
                                     <div class="post-content">
-                                        <a class="post-category" href="post-category-2.html">Google</a>
+                                        <a class="post-category" href="#">Google</a>
 
                                         <h2 class="post-title mt-3">
-                                            <a href="single-post.html">Intel’s new smart glasses actually look good</a>
+                                            <a href="#">Intel’s new smart glasses actually look good</a>
                                         </h2>
                                         <div class="post-meta">
                                             <span class="posted-time">an hour ago</span>
                                             <span class="post-author">by
-                                                <a href="author.html">John Snow</a>
+                                                <a href="#">John Snow</a>
                                             </span>
                                         </div>
 
@@ -150,20 +150,20 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="post-block-wrapper post-grid-view clearfix">
                                     <div class="post-thumbnail">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="images/news/news-03.jpg" alt="post-thumbnail" />
                                         </a>
                                     </div>
                                     <div class="post-content">
-                                        <a class="post-category" href="post-category-2.html">Apple</a>
+                                        <a class="post-category" href="#">Apple</a>
 
                                         <h2 class="post-title title-large mt-3">
-                                            <a href="single-post.html">Apple HomePod review: locked in</a>
+                                            <a href="#">Apple HomePod review: locked in</a>
                                         </h2>
                                         <div class="post-meta">
                                             <span class="posted-time">an hour ago</span>
                                             <span class="post-author">by
-                                                <a href="author.html">John Snow</a>
+                                                <a href="#">John Snow</a>
                                             </span>
                                         </div>
 
@@ -178,20 +178,20 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="post-block-wrapper post-grid-view clearfix">
                                     <div class="post-thumbnail">
-                                        <a href="single-post.html">
+                                        <a href="#">
                                             <img class="img-fluid" src="images/news/news-13.jpg" alt="post-thumbnail" />
                                         </a>
                                     </div>
                                     <div class="post-content">
-                                        <a class="post-category" href="post-category-2.html">Marc</a>
+                                        <a class="post-category" href="#">Marc</a>
 
                                         <h2 class="post-title mt-3">
-                                            <a href="single-post.html">An Asteroid Is Passing Earth Today: Here's How to</a>
+                                            <a href="#">An Asteroid Is Passing Earth Today: Here's How to</a>
                                         </h2>
                                         <div class="post-meta">
                                             <span class="posted-time">an hour ago</span>
                                             <span class="post-author">by
-                                                <a href="author.html">John Snow</a>
+                                                <a href="#">John Snow</a>
                                             </span>
                                         </div>
 
