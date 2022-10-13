@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="{{asset('src/plugins/bootstrap/css/bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{asset('src/plugins/font-awesome/css/font-awesome.min.css')}}">
+{{-- <link rel="stylesheet" href="{{asset('src/plugins/font-awesome/css/font-awesome.min.css')}}"> --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <link rel="stylesheet" href="{{asset('src/plugins/slick-carousel/slick.min.css')}}">
 <link rel="stylesheet" href="{{asset('src/plugins/slick-carousel/slick-theme.min.css')}}">
 <link rel="stylesheet" href="{{asset('anim/css/animsition.min.css')}}">

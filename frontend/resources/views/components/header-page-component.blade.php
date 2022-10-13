@@ -98,7 +98,7 @@
             <div class="col-xs-12 col-sm-9 col-md-9">
                 <div class="top-ad-banner float-right">
                     <a href="#">
-                        <img src="{{asset('src/images/news/ad-pro.png')}}" class="img-fluid" alt="banner-ads">
+                        <img src="{{asset('src/images/news/ad-pro.png')}}" width="728px" height="90px" class="img-fluid" alt="banner-ads">
                     </a>
                 </div>
             </div>

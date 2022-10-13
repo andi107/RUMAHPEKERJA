@@ -18,17 +18,12 @@ class HomeController extends Controller
     public function index(Request $req) {
 
         $title = 'Rumah Pekerja Hebat';
-        $description = 'Rumah Pekerja Hebat adalah sebuah portal web berisi berita, artikel, media komunikasi, dan jasa konsultasi, bagi masyarakat pekerja di Indonesia.';
+        $description = 'Rumah Pekerja Hebat adalah sebuah portal web berisi berita, artikel, media komunikasi, dan ~~';
         $created_at = Carbon::now()->toIso8601String();
         $category_name = 'news';
         $keyWord = ['rumah pekerja hebat', 'rumah pekerja', 'pekerja hebat'];
         
-        
-        if (config('app.env') === 'production') {
-            $imgLogo = secure_asset('src/images/icons/logo-01.webp');
-        } else{
-            $imgLogo = asset('src/images/icons/logo-01.webp');
-        }
+        $imgLogo = asset('src/images/logos/logo.webp');
         
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
