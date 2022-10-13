@@ -40,7 +40,7 @@
                     <label for="txtTitle">Judul</label>
                 </div>
                 <div class="form-floating">
-                    <textarea maxlength="255" onkeydown = "noareturnkey(event)" class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px"></textarea>
+                    <textarea maxlength="255" onkeydown = "noreturnkey(event)" class="form-control" name="txtDescription" id="txtDescription" placeholder="Deskripsi..." style="height: 100px"></textarea>
                     <label for="txtDescription">Deskripsi</label>
                 </div>
             </div>
@@ -107,18 +107,25 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingEmpat">
                                 <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#panelsStayOpen-collapseEmpat" aria-expanded="false" aria-controls="panelsStayOpen-collapseEmpat">
-                                    TERBITKAN
+                                    Penerbit
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseEmpat" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEmpat">
                                 <div class="accordion-body">
-                                    <div class="card">
-                                        <select class="js-example-basic-single" name="state">
-                                            <option value="AL">Alabama</option>
-                                              ...
-                                            <option value="WY">Wyoming</option>
-                                            <option value="ID">Indo</option>
+                                    <div class="form-floating mb-3" id="dtpublish">
+                                        <input type="text" class="form-control" id="publish_date" name="publish_date" placeholder="Tanggal">
+                                        <label for="publish_date">Tanggal Publish</label>
+                                    </div>
+                                    <label for="selpublisher mt-3" style="width: 100%">
+                                        Pilih Nama Penerbit
+                                        <select class="form-select selpublisher js-states" style="width: 100%" name="selpublisher" id="selpublisher">
+                                            @foreach ($user_select->data as $r)
+                                                <option value="{{$r->username}}">{{ $r->ftfirst_name.' '.$r->ftlast_name.' - @'.$r->username }}</option>
+                                            @endforeach
                                         </select>
+                                    </label>
+                                    <div class="mt-3">
+                                        <button type="button" onclick="_publish();" class="btn btn-outline-warning submitPublish">TERBITKAN</button>
                                     </div>
                                 </div>
                             </div>
@@ -148,8 +155,11 @@
     <x-posts-js-component />
     <x-posts-attach-js-component />
     <script>
+        
         $(document).ready(function() {
-            $('.js-example-basic-single').select2();
+            $('.selpublisher').select2({
+                width: 'resolve'
+            });
         });
     </script>
 </x-adm-base-layout>

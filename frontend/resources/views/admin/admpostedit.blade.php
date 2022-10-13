@@ -102,6 +102,32 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingEmpat">
+                                <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#panelsStayOpen-collapseEmpat" aria-expanded="false" aria-controls="panelsStayOpen-collapseEmpat">
+                                    Penerbit
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseEmpat" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEmpat">
+                                <div class="accordion-body">
+                                    <div class="form-floating mb-3" id="dtpublish">
+                                        <input type="text" class="form-control" id="publish_date" name="publish_date" placeholder="Tanggal">
+                                        <label for="publish_date">Tanggal Publish</label>
+                                    </div>
+                                    <label for="selpublisher mt-3" style="width: 100%">
+                                        Pilih Nama Penerbit
+                                        <select class="form-select selpublisher js-states" style="width: 100%" name="selpublisher" id="selpublisher">
+                                            @foreach ($user_select->data as $r)
+                                                <option value="{{$r->username}}">{{ $r->ftfirst_name.' '.$r->ftlast_name.' - @'.$r->username }}</option>
+                                            @endforeach
+                                        </select>
+                                    </label>
+                                    <div class="mt-3">
+                                        <button type="button" onclick="_publish();" class="btn btn-outline-warning submitPublish">TERBITKAN</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

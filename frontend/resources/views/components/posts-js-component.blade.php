@@ -1,11 +1,5 @@
 <script src="{{ asset('cke/ckeditor.js')}}"></script>
 <script>
-
-    function noreturnkey(event) {
-        var x = event.which || event.keyCode;
-        if (x == '13') event.preventDefault();
-    }
-
     CKEDITOR.replace('txtbody');
 
     // CKEDITOR.on('dialogDefinition', function(ev) {
@@ -26,7 +20,7 @@
     //     }
     // })
 
-    
+
 
     // <div class="wrap-pic-max-w p-b-30"><img alt="" src="http://localhost:8000/imgview/postattachment/png/c40ecfdb-b545-4442-9b01-e0bdbcee47a8"></div>
 
@@ -41,7 +35,6 @@
                     _save();
                 }
             );
-
             var isCtrl = false;
             document.onkeyup = function(e) {
                 if (e.keyCode == 17) isCtrl = false;
@@ -76,7 +69,7 @@
                 fd.append('body', resBody);
                 fd.append('description', $.trim($("#txtDescription").val()));
                 fd.append('category', 1);
-                fd.append('status', 1);
+                fd.append('status', 2);
                 if (isType !== 'new') {
                     fd.append('baner_name', $("input[name=baner_name]").val());
                     fd.append('baner_ext', $("input[name=baner_ext]").val());
@@ -104,8 +97,8 @@
                             } else {
                                 $("input[name=_id]").val(res.data.ftuniq);
                                 let tittle_url = "{{ route('post-detail',['@id@@tittle_url']) }}";
-                                tittle_url = tittle_url.replace('@id',res.data.ftuniq);
-                                tittle_url = tittle_url.replace('@tittle_url',res.data.fttitle_url);
+                                tittle_url = tittle_url.replace('@id', res.data.ftuniq);
+                                tittle_url = tittle_url.replace('@tittle_url', res.data.fttitle_url);
                                 $("input[name=tittle_url]").val(tittle_url);
                                 if (isType == 'new') {
                                     setInterval(function() {
@@ -137,6 +130,56 @@
             }
         }
     );
+    
+    function noreturnkey(event) {
+        var x = event.which || event.keyCode;
+        if (x == '13') event.preventDefault();
+    }
+
+    function _publish() {
+        let url = "{{ route('adm.post-publish') }}";
+        var fd = new FormData();
+        fd.append('_token', $("input[name=_token]").val());
+        fd.append('id', $("input[name=_id]").val());
+        fd.append('selpublisher', $("#selpublisher").val());
+        fd.append('publish_date', $("input[name=publish_date]").val());
+        console.log($("#selpublisher").val());
+        $.ajax({
+            type: 'POST'
+            , url: url
+            , data: fd
+            , dataType: 'json'
+            , contentType: false
+            , cache: false
+            , processData: false
+            , beforeSend: function() {
+                $('.submitPublish').attr("disabled", "disabled");
+                $('#formPosts').css("opacity", ".5");
+            }
+            , success: function(res) {
+                console.log(res)
+                let msg = '';
+                if (res.code == 200) {
+
+
+
+                    if (res.data.msg) {
+                        msg = res.data.msg;
+                    } else {
+                        msg = res.msg;
+                    }
+                } else {
+                    msg = res.msg;
+                }
+                $('strong.me-auto').text('PEMBERITAHUAN');
+                $('div.toast-body').text(msg);
+                toast.show();
+
+                $('#formPosts').css("opacity", "");
+                $(".submitPublish").removeAttr("disabled");
+            }
+        });
+    }
 
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
         let isType = $("input[name=_id]").val();
@@ -200,5 +243,12 @@
             thumbnailElement.style.backgroundImage = null;
         }
     }
+
+    $('#dtpublish input').datepicker({
+        format: "dd-mm-yyyy"
+        , todayHighlight: true
+        , language: "id"
+        , autoclose: true
+    , });
 
 </script>

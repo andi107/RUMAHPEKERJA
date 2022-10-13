@@ -468,4 +468,62 @@ class PostsController extends Controller {
                 ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
         }
     }
+
+    public function publish(Request $req) {
+        $this->validate($req, [
+            'id' => 'required',
+            'publisher_name' => 'required',
+            'publisher_date' => 'required|date_format:Y-m-d'
+        ]);
+        $id = $req->input('id');
+        $publisher_name = $req->input('publisher_name');
+        $publisher_date = $req->input('publisher_date');
+        try {
+
+            $chkData = DB::table('posts')
+            ->where('ftuniq','=',$id)
+            ->first();
+            $chkPublisher = DB::table('users')
+            ->where('username','=',$publisher_name)
+            ->where('fbstatus','=',1)
+            ->first();
+            if (!$chkData) {
+                DB::rollback();
+                return response()->json([
+                    'error' => 'Data tidak ada.',
+                ], 404);
+            }else if (!$chkPublisher) {
+                DB::rollback();
+                return response()->json([
+                    'error' => $publisher_name.' tidak ada.',
+                ], 404);
+            }
+
+            DB::table('posts')
+            ->where('ftuniq','=',$id)
+            ->update([
+                'published_at' => Carbon::parse($publisher_date),
+                'fnpublished_by' => $chkPublisher->id,
+                'fnstatus' => 1
+            ]);
+
+            $data = DB::table('posts')
+            ->selectRaw('id, fttitle, ftdescription, ftuniq, fncategory, fttitle_url, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at, uuid_tmp_id, published_at, fnpublished_by')
+            ->where('ftuniq','=',$id)
+            ->first();
+
+            return response()->json([
+                'data' => $data
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'error' => 'Internal Server Error.',
+            ], 500)
+                ->header('X-Content-Type-Options', 'nosniff')
+                ->header('X-Frame-Options', 'DENY')
+                ->header('X-XSS-Protection', '1; mode=block')
+                ->header('Strict-Transport-Security', 'max-age=7776000; includeSubDomains');
+        }
+    }
 }

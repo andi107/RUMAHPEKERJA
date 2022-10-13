@@ -19,6 +19,7 @@
 <link href="{{ asset('adm/vendors/@coreui/chartjs/css/coreui-chartjs.css') }}" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="{{ asset('bs-datepicker-1.9.0/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet">
 
 <style>
     .btn {

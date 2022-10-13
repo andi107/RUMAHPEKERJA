@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/post/create/save', 'create_update')->name('adm.post-save');
         Route::post('/post/save/tmp', 'tmpattachsave')->name('adm.post-tmp-save');
         Route::post('/post/attach/del', 'attachdelete')->name('adm.post-attach-del');
+        Route::post('/post/publish', 'publish')->name('adm.post-publish');
     });
     
 });

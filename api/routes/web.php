@@ -48,6 +48,12 @@ $router->group([
             $router->post('update_body', 'Admin\PostsController@update_body');
             $router->post('tmpattach_save', 'Admin\PostsController@tmpattach');
             $router->post('attach_delete', 'Admin\PostsController@attach_delete');
+            $router->post('publish', 'Admin\PostsController@publish');
+        });
+        $router->group([
+            'prefix' => 'select',
+        ], function() use($router) {
+            $router->get('users', 'Admin\SelectController@users_list');
         });
     });
 

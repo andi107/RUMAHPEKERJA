@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\ApiH;
 use Illuminate\Support\Facades\Validator;
 use Webpatser\Uuid\Uuid;
+use Carbon\Carbon;
 class PostController extends Controller
 {
 
@@ -42,14 +43,14 @@ class PostController extends Controller
         $firstrow = (($page * $perPage) - $perPage) + 1;
 
         $res = ApiH::apiGetVar($url);
-        if (isset($res->error)) {
-            if (!$res->error == "Unauthorized") {
-                return view('admin.admpostlist')->with('error', $res->error); 
-            }
-        }
         $res = ApiH::fixPagination(route('adm.post-list-index'), $res->data);
         $hlp = ApiH::class;
-        return view('admin.admpostlist', ['hlp' => $hlp,'res' => $res, 'firstrow' => $firstrow, 'qsearch' => $search]);
+        return view('admin.admpostlist', [
+            'hlp' => $hlp,
+            'res' => $res,
+            'firstrow' => $firstrow,
+            'qsearch' => $search,
+        ]);
     }
 
     public function index(Request $req) {
@@ -66,17 +67,26 @@ class PostController extends Controller
         //=== End Check ===
         $id = $req->input('edit');
         $tmp_id = Uuid::generate(4)->string;
+        $users_select = ApiH::apiGetVar('/a/select/users');
         if ($id) {
             $res_edit = ApiH::apiGetVar('/a/posts/detail/'. urlencode($id));
+            if (!$res_edit->data->published_at || !$res_edit->data->fnpublished_by) {
+                $published_status = true;
+            }else{
+                $published_status = false;
+            }
             if (!$res_edit->data->uuid_tmp_id) {
                 $res_edit->data->uuid_tmp_id = $tmp_id;
             }
             return view('admin.admpostedit', [
-                'res_edit' => $res_edit
+                'res_edit' => $res_edit,
+                'user_select' => $users_select,
+                'published_status' => $published_status
             ]);
         }else{
             return view('admin.admpostcreate',[
-                'tmp_id' => $tmp_id
+                'tmp_id' => $tmp_id,
+                'user_select' => $users_select
             ]);
         }
     }
@@ -423,6 +433,67 @@ class PostController extends Controller
             'code' => 200,
             'msg' => $resBody,
             // 'msg' => $resDel.' | '. $folder,
+            'data' => $res,
+        ]);
+    }
+
+    public function publish(Request $req) {
+        // return response()->json([
+        //     'code' => $req->all(),
+        // ]);
+        $validator = Validator::make($req->all(), [
+            'selpublisher' => 'required',
+            'publish_date' => 'required|date_format:d-m-Y',
+        ],[
+            'selpublisher' => 'Pilih nama penerbit.',
+            'publish_date.required' => 'Tanggal penerbit harus diinput.',
+            'publish_date.date_format' => 'Format Tanggal penerbit (d-m-Y).',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 404,
+                'msg' => $validator->messages()->first(),
+            ]);
+        }
+        $id = $req->input('id');
+        if ($id == 'new') {
+            return response()->json([
+                'code' => 404,
+                'msg' => 'Anda belum membuat dan menyimpan artikel.',
+            ]);
+        }
+        $publisher_name = $req->input('selpublisher');
+        $publisher_date = $req->input('publish_date');
+
+        $resBody = 'Artikel telah terbit.';
+        $publisher_date = Carbon::parse($publisher_date)->format('Y-m-d');
+        $body = [
+            'id' => $id,
+            'publisher_name' => $publisher_name,
+            'publisher_date' => $publisher_date,
+            '_csrf' => ApiH::csrf(),
+        ];
+        // return response()->json([
+        //     'code' => $body,
+        // ]);
+        $save = ApiH::apiPostVar('/a/posts/publish', $body);
+        
+        $res = $save->object();
+
+        if (isset($res->error)) {
+            if (is_string($res->error)) {
+                $res = ['msg' => $res->error];
+            }else{
+                $res = $res->error;
+            }
+        }else{
+            $res = $res->data;
+        }
+
+        return response()->json([
+            'code' => 200,
+            'msg' => $resBody,
+            //  'msg' => $req->input('tmp_id'),
             'data' => $res,
         ]);
     }
