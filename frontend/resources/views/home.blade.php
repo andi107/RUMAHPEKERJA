@@ -41,9 +41,9 @@
                                                             $isNow = $carbon::now();
                                                             $publicDate = $carbon::parse($r->updated_at);
                                                             if ($publicDate->diffInDays($isNow) >= 5) {
-                                                                echo ' '.$carbon::createFromFormat('Y-m-d H:i:s', $r->updated_at)->formatLocalized('%d %B %Y');
+                                                                echo ' '.$carbon::createFromFormat('Y-m-d H:i:s', $r->published_at)->formatLocalized('%d %B %Y');
                                                             }else{
-                                                                echo ' '.$carbon::createFromTimeStamp(strtotime($r->updated_at))->diffForHumans();
+                                                                echo ' '.$carbon::createFromTimeStamp(strtotime($r->published_at))->diffForHumans();
                                                             }
                                                         @endphp
                                                     </p>
