@@ -30,7 +30,7 @@ class HomeController extends Controller
         SEOMeta::addMeta('article:published_time', $created_at, 'property');
         // SEOMeta::addMeta('article:section', '$category_name', 'property');
         SEOMeta::addMeta('googlebot-news', 'index,follow', 'property');
-        SEOMeta::addMeta('googlebot', 'index,follow', 'property');
+        SEOMeta::addMeta('googlebot', 'index,follow,all', 'property');
         SEOMeta::addMeta('news_keywords','rumah pekerja hebat, rumah pekerja, pekerja hebat','property');
         SEOMeta::addKeyword($keyWord);
         
@@ -42,8 +42,8 @@ class HomeController extends Controller
         OpenGraph::addProperty('locale:alternate', ['id-ID']);
         OpenGraph::addProperty('site_name','Rumah Pekerja Hebat');
         OpenGraph::addProperty('image:type','image/png');
-        OpenGraph::addProperty('image:width','67');
-        OpenGraph::addProperty('image:height','30');
+        OpenGraph::addProperty('image:width','1200');
+        OpenGraph::addProperty('image:height','630');
         
         OpenGraph::addImage($imgLogo);
 
