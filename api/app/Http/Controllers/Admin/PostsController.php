@@ -21,12 +21,12 @@ class PostsController extends Controller {
             $data = DB::table('posts')
             ->selectRaw('id, fttitle, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
             ->where('fttitle','like', '%'. $search .'%')
-            ->orderBy('fttitle','asc')
+            ->orderBy('updated_at','desc')
             ->paginate(10);
         }else{
             $data = DB::table('posts')
             ->selectRaw('id, fttitle, ftdescription, ftuniq, fncategory, fnstatus, fnupdated_by, fncreated_by, created_at, updated_at')
-            ->orderBy('fttitle','asc')
+            ->orderBy('updated_at','desc')
             ->paginate(10);
         }
 
