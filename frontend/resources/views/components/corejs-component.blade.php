@@ -6,7 +6,7 @@
 <script src="{{asset('src/plugins/google-map/gmap.js')}}"></script> --}}
 <script src="{{asset('anim/js/animsition.min.js')}}"></script>
 <script src="{{asset('src/js/custom.js')}}"></script>
-
+<script src="{{asset('src/plugins/font-awesome/js/all.min.js')}}"></script>
 <script>
     let setContentImgSize = $("p img"), setContentImgFigureSize = $("figure img");
     setContentImgSize.css('max-width','100%');
