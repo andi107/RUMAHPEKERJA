@@ -47,7 +47,7 @@
                                                         @endphp
                                                     </p>
                                                     <span class="post-author">oleh
-                                                        <a href="{{ route('user-profile',['@'.$r->published_by, 'administrator']) }}">{{ $r->published_by }}</a>
+                                                        <a href="{{ route('user-profile',['@'.$r->published_by, strtolower($r->published_first_name.'-'.$r->published_last_name)]) }}">{{ $r->published_by }}</a>
                                                     </span>
                                                 </div>
                                             </div>

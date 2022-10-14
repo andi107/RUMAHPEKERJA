@@ -39,6 +39,7 @@ class PostDetailController extends Controller
             $keyWord = $res->dataKeyword;
             $addImg1 = route('image-view', [$res->dataBaner->ftfolder,$res->dataBaner->ftext,$res->dataBaner->ftname]);
             $published_by = $res->data->published_by;
+            $published_fullname = $res->data->published_first_name.' '.$res->data->published_last_name;
             //default w= 700,h = 393
             $img_width = 1200;
             $img_height = 630;
@@ -77,8 +78,8 @@ class PostDetailController extends Controller
             ]);
             JsonLd::addValue('author', [
                 '@type' => 'Person',
-                'url' => route('user-profile',['@'.$published_by, 'administrator']),
-                'name' => 'x-root'
+                'url' => route('user-profile',['@'.$published_by, str_replace(' ','-', strtolower($published_fullname))]),
+                'name' => $published_fullname
             ]);
             JsonLd::addValue('publisher', [
                 '@type' => 'Organization',

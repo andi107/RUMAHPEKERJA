@@ -21,10 +21,10 @@
                             <p class="font-weight-light font-italic">{{$data->data->ftdescription}}</p>
                             <div class="post-meta">
                                 <p>
-                                    {{ ' '.$carbon::createFromFormat('Y-m-d H:i:s', $data->data->created_at)->formatLocalized('%A, %d %B %Y %H:%M:00').' WIB' }}
+                                    {{ $carbon::createFromFormat('Y-m-d H:i:s', $data->data->created_at)->formatLocalized('%A, %d %B %Y %H:%M:00').' WIB' }}
                                 </p>
                                 <span class="post-author">oleh
-                                    <a href="{{ route('user-profile',['@'.$data->data->published_by, 'administrator']) }}">{{ $data->data->published_by }}</a>
+                                    <a href="{{ route('user-profile',['@'.$data->data->published_by, strtolower($data->data->published_first_name.'-'.$data->data->published_last_name)]) }}">{{ $data->data->published_by }}</a>
                                 </span>
                             </div>
                         </div>

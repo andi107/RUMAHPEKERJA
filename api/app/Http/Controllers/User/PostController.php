@@ -12,9 +12,11 @@ class PostController extends Controller {
         $data = DB::table('posts')
         ->join('galery', 'posts.id', '=', 'galery.fncontent_id')
         ->join('category', 'posts.fncategory', '=', 'category.id')
+        ->join('users','posts.fnpublished_by','=','users.id')
         ->selectRaw('posts.fttitle, posts.ftdescription ,posts.ftuniq ,posts.fncategory,posts.fttitle_url,posts.created_at,posts.updated_at,posts.fnstatus,posts.published_at,
         galery.ftname as ftgalery_name,galery.ftfolder as ftgalery_folder,galery.ftext as ftgalery_ext,category.ftname as ftcategory_name,
-        (select username from users where id = posts.fnpublished_by) as published_by')
+        (select username from users where id = posts.fnpublished_by) as published_by,
+        users.ftfirst_name as published_first_name, users.ftlast_name as published_last_name')
         ->where('galery.fttype','=','baner')
         ->where('posts.fnstatus','=',1)
         ->orderBy('posts.published_at','desc')
@@ -30,10 +32,12 @@ class PostController extends Controller {
         try {
             $data = DB::table('posts')
             ->join('category', 'posts.fncategory', '=', 'category.id')
+            ->join('users','posts.fnpublished_by','=','users.id')
             ->selectRaw(
                 'posts.id,posts.fttitle, posts.ftdescription,posts.ftbody ,posts.ftuniq ,posts.fncategory,posts.fttitle_url,posts.created_at,
                 posts.updated_at,posts.fnstatus,posts.published_at,category.ftname as ftcategory_name,
-                (select username from users where id = posts.fnpublished_by) as published_by')
+                (select username from users where id = posts.fnpublished_by) as published_by,
+                users.ftfirst_name as published_first_name, users.ftlast_name as published_last_name')
             ->where('posts.fnstatus','=',1)
             ->where('posts.ftuniq','=',$cont_id)
             // ->where('posts.fncategory','=', $cat_id)
