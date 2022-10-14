@@ -70,7 +70,7 @@ class PostController extends Controller
         $users_select = ApiH::apiGetVar('/a/select/users');
         if ($id) {
             $res_edit = ApiH::apiGetVar('/a/posts/detail/'. urlencode($id));
-            if (!$res_edit->data->published_at || !$res_edit->data->fnpublished_by) {
+            if (!$res_edit->data->published_at || !$res_edit->data->fnpublished_by || $res_edit->data->fnstatus == 2) {
                 $published_status = true;
             }else{
                 $published_status = false;
@@ -78,6 +78,7 @@ class PostController extends Controller
             if (!$res_edit->data->uuid_tmp_id) {
                 $res_edit->data->uuid_tmp_id = $tmp_id;
             }
+            // dd($res_edit);
             return view('admin.admpostedit', [
                 'res_edit' => $res_edit,
                 'user_select' => $users_select,
@@ -443,11 +444,11 @@ class PostController extends Controller
         // ]);
         $validator = Validator::make($req->all(), [
             'selpublisher' => 'required',
-            'publish_date' => 'required|date_format:d-m-Y',
+            // 'publish_date' => 'required|date_format:d-m-Y',
         ],[
             'selpublisher' => 'Pilih nama penerbit.',
-            'publish_date.required' => 'Tanggal penerbit harus diinput.',
-            'publish_date.date_format' => 'Format Tanggal penerbit (d-m-Y).',
+            // 'publish_date.required' => 'Tanggal penerbit harus diinput.',
+            // 'publish_date.date_format' => 'Format Tanggal penerbit (d-m-Y).',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -463,14 +464,14 @@ class PostController extends Controller
             ]);
         }
         $publisher_name = $req->input('selpublisher');
-        $publisher_date = $req->input('publish_date');
+        // $publisher_date = $req->input('publish_date');
 
         $resBody = 'Artikel telah terbit.';
-        $publisher_date = Carbon::parse($publisher_date)->format('Y-m-d');
+        // $publisher_date = Carbon::parse($publisher_date)->format('Y-m-d');
         $body = [
             'id' => $id,
             'publisher_name' => $publisher_name,
-            'publisher_date' => $publisher_date,
+            // 'publisher_date' => $publisher_date,
             '_csrf' => ApiH::csrf(),
         ];
         // return response()->json([

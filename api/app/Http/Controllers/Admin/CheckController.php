@@ -15,6 +15,13 @@ class CheckController extends Controller {
     }
 
     public function index() {
+        $chkData = DB::table('users')
+        ->where('id','=', Auth::id())
+        ->where('fbstatus','<>', 1)
+        ->first();
+        if ($chkData) {
+            $this->go_logout();
+        }
         return response()->json([
             'data' => 'ok'
         ], 200);

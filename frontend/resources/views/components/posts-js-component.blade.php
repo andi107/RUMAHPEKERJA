@@ -29,12 +29,20 @@
 
     $(document).ready(
         function() {
+            if ($("input[name=_id]").val() !== 'new') {
+                setInterval(function() {
+                    _save();
+                }, 300000);
+            }
             $('#formPosts').submit(
                 function(e) {
                     e.preventDefault();
                     _save();
                 }
             );
+            $('.selpublisher').select2({
+                width: 'resolve'
+            });
             var isCtrl = false;
             document.onkeyup = function(e) {
                 if (e.keyCode == 17) isCtrl = false;
@@ -48,102 +56,106 @@
                 }
             }
 
-
-            function _save() {
-                let url = "{{ route('adm.post-save') }}";
-
-                // var editor = CKEDITOR.instances.txtbody.getData()
-                // CKEDITOR.instances.txtbody.setData(editor.replace(/<img>/gi, "<img class='thiny_p'>"));
-                // editor.text(editor.val())
-
-                let resBody = CKEDITOR.instances.txtbody.getData();
-                // console.log(resBody)
-                let isType = $("input[name=_id]").val();
-
-                var fd = new FormData();
-                var mybaner = $('#mybaner')[0].files[0];
-                fd.append('mybaner', mybaner);
-                fd.append('_token', $("input[name=_token]").val());
-                fd.append('type', isType);
-                fd.append('title', $("input[name=txtTitle]").val());
-                fd.append('body', resBody);
-                fd.append('description', $.trim($("#txtDescription").val()));
-                fd.append('category', 1);
-                fd.append('status', 2);
-                if (isType !== 'new') {
-                    fd.append('baner_name', $("input[name=baner_name]").val());
-                    fd.append('baner_ext', $("input[name=baner_ext]").val());
-                }
-                fd.append('tmp_id', $("input[name=tmp_id]").val());
-
-                $.ajax({
-                    type: 'POST'
-                    , url: url
-                    , data: fd
-                    , dataType: 'json'
-                    , contentType: false
-                    , cache: false
-                    , processData: false
-                    , beforeSend: function() {
-                        $('.submitBtn').attr("disabled", "disabled");
-                        $('#formPosts').css("opacity", ".5");
-                    }
-                    , success: function(res) {
-                        console.log(res)
-                        let msg = '';
-                        if (res.code == 200) {
-                            if (typeof(res.data.ftuniq) === 'undefined') {
-                                $("input[name=_id]").val(res.data.id);
-                            } else {
-                                $("input[name=_id]").val(res.data.ftuniq);
-                                let tittle_url = "{{ route('post-detail',['@id@@tittle_url']) }}";
-                                tittle_url = tittle_url.replace('@id', res.data.ftuniq);
-                                tittle_url = tittle_url.replace('@tittle_url', res.data.fttitle_url);
-                                $("input[name=tittle_url]").val(tittle_url);
-                                if (isType == 'new') {
-                                    setInterval(function() {
-                                        _save();
-                                    }, 300000);
-                                }
-                            }
-                            if (!typeof(res.dataBaner) === 'undefined') {
-                                $("input[name=baner_name]").val(res.dataBaner.baner_id);
-                                $("input[name=baner_ext]").val(res.dataBaner.ext);
-                            }
-                            if (res.data.msg) {
-                                msg = res.data.msg;
-                            } else {
-                                msg = res.msg;
-                            }
-                        } else {
-                            // $("input[name=_id]").val('new');
-                            msg = res.msg;
-                        }
-                        $('strong.me-auto').text('PEMBERITAHUAN');
-                        $('div.toast-body').text(msg);
-                        toast.show();
-
-                        $('#formPosts').css("opacity", "");
-                        $(".submitBtn").removeAttr("disabled");
-                    }
-                });
-            }
         }
     );
-    
+
     function noreturnkey(event) {
         var x = event.which || event.keyCode;
         if (x == '13') event.preventDefault();
     }
 
+    function _publishDialog() {
+        $('#modalPublished').modal('show');
+    }
+
+    function _save() {
+        let url = "{{ route('adm.post-save') }}";
+
+        // var editor = CKEDITOR.instances.txtbody.getData()
+        // CKEDITOR.instances.txtbody.setData(editor.replace(/<img>/gi, "<img class='thiny_p'>"));
+        // editor.text(editor.val())
+
+        let resBody = CKEDITOR.instances.txtbody.getData();
+        // console.log(resBody)
+        let isType = $("input[name=_id]").val();
+
+        var fd = new FormData();
+        var mybaner = $('#mybaner')[0].files[0];
+        fd.append('mybaner', mybaner);
+        fd.append('_token', $("input[name=_token]").val());
+        fd.append('type', isType);
+        fd.append('title', $("input[name=txtTitle]").val());
+        fd.append('body', resBody);
+        fd.append('description', $.trim($("#txtDescription").val()));
+        fd.append('category', 1);
+        fd.append('status', 2);
+        if (isType !== 'new') {
+            fd.append('baner_name', $("input[name=baner_name]").val());
+            fd.append('baner_ext', $("input[name=baner_ext]").val());
+        }
+        fd.append('tmp_id', $("input[name=tmp_id]").val());
+
+        $.ajax({
+            type: 'POST'
+            , url: url
+            , data: fd
+            , dataType: 'json'
+            , contentType: false
+            , cache: false
+            , processData: false
+            , beforeSend: function() {
+                $('.submitBtn').attr("disabled", "disabled");
+                $('#formPosts').css("opacity", ".5");
+            }
+            , success: function(res) {
+                console.log(res)
+                let msg = '';
+                if (res.code == 200) {
+                    if (typeof(res.data.ftuniq) === 'undefined') {
+                        $("input[name=_id]").val(res.data.id);
+                    } else {
+                        let tittle_url = "{{ route('post-detail',['@id@@tittle_url']) }}";
+                        tittle_url = tittle_url.replace('@id', res.data.ftuniq);
+                        tittle_url = tittle_url.replace('@tittle_url', res.data.fttitle_url);
+
+                        if (isType === 'new') {
+                            $("input[name=tittle_url]").val(tittle_url);
+                            window.location.href = '{{ env("APP_URL") }}/admin/post/edit?edit=' + res.data.ftuniq;
+                        }
+                        // $("input[name=_id]").val(res.data.ftuniq);
+                    }
+                    if (!typeof(res.dataBaner) === 'undefined') {
+                        $("input[name=baner_name]").val(res.dataBaner.baner_id);
+                        $("input[name=baner_ext]").val(res.dataBaner.ext);
+                    }
+                    if (res.data.msg) {
+                        msg = res.data.msg;
+                    } else {
+                        msg = res.msg;
+                    }
+                } else {
+                    // $("input[name=_id]").val('new');
+                    msg = res.msg;
+                }
+                $('strong.me-auto').text('PEMBERITAHUAN');
+                $('div.toast-body').text(msg);
+                toast.show();
+
+                $('#formPosts').css("opacity", "");
+                $(".submitBtn").removeAttr("disabled");
+            }
+        });
+    }
+
     function _publish() {
+        _save();
         let url = "{{ route('adm.post-publish') }}";
         var fd = new FormData();
         fd.append('_token', $("input[name=_token]").val());
         fd.append('id', $("input[name=_id]").val());
         fd.append('selpublisher', $("#selpublisher").val());
         fd.append('publish_date', $("input[name=publish_date]").val());
-        console.log($("#selpublisher").val());
+
         $.ajax({
             type: 'POST'
             , url: url
@@ -155,14 +167,11 @@
             , beforeSend: function() {
                 $('.submitPublish').attr("disabled", "disabled");
                 $('#formPosts').css("opacity", ".5");
+                $('#modalPublished').modal('hide');
             }
             , success: function(res) {
-                console.log(res)
                 let msg = '';
                 if (res.code == 200) {
-
-
-
                     if (res.data.msg) {
                         msg = res.data.msg;
                     } else {
@@ -177,6 +186,9 @@
 
                 $('#formPosts').css("opacity", "");
                 $(".submitPublish").removeAttr("disabled");
+                if (res.code == 200) {
+                    location.reload();
+                }
             }
         });
     }

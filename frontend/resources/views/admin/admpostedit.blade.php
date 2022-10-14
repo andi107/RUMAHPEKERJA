@@ -6,7 +6,11 @@
     </x-slot>
     <div class="row">
         <div class="col">
-            <h5>EDIT POST</h5>
+            <h5>
+                EDIT POST
+                <span class="badge bg-{{ApiH::statusForm($res_edit->data->fnstatus) }} text-white rounded-2">{{ \ApiH::statusForm2($res_edit->data->fnstatus) }}</span>
+            </h5>
+            
         </div>
     </div>
     <div class="toast-container position-fixed top-0 end-0 p-3">
@@ -110,21 +114,32 @@
                             </h2>
                             <div id="panelsStayOpen-collapseEmpat" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEmpat">
                                 <div class="accordion-body">
-                                    <div class="form-floating mb-3" id="dtpublish">
-                                        <input type="text" class="form-control" id="publish_date" name="publish_date" placeholder="Tanggal">
-                                        <label for="publish_date">Tanggal Publish</label>
-                                    </div>
-                                    <label for="selpublisher mt-3" style="width: 100%">
-                                        Pilih Nama Penerbit
-                                        <select class="form-select selpublisher js-states" style="width: 100%" name="selpublisher" id="selpublisher">
-                                            @foreach ($user_select->data as $r)
-                                                <option value="{{$r->username}}">{{ $r->ftfirst_name.' '.$r->ftlast_name.' - @'.$r->username }}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                    <div class="mt-3">
-                                        <button type="button" onclick="_publish();" class="btn btn-outline-warning submitPublish">TERBITKAN</button>
-                                    </div>
+                                    @if ($published_status)
+                                        {{-- <div class="form-floating mb-3" id="dtpublish">
+                                            <input type="text" class="form-control" id="publish_date" name="publish_date" placeholder="Tanggal">
+                                            <label for="publish_date">Tanggal Terbit</label>
+                                        </div> --}}
+                                        <label for="selpublisher mt-3" style="width: 100%">
+                                            Pilih Nama Penerbit
+                                            <select class="form-select selpublisher js-states" style="width: 100%" name="selpublisher" id="selpublisher">
+                                                @foreach ($user_select->data as $r)
+                                                    <option value="{{$r->username}}">{{ $r->ftfirst_name.' '.$r->ftlast_name.' - @'.$r->username }}</option>
+                                                @endforeach
+                                            </select>
+                                        </label>
+                                        <div class="mt-3">
+                                            <button type="button" onclick="_publishDialog();" class="btn btn-outline-warning submitPublish">TERBITKAN</button>
+                                        </div>
+                                    @else
+                                        <div class="form-floating mb-3">
+                                            <input value="{{ $res_edit->data->published_by }}" type="text" class="form-control" id="publish_date" name="publish_date" placeholder="Tanggal" readonly>
+                                            <label for="publish_date">Diterbitkan oleh</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input value="{{ $res_edit->data->published_at }}" type="text" class="form-control" id="publish_date" name="publish_date" placeholder="Tanggal" readonly>
+                                            <label for="publish_date">Tanggal Terbit</label>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -138,7 +153,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Perhatian!</h5>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -147,6 +162,26 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">TIDAK</button>
                     <button type="submit" class="btn btn-primary" onclick="yesDelImage()">YA</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalPublished" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Perhatian!</h5>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Artikel ini akan di publikasikan [Draft => Publik].<br/>
+                        Ingin melanjutkan?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">TIDAK</button>
+                    <button type="submit" class="btn btn-primary" onclick="_publish()">YA</button>
                 </div>
             </div>
         </div>

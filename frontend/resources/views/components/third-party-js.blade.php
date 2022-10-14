@@ -76,7 +76,4 @@
     })(window, document, "clarity", "script", "e29pxggw2e");
 
 </script>
-<script>
-    
-  </script>
 @endif

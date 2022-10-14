@@ -94,7 +94,6 @@
             'ext': ext
         });
         $('#modalDelImg').modal('show');
-        console.log(_tmpDel)
     }
 
     function yesDelImage() {

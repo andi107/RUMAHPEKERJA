@@ -18,6 +18,7 @@
                             <h1 class="post-title">
                                 {{ $data->data->fttitle }}
                             </h1>
+                            <p class="font-weight-light font-italic">{{$data->data->ftdescription}}</p>
                             <div class="post-meta">
                                 <p>
                                     {{ ' '.$carbon::createFromFormat('Y-m-d H:i:s', $data->data->created_at)->formatLocalized('%A, %d %B %Y %H:%M:00').' WIB' }}
@@ -28,7 +29,7 @@
                             </div>
                         </div>
                         <div class="post-body">
-                            <div class="post-featured-image">
+                            <div class="post-featured-image text-center">
                                 <img class="img-fluid lazy" data-original="{{route('image-view', [$data->dataBaner->ftfolder,$data->dataBaner->ftext,$data->dataBaner->ftname])}}" alt="{{ $data->data->fttitle_url }}" />
                             </div>
                             <div class="entry-content">

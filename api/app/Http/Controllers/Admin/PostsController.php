@@ -39,7 +39,11 @@ class PostsController extends Controller {
         $uniq = urldecode($uniq);
 
         $data = DB::table('posts')
-        ->where('ftuniq','=',$uniq)
+        ->join('category', 'posts.fncategory', '=', 'category.id')
+            ->selectRaw(
+                'posts.*,
+                (select username from users where id = posts.fnpublished_by) as published_by')
+        ->where('posts.ftuniq','=',$uniq)
         ->first();
         if ($data) {
             $banerData = DB::table('galery')
@@ -210,7 +214,7 @@ class PostsController extends Controller {
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'category' => 'required|numeric',
-            'status' => 'required|numeric',
+            // 'status' => 'required|numeric',
             'isbaner' => 'required|numeric',
             'tmp_id' => 'required'
         ]);
@@ -219,7 +223,7 @@ class PostsController extends Controller {
         $title = urldecode($request->input('title'));
         $description = urldecode($request->input('description'));
         $category = $request->input('category');
-        $status = $request->input('status');
+        // $status = $request->input('status');
         $isbaner = $request->input('isbaner');
         $tmp_id = $request->input('tmp_id');
         if ($isbaner == 1) {
@@ -261,6 +265,7 @@ class PostsController extends Controller {
                 ], 404);
             }
             
+            
             // $resTitle = urlencode(str_replace(' ','-', strtolower($title)));
             $resTitle = $this->text_clean(urlencode(str_replace(' ','-', strtolower($title))));
             DB::table('posts')
@@ -269,7 +274,7 @@ class PostsController extends Controller {
                 'fttitle' => $title,
                 'ftdescription' => $description,
                 'fncategory' => $category,
-                'fnstatus' => $status,
+                // 'fnstatus' => $status,
                 'fnupdated_by' => Auth::id(),
                 'updated_at' => $dtnow,
                 'fttitle_url' => $resTitle,
@@ -473,15 +478,16 @@ class PostsController extends Controller {
         $this->validate($req, [
             'id' => 'required',
             'publisher_name' => 'required',
-            'publisher_date' => 'required|date_format:Y-m-d'
+            // 'publisher_date' => 'required|date_format:Y-m-d'
         ]);
         $id = $req->input('id');
         $publisher_name = $req->input('publisher_name');
-        $publisher_date = $req->input('publisher_date');
+        // $publisher_date = $req->input('publisher_date');
         try {
 
             $chkData = DB::table('posts')
             ->where('ftuniq','=',$id)
+            ->where('fnstatus','=',2)
             ->first();
             $chkPublisher = DB::table('users')
             ->where('username','=',$publisher_name)
@@ -502,7 +508,8 @@ class PostsController extends Controller {
             DB::table('posts')
             ->where('ftuniq','=',$id)
             ->update([
-                'published_at' => Carbon::parse($publisher_date),
+                // 'published_at' => Carbon::parse($publisher_date),
+                'published_at' => Carbon::now(),
                 'fnpublished_by' => $chkPublisher->id,
                 'fnstatus' => 1
             ]);

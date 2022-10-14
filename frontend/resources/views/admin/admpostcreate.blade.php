@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
+                        {{-- <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingEmpat">
                                 <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse" data-coreui-target="#panelsStayOpen-collapseEmpat" aria-expanded="false" aria-controls="panelsStayOpen-collapseEmpat">
                                     Penerbit
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -154,12 +154,4 @@
     </div>
     <x-posts-js-component />
     <x-posts-attach-js-component />
-    <script>
-        
-        $(document).ready(function() {
-            $('.selpublisher').select2({
-                width: 'resolve'
-            });
-        });
-    </script>
 </x-adm-base-layout>
