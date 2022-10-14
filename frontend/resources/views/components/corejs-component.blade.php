@@ -8,6 +8,12 @@
 <script src="{{asset('src/js/custom.js')}}"></script>
 
 <script>
+    let setContentImgSize = $("p img"), setContentImgFigureSize = $("figure img");
+    setContentImgSize.css('max-width','100%');
+    setContentImgSize.css('height','100%');
+    setContentImgFigureSize.css('max-width','100%');
+    setContentImgFigureSize.css('height','100%');
+
     $("img.lazy").lazyload({
         effect : "fadeIn"
     });
