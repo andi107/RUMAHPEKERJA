@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index(Request $req) {
 
         $title = 'Rumah Pekerja Hebat';
-        $description = 'Rumah Pekerja Hebat adalah sebuah portal web berisi berita, artikel, media komunikasi, dan ~~';
+        $description = 'Rumah Pekerja Hebat adalah sebuah portal web berisi berita, artikel, media komunikasi.';
         $created_at = Carbon::now()->toIso8601String();
         $category_name = 'news';
         $keyWord = ['rumah pekerja hebat', 'rumah pekerja', 'pekerja hebat'];
