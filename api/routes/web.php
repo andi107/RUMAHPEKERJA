@@ -25,6 +25,12 @@ $router->group([
             
         });
         $router->group([
+            'prefix' => 'users',
+        ], function() use($router) {
+            $router->get('/', 'Admin\UsersController@index');
+            $router->post('create', 'Admin\UsersController@create');
+        });
+        $router->group([
             'prefix' => 'sitemap',
         ], function() use($router) {
             $router->post('create', 'Admin\SiteMapController@create');

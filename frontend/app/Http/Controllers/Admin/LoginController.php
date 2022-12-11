@@ -51,14 +51,17 @@ class LoginController extends Controller
                 return view('admin.admlogin', ['errLogin' => 'Capcha tidak Valid, Beri tahu kami jika anda bukan BOT!']);
                 // return redirect()->route('adm.login');
             }
+            $paswd = '';
+        }else{
+            $paswd = $request->txtpassword;
         }
         $response = Http::withToken(null)
             ->acceptJson()
             ->post(env('APP_API') . '/a/auth', [
                 'username' => $request->txtusername,
-                'password' => $request->txtpassword,
+                'password' => $paswd,
                 'remember' => 1,
-                '_csrf'  => ApiH::csrf($request->txtpassword),
+                '_csrf'  => ApiH::csrf($paswd),
             ]);
 
         $res = $response->object();

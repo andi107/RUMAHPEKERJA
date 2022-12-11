@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
 // use App\Helpers\Notification;
-// use App\Helpers\Mail\MailQueue;
+use App\Helpers\Mail\MailQueue;
 class Guard {
 
     public static function check_point($value,$username = '') {
@@ -41,7 +41,7 @@ class Guard {
                     ->first();
                     
                 if($checkBlockedIp) {
-                    return json_decode(str_replace('{{ERR}}', 'You are forbidden to access.',$err));
+                    return json_decode(str_replace('{{ERR}}', 'You are forbidden to access.#1',$err));
                 }
                 
                 if (($dtnow->getTimestamp() - $msgDate->getTimestamp()) <= $intervalThreshold) {
@@ -52,13 +52,13 @@ class Guard {
                         ->first();
                         
                     if($chkWhite) {
-                        // if ($username){
-                        //     $res = (new self)->users_log($dc,$username);
-                        //     if (str_contains($res, '{{ERR}}')){ 
-                        //         DB::rollback();
-                        //         return json_decode(str_replace('{{ERR}}', str_replace('{{ERR}}','',$res),$err));
-                        //     }
-                        // }
+                        if ($username){
+                            $res = (new self)->users_log($dc,$username);
+                            if (str_contains($res, '{{ERR}}')){ 
+                                DB::rollback();
+                                return json_decode(str_replace('{{ERR}}', str_replace('{{ERR}}','',$res),$err));
+                            }
+                        }
                         
                         return $dc;
                     }
@@ -74,7 +74,7 @@ class Guard {
                     ->where('fnattempt','>=', 10)
                     ->first();
                 if($checkBlockedIp) {
-                    return json_decode(str_replace('{{ERR}}', 'You are forbidden to access.',$err));
+                    return json_decode(str_replace('{{ERR}}', 'You are forbidden to access.#2',$err));
                 }
                 $getBlockedIp = DB::table('blacklist_ip')
                     ->where('ftpublic_ip', '=', $public_ip)
@@ -96,53 +96,43 @@ class Guard {
                         ]);
                 }
             } catch (\Throwable $th) {}
-            return json_decode(str_replace('{{ERR}}', 'You are forbidden to access.',$err));
+            return json_decode(str_replace('{{ERR}}', 'You are forbidden to access.#3',$err));
         }
     }
 
     public static function users_log($data,$username) {
-        $dtnow = Carbon::now();
-        $getUsernameWithoutLogin = DB::table('users')
-            ->where('username','=', $username)
-            ->first();
-            
-        if ($getUsernameWithoutLogin) {
-            $generate = Uuid::generate(4)->string;
-            $getUserLog = DB::table('users_log_ip')
-                ->where('fnuser_id', '=', $getUsernameWithoutLogin->id)
-                ->where('ftpublic_ip','=',$data->public_ip)
-                ->where('ftbrowser','=',$data->browser)
-                ->where('ftdevice','=',$data->devices)
-                ->where('ftos','=',$data->os)
+        DB::beginTransaction();
+        try {
+            $dtnow = Carbon::now();
+            $getUsernameWithoutLogin = DB::table('users')
+                ->where('username','=', $username)
                 ->first();
-                
-            if (!$getUserLog) {
-                DB::table('users_log_ip')
-                    ->insert([
-                        'id' => $generate,
-                        'fnuser_id' => $getUsernameWithoutLogin->id,
-                        'ftpublic_ip' => $data->public_ip,
-                        'ftbrowser' => $data->browser,
-                        'ftdevice' => $data->devices,
-                        'ftos' => $data->os,
-                        'fncreated_by' => $getUsernameWithoutLogin->id,
-                        'fnupdated_by' => $getUsernameWithoutLogin->id,
-                        'created_at' => $dtnow,
-                        'updated_at' => $dtnow,
-                    ]);
-
-                $notif['title'] = 'New Devices detected.';
-                $notif['message'] = 'Recently there was an unknown login activity.
-                If this is not you, immediately change the password and check login activity.
-                Click here to change password : {{URL_PWD_CHANGE}}';
-                $resnotif = Notification::push($getUsernameWithoutLogin->id, $notif);
-                $getUsrView = DB::table('users_view')
-                    ->select('ftemail')
-                    ->where('username','=',$username)
+            if ($getUsernameWithoutLogin) {
+                $generate = Uuid::generate(4)->string;
+                $getUserLog = DB::table('users_log_ip')
+                    ->where('fnuser_id', '=', $getUsernameWithoutLogin->id)
+                    ->where('ftpublic_ip','=',$data->public_ip)
+                    ->where('ftbrowser','=',$data->browser)
+                    ->where('ftdevice','=',$data->devices)
+                    ->where('ftos','=',$data->os)
                     ->first();
-                if ($getUsrView) {
+                if (!$getUserLog) {
+                    DB::table('users_log_ip')
+                        ->insert([
+                            'id' => $generate,
+                            'fnuser_id' => $getUsernameWithoutLogin->id,
+                            'ftpublic_ip' => $data->public_ip,
+                            'ftbrowser' => $data->browser,
+                            'ftdevice' => $data->devices,
+                            'ftos' => $data->os,
+                            'fncreated_by' => $getUsernameWithoutLogin->id,
+                            'fnupdated_by' => $getUsernameWithoutLogin->id,
+                            'created_at' => $dtnow,
+                            'updated_at' => $dtnow,
+                        ]);
+
                     $data = [
-                        'title' => 'New Device detected',
+                        'title' => 'RPH - New Login',
                         'host' => $data->host,
                         'public_ip' => $data->public_ip,
                         'browser' => $data->browser,
@@ -150,11 +140,17 @@ class Guard {
                         'os' => $data->os,
                         'user_agent' => $data->user_agent,
                     ];
-                    MailQueue::save('new_login',$getUsrView->ftemail,$data);
+                    
+                    MailQueue::send('new_login',$getUsernameWithoutLogin->email,$data,$username);
+                    DB::commit();
+
+                }elseif($getUserLog->fnblocked == 1){
+                    return '{{ERR}}Your IP address has been blocked.';
                 }
-            }elseif($getUserLog->fnblocked == 1){
-                return '{{ERR}}Your IP address has been blocked.';
+                return false;
             }
+        } catch (\Throwable $th) {
+            DB::rollback();
             return false;
         }
     }
